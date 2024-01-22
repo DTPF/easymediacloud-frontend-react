@@ -1,0 +1,26 @@
+@import '../../../../../scss/variables';
+@import '../../../../../scss/animations';
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  color: $color-primary;
+  background-color: $bg-primary;
+  align-items: center;
+  font-size: 1.5rem;
+  min-height: 80px;
+  padding: 0 15px;
+  font-weight: bold;
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
+  @include fadeIn();
+
+  &__logo {
+    font-size: 2.5rem;
+    margin-top: 8px;
+    margin-left: 10px;
+    color: $bg-secondary;
+  }
+}

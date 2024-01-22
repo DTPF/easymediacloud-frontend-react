@@ -1,0 +1,14 @@
+@import '../../../scss/variables';
+
+.layout-basic {
+  width: 100%;
+
+  &__main {
+    padding-top: 80px;
+    min-height: calc(100dvh - 70px);
+
+    &--container {
+      padding: 30px;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+import { basePath } from "./utils/config";
