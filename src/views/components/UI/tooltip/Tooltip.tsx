@@ -1,5 +1,7 @@
 import { Tooltip as TooltipAntd } from 'antd'
 import React, { memo } from 'react'
+import { bgLight } from 'scss/_variables'
+import './tooltip.scss'
 
 type Props = {
   title: string
@@ -8,9 +10,16 @@ type Props = {
 
 function Tooltip({ title, children }: Props) {
   return (
-    <TooltipAntd title={title} color={'rgb(64, 128, 69)'} key={'rgb(64, 128, 69)'}>
-      {children}
-    </TooltipAntd>
+    <div className='tooltip-antd'>
+      <TooltipAntd
+        title={<div className='tooltip-antd__title'>{title}</div>}
+        color={bgLight}
+        key={title}
+        className='tooltip-antd__tooltip'
+      >
+        {children}
+      </TooltipAntd>
+    </div>
   )
 }
 
