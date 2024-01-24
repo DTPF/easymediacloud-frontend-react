@@ -8,9 +8,17 @@
   grid-gap: 3rem;
   width: 100%;
 
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   @media (min-width: 1700px) {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 4rem;
+  }
+
+  @media (min-width: 2200px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 
   &--license {
