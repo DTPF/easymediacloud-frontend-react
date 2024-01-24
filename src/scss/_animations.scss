@@ -3,9 +3,35 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
   }
+
   animation: fadeIn 800ms;
+}
+
+@mixin rotate($from, $to, $duration) {
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate($from);
+      -moz-transform: rotate($from);
+      -webkit-transform: rotate($from);
+      -o-transform: rotate($from);
+      transform: rotate($from);
+      rotate: $from;
+    }
+
+    to {
+      -ms-transform: rotate($to);
+      -moz-transform: rotate($to);
+      -webkit-transform: rotate($to);
+      -o-transform: rotate($to);
+      transform: rotate($to);
+      rotate: $to;
+    }
+  }
+
+  animation: $duration rotating;
 }

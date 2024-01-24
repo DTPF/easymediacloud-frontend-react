@@ -1,0 +1,23 @@
+@import '../../../../scss/variables';
+
+.buttons {
+  &__btn-primary {
+    &--label {
+      font-family: 'Lato Bold';
+    }
+  }
+
+  &__btn-default {
+    border: 1px solid $bg-dark;
+
+    &--label {
+      font-family: 'Lato Bold';
+    }
+  }
+
+  &__btn-link {
+    &--label {
+      font-family: 'Lato Bold';
+    }
+  }
+}

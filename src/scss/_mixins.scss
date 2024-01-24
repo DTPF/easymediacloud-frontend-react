@@ -4,8 +4,57 @@
   color: $color-primary;
   text-align: center;
   margin: 0;
-  margin-bottom: 20px;
+  padding: 10px 0;
+  font-size: 1.8rem;
+  font-family: "Lato Bold";
   @include fadeIn()
+}
+
+@mixin titleH2() {
+  color: $color-primary;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-family: "Lato Bold";
+  @include fadeIn()
+}
+
+@mixin p($color: $color-primary) {
+  color: $color;
+  margin: 0;
+  padding: 0;
+  font-size: .94rem;
+  @include fadeIn()
+}
+
+@mixin p0($color: $color-primary) {
+  font-family: "Lato Thin";
+  @include fadeIn();
+  @include p($color);
+}
+
+@mixin p1($color: $color-primary) {
+  font-family: "Lato Light";
+  @include fadeIn();
+  @include p($color);
+}
+
+@mixin p2($color: $color-primary) {
+  font-family: "Lato Regular";
+  @include fadeIn();
+  @include p($color);
+}
+
+@mixin p3($color: $color-primary) {
+  font-family: "Lato Bold";
+  @include fadeIn();
+  @include p($color);
+}
+
+@mixin p4($color: $color-primary) {
+  font-family: "Lato BLack";
+  @include fadeIn();
+  @include p($color);
 }
 
 @mixin buttonPrimary() {

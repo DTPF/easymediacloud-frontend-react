@@ -1,0 +1,8 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+
+.tooltip-antd {
+  &__title {
+    @include p2();
+  }
+}

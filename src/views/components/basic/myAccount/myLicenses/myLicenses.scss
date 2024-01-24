@@ -1,0 +1,22 @@
+@import '../../../../../scss/variables.scss';
+@import '../../../../../scss/mixins.scss';
+
+.my-licenses {
+  // * {
+  //   border: 1px solid black;
+  // }
+
+  padding: 20px;
+  max-width: 2400px;
+  margin: 0 auto;
+
+  h2 {
+    @include titleH2();
+    padding: 25px;
+    padding-top: 5px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}
