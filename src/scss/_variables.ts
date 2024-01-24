@@ -1,1 +1,11 @@
-export const mobileWidth = 968;
+export const mobileWidth = 768;
+export const bgDark = '#283044';
+export const bgMedium = '#78A1BB';
+export const bgLight = '#f7fafc';
+export const bgSecondary = '#BFA89E';
+export const bgSecondaryDark = '#8B786D';
+export const colorPrimary = '#000';
+export const colorLight = '#fff';
+export const colorGreen = 'rgb(11, 95, 11)';
+export const colorRed = 'rgb(157, 28, 28)';
+export const colorOrange = 'rgb(185, 132, 34)';
