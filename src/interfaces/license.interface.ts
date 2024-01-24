@@ -12,7 +12,9 @@ export interface ILicense {
   sizeT: string
   totalFiles?: number
   subscription: ISubscription
-  __v: any
+  createdAt: Date |string
+  updatedAt: Date | string
+  __v?: any
 }
 
 export interface IApiKey {

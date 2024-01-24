@@ -1,1 +1,3 @@
+export const GET_LICENSES = 'GET_LICENSES'
 export const POST_LICENSE = 'POST_LICENSE'
+export const SET_IS_LOADING = 'SET_IS_LOADING'
