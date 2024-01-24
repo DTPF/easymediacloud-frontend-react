@@ -5,7 +5,7 @@ export interface ISubscription {
   type: string
   price: number
   currency: string
-  maxSize?: number
+  maxSize: number
   maxSizeT?: string
   expire?: Date
   enabled: boolean

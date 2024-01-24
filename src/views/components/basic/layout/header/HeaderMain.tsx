@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 import MenuTopMain from 'views/components/basic/layout/menuTop/MenuTopMain'
 import LoginIcon from 'views/components/basic/layout/loginIcon'
-import './HeaderMain.scss'
+import './headerMain.scss'
 import useWindowSizeReport from "hooks/useWindowSizeReport"
 import { routes } from "router/paths"
 import { memo } from "react"

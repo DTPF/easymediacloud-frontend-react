@@ -13,7 +13,7 @@ function useWindowSizeReport() {
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-  return [isMobile, innerWidth]
+  return [isMobile, innerWidth as number]
 }
 
 export default useWindowSizeReport
