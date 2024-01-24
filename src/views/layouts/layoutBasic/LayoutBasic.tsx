@@ -1,26 +1,34 @@
 import { Outlet } from 'react-router-dom';
 import HeaderMain from 'views/components/basic/layout/header';
 import FooterBasic from 'views/components/basic/layout/footer/FooterBasic';
-import './LayoutBasic.scss'
+import './layoutBasic.scss'
 import { memo } from 'react';
 import useWindowSizeReport from 'hooks/useWindowSizeReport';
 import MenuBottom from 'views/components/basic/layout/menuBottom/MenuBottom';
-import { FloatButton } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { ConfigProvider } from 'antd';
+import { bgMedium } from 'scss/_variables';
 
 function LayoutMain() {
   const [isMobile] = useWindowSizeReport()
   return (
-    <div className='layout-basic'>
-      <HeaderMain />
-      <div className='layout-basic__main'>
-        <div className='layout-basic__main--container'>
-          <Outlet />
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: bgMedium,
+          borderRadius: 10,
+        },
+      }}
+    >
+      <div className='layout-basic'>
+        <HeaderMain />
+        <div className='layout-basic__main'>
+          <div className='layout-basic__main--container'>
+            <Outlet />
+          </div>
         </div>
-        <FloatButton icon={<PlusOutlined style={{ color: 'rgb(56, 56, 56)'}} />} style={{ right: 50 }} />
+        {!isMobile ? <FooterBasic /> : <MenuBottom />}
       </div>
-      {!isMobile ? <FooterBasic /> : <MenuBottom />}
-    </div>
+    </ConfigProvider>
   )
 }
 
