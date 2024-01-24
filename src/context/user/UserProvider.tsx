@@ -23,7 +23,7 @@ function UserProvider(props: ChildrenProps) {
 			}
 			const token = await getAccessTokenSilently()
 			if (token && user) {
-				console.log(token);
+				// console.log(token);
 				action.loginAction({ dispatch, user, token })
 			}
 		})()
