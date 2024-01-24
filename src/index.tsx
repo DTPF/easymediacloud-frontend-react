@@ -3,6 +3,8 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import App from './App'
 import './index.scss'
 import { message } from 'antd'
+import 'antd/dist/reset.css';
+import 'moment/locale/es';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
