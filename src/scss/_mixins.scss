@@ -19,6 +19,24 @@
   @include fadeIn()
 }
 
+@mixin titleH3() {
+  color: $color-primary;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  font-family: "Lato Bold";
+  @include fadeIn()
+}
+
+@mixin titleH4() {
+  color: $color-primary;
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  font-family: "Lato Bold";
+  @include fadeIn()
+}
+
 @mixin p($color: $color-primary) {
   color: $color;
   margin: 0;

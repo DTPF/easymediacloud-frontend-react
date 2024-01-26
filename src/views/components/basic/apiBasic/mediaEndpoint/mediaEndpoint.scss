@@ -1,0 +1,125 @@
+@import '../../../../../scss/variables';
+@import '../../../../../scss/mixins';
+
+.example-endpoint {
+  margin-bottom: 20px;
+  background-color: $bg-medium-light;
+
+  &--title {
+    @include titleH2();
+    font-weight: 600;
+  }
+
+  &__media {
+    padding: 0 20px;
+    padding-bottom: 10px;
+
+    &--description {
+      @include p2();
+      font-size: 1.1rem;
+      padding: 0;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 5px;
+      padding-left: 20px;
+      padding-bottom: 20px;
+
+      &__title {
+        @include titleH3();
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+
+      &__item {
+        @include p2();
+        display: flex;
+        align-items: center;
+        padding: 3px !important;
+        padding-left: 10px !important;
+        text-wrap: balance;
+        white-space: nowrap;
+        overflow: hidden;
+        overflow-x: auto;
+
+        &--sub-item {
+          padding: 0 !important;
+          padding-left: 20px !important;
+
+          &__folder {
+            @include p2();
+            color: $color-medium;
+            padding: 0 2px;
+            font-weight: 600 !important;
+          }
+        }
+
+        &--media {
+          @include p2();
+          color: $color-medium;
+          margin-left: 4px;
+          font-weight: 600;
+        }
+      }
+
+      &__info {
+        padding: 5px;
+        padding-bottom: 10px;
+        font-size: 1rem;
+
+        p {
+          @include p2();
+          white-space: nowrap;
+          overflow: hidden;
+          overflow-x: auto;
+          padding-top: 7px;
+        }
+
+        span {
+          @include p3();
+          font-size: 1.1rem;
+
+          &.token {
+            @include p2();
+            color: $color-medium;
+            font-weight: 600;
+          }
+
+          &.folder {
+            @include p2();
+            color: $color-medium;
+            padding: 0 2px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+
+    &--example {
+      margin-top: 20px;
+
+      &__request {
+        &--title {
+          @include p2();
+          margin: 20px 0;
+          font-size: 1.1rem;
+        }
+
+        &--pre {
+          font-size: .88rem;
+          overflow: auto;
+        }
+      }
+    }
+  }
+
+}
+
+.ant-collapse {
+  border: none;
+}
+
+.ant-collapse-expand-icon {
+  margin-top: 8px;
+}

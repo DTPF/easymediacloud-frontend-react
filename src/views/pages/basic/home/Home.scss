@@ -4,5 +4,6 @@
 .web-home {
   h1 {
     @include titleH1();
+    margin-bottom: 25px;
   }
 }
