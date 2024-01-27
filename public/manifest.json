@@ -1,6 +1,6 @@
 {
-  "short_name": "Media CLoud",
-  "name": "Media Cloud FIles App",
+  "short_name": "EMC",
+  "name": "Easy Media Cloud",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#bcecc0",
-  "background_color": "#bcecc0"
+  "theme_color": "#f7fafc",
+  "background_color": "#f7fafc"
 }
