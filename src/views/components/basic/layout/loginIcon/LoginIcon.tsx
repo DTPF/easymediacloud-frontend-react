@@ -17,7 +17,7 @@ function LoginIcon() {
   const content = useMemo(() => {
     return (
       <div>
-        <p>Mi cuenta</p>
+        {/* <p>Mi cuenta</p> */}
         {user.role === adminRole && (
           <p>Admin</p>
         )}
