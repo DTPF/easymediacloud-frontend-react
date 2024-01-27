@@ -13,9 +13,14 @@ export async function getLicensesAction(dispatch: any, token: string) {
         type: LicenseTypes.GET_LICENSES,
         payload: sortLicenses
       })
-    } else {
-      messageError(data.message)
     }
+    if (response.status === 404 || response.status === 401) {
+      return dispatch({
+        type: LicenseTypes.GET_LICENSES,
+        payload: []
+      })
+    }
+    return messageError(data.message)
   } catch (err: any) {
     messageError(err.message)
   } finally {
