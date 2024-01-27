@@ -9,9 +9,9 @@ function MenuTop() {
   const { user } = useContext(UserContext)
   return (
     <div className='menu-top'>
-      <NavLink key={routes.myAccount} to={routes.myAccount}>
+      {/* <NavLink key={routes.myAccount} to={routes.myAccount}>
         Mi Cuenta
-      </NavLink>
+      </NavLink> */}
       {user.role === adminRole && (
         <NavLink key={adminRole} to={routes.adminHome}>
           Admin

@@ -8,7 +8,7 @@ function Home() {
   const { isAuthenticated } = useAuth0()
   return (
     <div className='web-home'>
-      <h1>Media Cloud</h1>
+      <h1>Easy Media Cloud</h1>
       <ApiBasic />
       {isAuthenticated && (
         <MyLicenses />

@@ -21,11 +21,15 @@ function Licenses() {
       {isLoading ? (
         <Spin />
       ) : (
-        licenses.map((license, index) => {
-          return (
-            <div key={index}><License license={license} /></div>
-          )
-        })
+        licenses.length === 0 ? (
+          <div>No hay licencias</div>
+        ) : (
+          licenses.map((license, index) => {
+            return (
+              <div key={index}><License license={license} /></div>
+            )
+          })
+        )
       )}
     </div>
   )

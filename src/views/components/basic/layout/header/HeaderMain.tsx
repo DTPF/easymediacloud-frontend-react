@@ -5,14 +5,14 @@ import './headerMain.scss'
 import useWindowSizeReport from "hooks/useWindowSizeReport"
 import { routes } from "router/paths"
 import { memo } from "react"
-import { PiFloppyDiskDuotone } from "react-icons/pi"
+import emcLogo from 'assets/img/emc-logo-128.png'
 
 function HeaderMain() {
   const [isMobile] = useWindowSizeReport()
   return (
     <header className='header-main'>
       <NavLink to={routes.home} >
-        <PiFloppyDiskDuotone className="header-main__logo" />
+        <img src={emcLogo} alt="Easy Media Cloud" className="header-main__logo" />
       </NavLink>
       {!isMobile && <MenuTopMain />}
       <LoginIcon />
