@@ -1,6 +1,13 @@
 import { ISubscription } from "./subscription.interface"
 import { IUser } from "./user.interface"
 
+export interface ILicenseState {
+  licenses: ILicense[],
+  isLoading: boolean,
+  getLicenses: () => void,
+  postLicense: ({ projectName }: { projectName: string }) => void,
+}
+
 export interface ILicense {
   _id?: string
   user?: IUser
@@ -12,13 +19,14 @@ export interface ILicense {
   sizeT: string
   totalFiles?: number
   subscription: ISubscription
-  createdAt: Date |string
+  totalRequests?: number
+  requestsInDataRange?: number
+  createdAt: Date | string
   updatedAt: Date | string
   __v?: any
 }
 
-export interface IApiKey {
-  project: string
-  nickname: string
-  apiKey: string
+export interface IRequestsDataRange {
+  quantity: number
+  cicle: string
 }

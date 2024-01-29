@@ -6,9 +6,11 @@ import * as action from "context/user/reducer/user.actions"
 import { ChildrenProps } from 'interfaces/global'
 import { useAuth0 } from '@auth0/auth0-react'
 import { lastLoginLS } from './constants'
+import { IUserState } from 'interfaces/user.interface'
 
 function UserProvider(props: ChildrenProps) {
-	const [userState, dispatch] = useReducer(userReducer, initialUserState)
+	const [ustate, dispatch] = useReducer(userReducer, initialUserState)
+	const userState: IUserState = ustate
 	const { isAuthenticated, user, getAccessTokenSilently, isLoading, loginWithRedirect, logout: logoutAuth0 } = useAuth0()
 
 	useEffect(() => {

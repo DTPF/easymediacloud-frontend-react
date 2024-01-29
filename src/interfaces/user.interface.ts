@@ -1,9 +1,13 @@
+export interface IUserState {
+  user: IUser,
+  logout: () => void
+}
+
 export interface IUser {
-	_id: string
+  _id: string
   auth0Id: string
   name: string
   lastname: string
-  nickname: string
   email: string
   role: string
   isVerified: boolean
@@ -15,14 +19,14 @@ export interface IUser {
 }
 
 export interface IAuth0User {
-	given_name?: string,
-	family_name?: string,
-	nickname?: string,
-	name?: string,
-	picture?: string,
-	locale?: string,
-	updated_at?: string,
-	email?: string,
-	email_verified?: boolean,
-	sub?: string
+  given_name?: string,
+  family_name?: string,
+  nickname?: string,
+  name?: string,
+  picture?: string,
+  locale?: string,
+  updated_at?: string,
+  email?: string,
+  email_verified?: boolean,
+  sub?: string
 }

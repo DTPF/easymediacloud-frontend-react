@@ -25,7 +25,7 @@ export async function loginAction({ dispatch, user, token }: LoginType) {
 			return dispatch({
 				type: RecipeTypes.LOGIN,
 				payload: {
-					user: loginFetch.data.user
+					user: loginFetch.data.user as IUser
 				}
 			})
 		} else {

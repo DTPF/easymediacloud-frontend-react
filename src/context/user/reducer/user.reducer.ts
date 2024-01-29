@@ -1,9 +1,8 @@
 import * as UserTypes from './user.types'
-import { UserState } from '../initialUserState';
-import { IUser } from 'interfaces/user.interface';
+import { IUser, IUserState } from 'interfaces/user.interface';
 
 export default function userReducer(
-	state: UserState,
+	state: IUserState,
 	action: {
 		type: string;
 		payload: {
