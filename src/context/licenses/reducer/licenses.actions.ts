@@ -9,7 +9,7 @@ export async function getLicensesAction(dispatch: any, token: string) {
     const { response, data } = await getMyLicensesAPI(token)
     if (response.status === 200) {
       const sortLicenses = data.licenses.sort((a: ILicense, b: ILicense) => a.updatedAt > b.updatedAt ? -1 : 1)
-      dispatch({
+      return dispatch({
         type: LicenseTypes.GET_LICENSES,
         payload: sortLicenses
       })
@@ -28,6 +28,4 @@ export async function getLicensesAction(dispatch: any, token: string) {
   }
 }
 
-export async function postLicenseAction(dispatch: any) {
-
-}
+export async function postLicenseAction(dispatch: any) { }
