@@ -17,7 +17,9 @@ const userState: IUser = {
 
 const initialUserState: IUserState = {
 	user: userState,
-	logout: () => { }
+	isLoading: true,
+	logout: () => { },
+	setLanguage: ({ language }: { language: string }) => { }
 }
 
 export default initialUserState

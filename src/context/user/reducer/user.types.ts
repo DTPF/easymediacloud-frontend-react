@@ -1,1 +1,3 @@
 export const LOGIN = 'LOGIN'
+export const UPDATE_PARTIAL_USER = 'UPDATE_PARTIAL_USER'
+export const SET_IS_LOADING = 'SET_IS_LOADING'

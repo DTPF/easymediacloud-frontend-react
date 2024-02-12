@@ -4,8 +4,10 @@ import './mediaEndpoint.scss'
 import { Highlight, themes } from "prism-react-renderer"
 import { useAuth0 } from '@auth0/auth0-react'
 import Spin from 'views/components/UI/spin/Spin'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
+  title: string
   endpoint: string
   method: string
   header: boolean
@@ -14,7 +16,7 @@ type Props = {
   responseCodeBlock: string
 }
 
-function PostMediaEndpoint({ endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Props) {
+function MediaEndpoint({ title, endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Props) {
   const { isAuthenticated, isLoading } = useAuth0()
   return (
     isLoading ? <Spin /> : (
@@ -26,9 +28,9 @@ function PostMediaEndpoint({ endpoint, method, header, instructions, requestCode
         items={[
           {
             key: '1',
-            label: <h2 className='example-endpoint--title'>Subir archivo</h2>,
+            label: <h2 className='example-endpoint--title'>{title}</h2>,
             children: (
-              <PostEndpoint
+              <MediaEndpointCollapse
                 endpoint={endpoint}
                 method={method}
                 header={header}
@@ -45,9 +47,10 @@ function PostMediaEndpoint({ endpoint, method, header, instructions, requestCode
   )
 }
 
-export default PostMediaEndpoint
+export default MediaEndpoint
 
-function PostEndpoint({ endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Props) {
+function MediaEndpointCollapse({ endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Omit<Props, 'title'>) {
+  const { t } = useTranslation()
   return (
     <article className='example-endpoint__media'>
       <div className='example-endpoint__media--description'>
@@ -66,7 +69,7 @@ function PostEndpoint({ endpoint, method, header, instructions, requestCodeBlock
         </div>
         {instructions && (
           <>
-            <div className='example-endpoint__media--description__title'>Intrucciones:</div>
+            <div className='example-endpoint__media--description__title'>{t('media-endpoint_instructions-label')}:</div>
             {instructions}
           </>
         )

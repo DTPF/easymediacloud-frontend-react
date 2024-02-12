@@ -2,6 +2,7 @@ import { memo } from 'react'
 import './apiEndpointsBasic.scss'
 import MediaEndpoint from './mediaEndpoint'
 import { basePath } from 'api/utils/config'
+import { useTranslation } from 'react-i18next'
 
 function ApiBasic() {
   return (
@@ -14,18 +15,20 @@ function ApiBasic() {
 export default memo(ApiBasic)
 
 function PMediaEndpoint() {
+  const { t } = useTranslation()
   return (
     <MediaEndpoint
+      title={'Post Media'}
       endpoint={'/post-media'}
       method={'POST'}
       header={true}
       instructions={<>
         <p className='example-endpoint__media--description__item'>
-          • Para anidar en carpetas, ponemos en la url los nombres de las carpetas separadas por un guión "-":
+          • {t('post-media-endpoint_description-1')} "-":
         </p>
         <p className='example-endpoint__media--description__item'>
           <span className='example-endpoint__media--description__item--sub-item'>
-            -{basePath}/api/v1/post-media/<span className='example-endpoint__media--description__item--sub-item__folder'>anidado1</span>-<span className='example-endpoint__media--description__item--sub-item__folder'>anidado2</span>
+            {basePath}/post-media/<span className='example-endpoint__media--description__item--sub-item__folder'>anidado1</span>-<span className='example-endpoint__media--description__item--sub-item__folder'>anidado2</span>
           </span>
         </p>
         <p className='example-endpoint__media--description__item'>

@@ -5,6 +5,7 @@ import './index.scss'
 import { message } from 'antd'
 import 'antd/dist/reset.css';
 import 'moment/locale/es';
+import 'utils/i18n'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

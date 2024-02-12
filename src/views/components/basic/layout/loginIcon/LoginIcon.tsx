@@ -6,9 +6,10 @@ import UserContext from 'context/user/UserContext';
 import { Avatar, Popover } from 'antd';
 import { adminRole } from 'context/user/constants';
 import { basePath } from 'api/utils/config';
+import LanguageSwitch from 'views/components/UI/languageSwitch';
 
 function LoginIcon() {
-  const { loginWithRedirect } = useAuth0()
+  const { loginWithRedirect, isAuthenticated } = useAuth0()
   const { user, logout } = useContext(UserContext)
   const handleLogout = useCallback(() => {
     logout()
@@ -17,24 +18,23 @@ function LoginIcon() {
   const content = useMemo(() => {
     return (
       <div>
-        {/* <p>Mi cuenta</p> */}
         {user.role === adminRole && (
           <p>Admin</p>
         )}
-        <p onClick={handleLogout} style={{ cursor: 'pointer' }}>Cerrar sesión</p>
+        <LanguageSwitch />
+        <p onClick={() => isAuthenticated ? handleLogout() : loginWithRedirect()} style={{ cursor: 'pointer' }}>
+          {isAuthenticated ? 'Cerrar sesión' : 'Iniciar sesión'}
+        </p>
       </div>
     );
-  }, [handleLogout, user.role])
+  }, [handleLogout, isAuthenticated, loginWithRedirect, user.role])
 
+  const userAvatar = useMemo(() => user.avatar.split('://')[0] === 'https' ? user.avatar : `${basePath}/user-avatar/${user.avatar}`, [user.avatar])
   return (
     <div className='login-icon'>
-      {user._id ? (
-        <Popover content={content} title={user.email} placement="bottomRight">
-          <Avatar size={48} src={user.avatar.split('://')[0] === 'https' ? user.avatar : `${basePath}/user-avatar/${user.avatar}`} />
-        </Popover>
-      ) : (
-        <Avatar size={48} icon={<UserOutlined />} onClick={() => loginWithRedirect()} />
-      )}
+      <Popover content={content} title={user.email} placement="bottomRight">
+        <Avatar size={48} src={isAuthenticated ? userAvatar : <UserOutlined />} />
+      </Popover>
     </div>
   );
 }

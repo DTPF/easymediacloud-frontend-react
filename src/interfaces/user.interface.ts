@@ -1,6 +1,8 @@
 export interface IUserState {
   user: IUser,
+  isLoading: boolean
   logout: () => void
+  setLanguage: ({ language }: { language: string }) => void
 }
 
 export interface IUser {
