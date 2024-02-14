@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import './languageSwitch.scss';
 import UserContext from "context/user/UserContext";
-import English from "assets/img/English.png";
-import Spanish from "assets/img/Spanish.png";
+import English from "assets/img/English.webp";
+import Spanish from "assets/img/Spanish.webp";
 
 const languages = [
   {
