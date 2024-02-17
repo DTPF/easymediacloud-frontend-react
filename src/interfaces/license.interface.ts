@@ -1,5 +1,5 @@
 import { ISubscription } from "./subscription.interface"
-import { IUser } from "./user.interface"
+import { IDauthUser } from "./user.interface"
 
 export interface ILicenseState {
   licenses: ILicense[],
@@ -10,7 +10,7 @@ export interface ILicenseState {
 
 export interface ILicense {
   _id?: string
-  user?: IUser
+  user?: IDauthUser
   project: string
   apiKey?: string
   enabled?: boolean

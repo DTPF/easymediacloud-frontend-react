@@ -1,16 +1,15 @@
 import { UserOutlined } from '@ant-design/icons';
 import './LoginIcon.scss'
-import { useAuth0 } from '@auth0/auth0-react';
-import { memo, useCallback, useContext, useMemo } from 'react';
-import UserContext from 'context/user/UserContext';
+import { memo, useCallback, useMemo } from 'react';
 import { Avatar, Popover } from 'antd';
-import { adminRole } from 'context/user/constants';
-import { basePath } from 'api/utils/config';
 import LanguageSwitch from 'views/components/UI/languageSwitch';
+import { useDauth } from 'dauth-context-react';
+import { adminRole } from 'context/constants';
 
 function LoginIcon() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0()
-  const { user, logout } = useContext(UserContext)
+  const { isAuthenticated, loginWithRedirect } = useDauth()
+  const { user, logout } = useDauth()
+
   const handleLogout = useCallback(() => {
     logout()
   }, [logout])
@@ -29,11 +28,15 @@ function LoginIcon() {
     );
   }, [handleLogout, isAuthenticated, loginWithRedirect, user.role])
 
-  const userAvatar = useMemo(() => user.avatar.split('://')[0] === 'https' ? user.avatar : `${basePath}/user-avatar/${user.avatar}`, [user.avatar])
+  console.log(user);
+
   return (
     <div className='login-icon'>
       <Popover content={content} title={user.email} placement="bottomRight">
-        <Avatar size={48} src={isAuthenticated ? userAvatar : <UserOutlined />} />
+        <Avatar
+          size={48}
+          src={(isAuthenticated && user.avatar) ? <img src={user.avatar} alt={user.name.charAt(0)} /> : <UserOutlined />}
+        />
       </Popover>
     </div>
   );

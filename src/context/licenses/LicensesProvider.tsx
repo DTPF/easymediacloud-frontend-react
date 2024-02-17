@@ -4,18 +4,18 @@ import initialLicensesState from './initialLicensesState'
 import licenseReducer from 'context/licenses/reducer/licenses.reducer'
 import * as action from "context/licenses/reducer/licenses.actions"
 import { ChildrenProps } from 'interfaces/global'
-import { useAuth0 } from '@auth0/auth0-react'
 import { ILicenseState } from 'interfaces/license.interface'
+import { useDauth } from 'dauth-context-react'
 
 function LicensesProvider(props: ChildrenProps) {
 	const [lState, dispatch] = useReducer(licenseReducer, initialLicensesState)
 	const licensesState: ILicenseState = lState
-	const { getAccessTokenSilently } = useAuth0()
+	const { getAccessToken } = useDauth()
 
-	const getLicenses = useCallback(async () => {
-		const token = await getAccessTokenSilently()
+	const getLicenses = useCallback(() => {
+		const token = getAccessToken()
 		action.getLicensesAction(dispatch, token)
-	}, [getAccessTokenSilently])
+	}, [getAccessToken])
 
 	const postLicense = useCallback(async () => {
 		action.postLicenseAction(dispatch)

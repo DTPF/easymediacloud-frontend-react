@@ -1,34 +1,18 @@
-export interface IUserState {
-  user: IUser,
-  isLoading: boolean
-  logout: () => void
-  setLanguage: ({ language }: { language: string }) => void
-}
-
-export interface IUser {
+export interface IDauthUser {
   _id: string
-  auth0Id: string
+  dauthLicense?: string
+  sid: string
   name: string
   lastname: string
+  nickname: string
   email: string
-  role: string
-  isVerified: boolean
+  is_verified: boolean
   language: string
   avatar: string
+  role: string
+  tel_prefix: string
+  tel_suffix: string
   createdAt: Date
   updatedAt: Date
-  lastLogin: Date
-}
-
-export interface IAuth0User {
-  given_name?: string,
-  family_name?: string,
-  nickname?: string,
-  name?: string,
-  picture?: string,
-  locale?: string,
-  updated_at?: string,
-  email?: string,
-  email_verified?: boolean,
-  sub?: string
+  last_login: Date
 }

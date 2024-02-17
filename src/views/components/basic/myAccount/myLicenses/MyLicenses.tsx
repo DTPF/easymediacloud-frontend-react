@@ -2,12 +2,12 @@ import './myLicenses.scss'
 import { useContext, useEffect } from 'react';
 import LicensesContext from 'context/licenses/LicensesContext';
 import Licenses from './licenses';
-import { useAuth0 } from '@auth0/auth0-react';
 import Spin from 'views/components/UI/spin/Spin';
+import { useDauth } from 'dauth-context-react';
 
 function MyLicenses() {
   const { licenses, getLicenses } = useContext(LicensesContext)
-  const { isLoading: isLoadingAuth0 } = useAuth0()
+  const { isLoading: isLoadingAuth0 } = useDauth()
 
   useEffect(() => {
     let isMounted = true

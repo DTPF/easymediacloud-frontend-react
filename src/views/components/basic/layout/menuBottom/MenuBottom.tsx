@@ -1,15 +1,15 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
 import './menuBottom.scss'
 import { IoHomeSharp } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
 import { routes } from 'router/paths';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
-import { adminRole } from 'context/user/constants';
-import UserContext from 'context/user/UserContext';
 import { RiAccountCircleFill, RiAdminLine } from "react-icons/ri";
+import { useDauth } from 'dauth-context-react';
+import { adminRole } from 'context/constants';
 
 function MenuBottom() {
-  const { user } = useContext(UserContext)
+  const { user } = useDauth()
   return (
     <div className='menu-bottom-mobile'>
       <NavLink key={routes.home} to={routes.home} className='menu-bottom-mobile__item'>

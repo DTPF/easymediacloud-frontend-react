@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import './languageSwitch.scss';
-import UserContext from "context/user/UserContext";
 import English from "assets/img/English.webp";
 import Spanish from "assets/img/Spanish.webp";
+import { useDauth } from "dauth-context-react";
 
 const languages = [
   {
@@ -24,7 +23,7 @@ const languages = [
 ];
 
 const LanguageSwitch = () => {
-  const { user, setLanguage } = useContext(UserContext)
+  const { user } = useDauth()
   return (
     <div className="language-switcher">
       <div className="language-switcher__section">
@@ -32,7 +31,8 @@ const LanguageSwitch = () => {
           const { code, label, img } = lng;
           return (
             <div key={i} className="language-switcher__section--container">
-              <button onClick={() => setLanguage({ language: code })} className="language-switcher__section--container__btn">
+              {/* <button onClick={() => setLanguage({ language: code })} className="language-switcher__section--container__btn"> */}
+              <button className="language-switcher__section--container__btn">
                 <img
                   src={img}
                   alt={code === 'es' ? label.es : label.en}

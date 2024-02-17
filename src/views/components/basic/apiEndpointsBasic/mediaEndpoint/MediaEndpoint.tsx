@@ -2,9 +2,9 @@ import { Collapse } from 'antd'
 import { basePath } from 'api/utils/config'
 import './mediaEndpoint.scss'
 import { Highlight, themes } from "prism-react-renderer"
-import { useAuth0 } from '@auth0/auth0-react'
 import Spin from 'views/components/UI/spin/Spin'
 import { useTranslation } from 'react-i18next'
+import { useDauth } from 'dauth-context-react'
 
 type Props = {
   title: string
@@ -17,7 +17,7 @@ type Props = {
 }
 
 function MediaEndpoint({ title, endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Props) {
-  const { isAuthenticated, isLoading } = useAuth0()
+  const { isAuthenticated, isLoading } = useDauth()
   return (
     isLoading ? <Spin /> : (
       <Collapse

@@ -4,7 +4,7 @@ export const getMyLicensesAPI = async (token: string): Promise<any> => {
   const params = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token,
       "Content-Type": "application/json",
     }
   }

@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom"
 import './menuTopMain.scss'
-import { memo, useContext } from "react"
-import UserContext from "context/user/UserContext"
-import { adminRole } from "context/user/constants"
+import { memo } from "react"
 import { routes } from "router/paths"
+import { useDauth } from "dauth-context-react"
+import { adminRole } from "context/constants"
 
 function MenuTop() {
-  const { user } = useContext(UserContext)
+  const { user } = useDauth()
   return (
     <div className='menu-top'>
       {/* <NavLink key={routes.myAccount} to={routes.myAccount}>
