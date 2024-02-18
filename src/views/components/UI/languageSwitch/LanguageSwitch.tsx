@@ -23,7 +23,7 @@ const languages = [
 ];
 
 const LanguageSwitch = () => {
-  const { user } = useDauth()
+  const { user, updateUser } = useDauth()
   return (
     <div className="language-switcher">
       <div className="language-switcher__section">
@@ -31,8 +31,10 @@ const LanguageSwitch = () => {
           const { code, label, img } = lng;
           return (
             <div key={i} className="language-switcher__section--container">
-              {/* <button onClick={() => setLanguage({ language: code })} className="language-switcher__section--container__btn"> */}
-              <button className="language-switcher__section--container__btn">
+              <button
+                onClick={() => updateUser({ language: code })}
+                className="language-switcher__section--container__btn"
+              >
                 <img
                   src={img}
                   alt={code === 'es' ? label.es : label.en}
