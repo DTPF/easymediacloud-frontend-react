@@ -28,8 +28,6 @@ function LoginIcon() {
     );
   }, [handleLogout, isAuthenticated, loginWithRedirect, user.role])
 
-  console.log(user);
-
   return (
     <div className='login-icon'>
       <Popover content={content} title={user.email} placement="bottomRight">
