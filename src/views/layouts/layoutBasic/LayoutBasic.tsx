@@ -2,14 +2,24 @@ import { Outlet } from 'react-router-dom';
 import HeaderMain from 'views/components/basic/layout/header';
 import FooterBasic from 'views/components/basic/layout/footer/FooterBasic';
 import './layoutBasic.scss'
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import useWindowSizeReport from 'hooks/useWindowSizeReport';
 import MenuBottom from 'views/components/basic/layout/menuBottom/MenuBottom';
 import { ConfigProvider } from 'antd';
 import { bgMedium } from 'scss/_variables';
+import i18n from 'utils/i18n';
+import { useDauth } from 'dauth-context-react';
 
 function LayoutMain() {
   const [isMobile] = useWindowSizeReport()
+  const { user } = useDauth()
+  useEffect(() => {
+    let isMounted = true
+    isMounted && i18n.changeLanguage(user.language)
+    return () => {
+      isMounted = false
+    }
+  }, [user.language])
   return (
     <ConfigProvider
       theme={{

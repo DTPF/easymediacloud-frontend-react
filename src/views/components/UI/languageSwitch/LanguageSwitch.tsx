@@ -2,6 +2,7 @@ import './languageSwitch.scss';
 import English from "assets/img/English.webp";
 import Spanish from "assets/img/Spanish.webp";
 import { useDauth } from "dauth-context-react";
+import Tooltip from '../tooltip/Tooltip';
 
 const languages = [
   {
@@ -31,16 +32,18 @@ const LanguageSwitch = () => {
           const { code, label, img } = lng;
           return (
             <div key={i} className="language-switcher__section--container">
-              <button
-                onClick={() => updateUser({ language: code })}
-                className="language-switcher__section--container__btn"
-              >
-                <img
-                  src={img}
-                  alt={code === 'es' ? label.es : label.en}
-                  className={user.language === code ? "language-switcher__section--container__btn--imgActive" : "language-switcher__section--container__btn--img"}
-                />
-              </button>
+              <Tooltip title={user.language === 'es' ? label.es : label.en}>
+                <button
+                  onClick={() => updateUser({ language: code })}
+                  className="language-switcher__section--container__btn"
+                >
+                  <img
+                    src={img}
+                    alt={code === 'es' ? label.es : label.en}
+                    className={user.language === code ? "language-switcher__section--container__btn--imgActive" : "language-switcher__section--container__btn--img"}
+                  />
+                </button>
+              </Tooltip>
             </div>
           )
         })}
