@@ -3,6 +3,7 @@ import English from "assets/img/English.webp";
 import Spanish from "assets/img/Spanish.webp";
 import { useDauth } from "dauth-context-react";
 import Tooltip from '../tooltip/Tooltip';
+import moment from 'moment';
 
 const languages = [
   {
@@ -25,6 +26,7 @@ const languages = [
 
 const LanguageSwitch = () => {
   const { user, updateUser } = useDauth()
+  moment.locale(user.language)
   return (
     <div className="language-switcher">
       <div className="language-switcher__section">
