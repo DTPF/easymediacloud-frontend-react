@@ -1,0 +1,46 @@
+@import 'scss/variables';
+@import 'scss/animations';
+@import 'scss/mixins';
+
+.profile-icon {
+  position: absolute;
+  top: 17px;
+  right: 37px;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  padding: 2px;
+  margin-top: -3px;
+  @include fadeIn();
+
+  img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+  }
+
+  &__auth {
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+
+  &__language {
+    margin-top: 10;
+  }
+  
+  &__my-profile {
+    @include p();
+    margin: 10px 0;
+    cursor: pointer;
+  }
+
+  &__login-logout {
+    @include p();
+    margin-top: 5px;
+    cursor: pointer;
+  }
+
+  &__popover-title {
+    @include titleH4();
+  }
+}
