@@ -2,8 +2,14 @@
 @import '../../../../scss//mixins';
 
 .web-home {
-  h1 {
-    @include titleH1();
+  &__logo {
+    display: flex;
+    justify-content: center;
     margin-bottom: 25px;
+
+    img {
+      width: 100%;
+      max-width: 200px;
+    }
   }
 }
