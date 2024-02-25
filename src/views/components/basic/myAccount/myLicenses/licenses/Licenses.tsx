@@ -1,20 +1,22 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import './licenses.scss'
+import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { Dropdown, MenuProps, Progress, Switch } from 'antd'
 import LicensesContext from 'context/licenses/LicensesContext'
 import { ILicense } from 'interfaces/license.interface'
 import { FaDotCircle } from 'react-icons/fa'
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { GrUpdate } from "react-icons/gr";
-import './licenses.scss'
-import Spin from 'views/components/UI/spin/Spin'
+import Spin from 'views/components/UI/spin'
 import moment from 'moment'
 import { DownCircleOutlined } from '@ant-design/icons'
 import { colorGreen, colorOrange, colorRed } from 'scss/_variables'
-import Tooltip from 'views/components/UI/tooltip/Tooltip'
+import Tooltip from 'views/components/UI/tooltip'
 import useWindowSizeReport from 'hooks/useWindowSizeReport'
-import { BtnDefault, BtnLink, BtnPrimary } from 'views/components/UI/buttons/Buttons'
+import { BtnDefault, BtnLink, BtnPrimary } from 'views/components/UI/buttons'
+import { useTranslation } from 'react-i18next'
 
 function Licenses() {
+  const { t } = useTranslation()
   const { licenses, isLoading } = useContext(LicensesContext)
   return (
     <div className='my-licenses__container'>
@@ -22,7 +24,7 @@ function Licenses() {
         <Spin />
       ) : (
         licenses.length === 0 ? (
-          <div>No hay licencias</div>
+          <div>{t('licenses_empty-msg')}</div>
         ) : (
           licenses.map((license, index) => {
             return (
@@ -35,21 +37,25 @@ function Licenses() {
   )
 }
 
-export default Licenses
+const MemoizedLicenses = memo(Licenses)
+export default MemoizedLicenses
 
 function License({ license }: { license: ILicense }) {
-  moment.locale('es')
+  const { t } = useTranslation()
   const [isMobile, innerWidth] = useWindowSizeReport()
-  const sizePercentage = useMemo(() => Math.round(license.size * 100 / license.subscription.maxSize), [license.size, license.subscription.maxSize])
+  const sizePercentage = useMemo(
+    () => Math.round(license.size * 100 / license.subscription.maxSize)
+    , [license.size, license.subscription.maxSize]
+  )
+  const requestsPercentage = useMemo(
+    () => Math.round(license.requestsInDataRange as number * 100 / license.subscription.maxRequests),
+    [license.requestsInDataRange, license.subscription.maxRequests]
+  )
   const [isOpen, setIsOpen] = useState(isMobile ? false : true);
 
   useEffect(() => {
     let isMounted = true
-    if (isMobile) {
-      isMounted && setIsOpen(false)
-    } else {
-      isMounted && setIsOpen(true)
-    }
+    isMounted && setIsOpen(isMobile ? false : true)
     return () => { isMounted = false }
   }, [isMobile])
 
@@ -61,36 +67,48 @@ function License({ license }: { license: ILicense }) {
     if (license.enabled === false) {
       return {
         color: colorRed,
-        text: 'La licencia no está activa'
+        text: t('licenses_tooltip_license-not-active')
       }
     }
-    if (license.enabled === true && license.online === false) {
+    if (
+      license.enabled === true &&
+      license.online === false
+    ) {
       return {
         color: colorOrange,
-        text: 'La licencia está activa pero no está online'
+        text: t('licenses_tooltip_license-not-online')
       }
     }
-    if (license.enabled === true && license.online === true && license.subscription.enabled === false) {
+    if (
+      license.enabled === true &&
+      license.online === true &&
+      license.subscription.enabled === false
+    ) {
       return {
         color: colorOrange,
-        text: 'La licencia está activa y online pero la suscripción está desactivada'
+        text: t('licenses_tooltip_subscription-not-active')
       }
     }
-    if (license.enabled === true && license.online === true && license.subscription.enabled === true) {
+    if (
+      license.enabled === true &&
+      license.online === true &&
+      license.subscription.enabled === true
+    ) {
       return {
         color: colorGreen,
-        text: 'La licencia está activa, online y la suscripción está activada'
+        text: t('licenses_tooltip_license-subscription-online-active')
       }
     }
-  }, [license.enabled, license.online, license.subscription.enabled])
+  }, [license.enabled, license.online, license.subscription.enabled, t])
 
   const items: MenuProps['items'] = useMemo(() => {
     return [
       {
         key: '1',
         label: (
-          <div className='my-licenses__container--license__column-1--sub__text' style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-            <FaDotCircle style={{ color: getLicenseStatus?.color }} /> {getLicenseStatus?.text}
+          <div className='my-licenses__container--license__column-1--sub__text'>
+            <FaDotCircle style={{ color: getLicenseStatus?.color }} />
+            {getLicenseStatus?.text}
           </div>
         ),
       },
@@ -108,12 +126,14 @@ function License({ license }: { license: ILicense }) {
                 <GrStatusGoodSmall style={{ color: getLicenseStatus?.color }} />
               </Dropdown>
             </i>
-            {/* Prject name */}
-            <Tooltip title={'Nombre del proyecto'}>
-              <p>{license.project}</p>
+            {/* Project name */}
+            <Tooltip title={t('licenses_tooltip_project-name')}>
+              <p className='my-licenses__container--license__column-1--sub__license-name'>
+                {license.project}
+              </p>
             </Tooltip>
             {/* Last update */}
-            <Tooltip title={'Última subida de datos'}>
+            <Tooltip title={t('licenses_tooltip_last-update')}>
               <span className='my-licenses__container--license__column-1--sub__last-update'>
                 | <GrUpdate className='my-licenses__container--license__column-1--sub__last-update--icon' />
                 {moment(license.updatedAt).calendar()}
@@ -122,8 +142,17 @@ function License({ license }: { license: ILicense }) {
           </div>
           <div className='my-licenses__container--license__column-1--sub-2'>
             {/* Online */}
-            <Tooltip title={license.online ? 'Desactivar licencia' : 'Activar licencia'}>
-              <Switch checkedChildren="Online" unCheckedChildren="Offline" defaultChecked={license.online} />
+            <Tooltip
+              title={
+                license.online ?
+                  t('licenses_tooltip_deactivate-license') :
+                  t('licenses_tooltip_activate-license')
+              }>
+              <Switch
+                checkedChildren="Online"
+                unCheckedChildren="Offline"
+                defaultChecked={license.online}
+              />
             </Tooltip>
             {/* Toggle collapse */}
             <span onClick={toggleCollapsible}>
@@ -134,42 +163,77 @@ function License({ license }: { license: ILicense }) {
           </div>
         </div>
         <div className='my-licenses__container--license__column-2'>
-          {/* Progress */}
-          <Progress percent={sizePercentage} showInfo={false} style={{ display: 'flex', alignItems: 'center' }} />
-          <span className='my-licenses__container--license__column-2--span'>
-            <Tooltip title={`${sizePercentage}% ocupado`}>
-              {`${license.sizeT}/`}
-            </Tooltip>
-            <Tooltip title={'Disco total disponible'}>
-              {`${license.subscription.maxSizeT}`}
-            </Tooltip>
-          </span>
+          <div className='my-licenses__container--license__column-2--size'>
+            {/* Progress Size */}
+            <h4 className='my-licenses__container--license__column-2--size__title'>
+              {t('licenses_used-disk')}
+            </h4>
+            <div className='my-licenses__container--license__column-2--size__progress'>
+              <Progress
+                percent={sizePercentage}
+                showInfo={false}
+                style={{ display: 'flex', alignItems: 'center' }}
+              />
+              <span className='my-licenses__container--license__column-2--size__progress--span'>
+                <Tooltip title={`${sizePercentage}% ${t('licenses_tooltip_used-disk')}`}>
+                  {`${license.sizeT}/`}
+                </Tooltip>
+                <Tooltip title={t('licenses_tooltip_total-available-disk')}>
+                  {`${license.subscription.maxSizeT}`}
+                </Tooltip>
+              </span>
+            </div>
+          </div>
+          <div className='my-licenses__container--license__column-2--requests'>
+            {/* Progress Requests */}
+            <h4 className='my-licenses__container--license__column-2--requests__title'>
+              {t('licenses_requests')}
+            </h4>
+            <div className='my-licenses__container--license__column-2--requests__progress'>
+              <Progress
+                percent={requestsPercentage}
+                showInfo={false}
+                style={{ display: 'flex', alignItems: 'center' }}
+              />
+              <span className='my-licenses__container--license__column-2--requests__progress--span'>
+                <Tooltip title={`${requestsPercentage}% ${t('licenses_tooltip_used-requests')}`}>
+                  {`${license.requestsInDataRange}/`}
+                </Tooltip>
+                <Tooltip title={t('licenses_tooltip_max-requests-month')}>
+                  {`${license.subscription.maxRequests} ${t('licenses_max-requests-month')}`}
+                </Tooltip>
+              </span>
+            </div>
+          </div>
         </div>
         <div className={`my-licenses__container--license__collapsible${isOpen ? '--open' : ''}`}>
-          <div className={`my-licenses__container--license__collapsible--open__content`}>
+          <div className={`my-licenses__container--license__collapsible--open__content-1`}>
             {/* Collapse */}
             <div>
-              <div className='my-licenses__container--license__collapsible--open__content--item'>
-                <span>Suscripción:</span>
+              <div className='my-licenses__container--license__collapsible--open__content-1--item'>
+                <span>{t('licenses_subscription')}:</span>
                 <p>{license.subscription.type.toUpperCase()}</p>
               </div>
-              <div className='my-licenses__container--license__collapsible--open__content--item'>
-                <span>Archivos:</span>
+              <div className='my-licenses__container--license__collapsible--open__content-1--item'>
+                <span>{t('licenses_archives')}:</span>
                 <p>{license.totalFiles}</p>
               </div>
             </div>
-
             <div>
-              <div className='my-licenses__container--license__collapsible--open__content--item'>
-                <span>Fecha creación:</span>
+              <div className='my-licenses__container--license__collapsible--open__content-1--item'>
+                <span>{t('licenses_created-at')}:</span>
                 <p>{moment(license.createdAt).format('L')}</p>
               </div>
-              <div className='my-licenses__container--license__collapsible--open__content--item'>
-                <span>Válido hasta:</span>
+              <div className='my-licenses__container--license__collapsible--open__content-1--item'>
+                <span>{t('licenses_valid-until')}:</span>
                 <p>{moment(license.subscription.expire).format('L')}</p>
               </div>
             </div>
-
+          </div>
+          <div className={`my-licenses__container--license__collapsible--open__content-2`}>
+            <p>
+              License Id: <b>{license._id}</b>
+            </p>
           </div>
           {/* Buttons */}
           <div className={`my-licenses__container--license__collapsible--open__buttons`}>
@@ -179,7 +243,7 @@ function License({ license }: { license: ILicense }) {
               color={colorRed}
               onClick={() => { }}
             >
-              Eliminar {innerWidth as number >= 420 ? 'licencia' : ''}
+              {t('licenses_remove')} {innerWidth as number >= 420 ? t('licenses_license') : ''}
             </BtnLink>
             <div className={`my-licenses__container--license__collapsible--open__buttons--sub`}>
               <BtnDefault
@@ -187,18 +251,17 @@ function License({ license }: { license: ILicense }) {
                 shape='round'
                 onClick={() => { }}
               >
-                Refrescar Token
+                {t('licenses_refresh-token')}
               </BtnDefault>
               <BtnPrimary
                 size='small'
                 shape='round'
                 onClick={() => { }}
               >
-                Ver Token
+                {t('licenses_see-token')}
               </BtnPrimary>
             </div>
           </div>
-
         </div>
       </div>
     </>

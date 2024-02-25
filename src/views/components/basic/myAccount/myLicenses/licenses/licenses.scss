@@ -57,11 +57,9 @@
           margin-top: 5px;
         }
 
-        p {
-          margin: 0;
-          padding: 0;
-          font-size: 1.2rem;
-          font-weight: 600;
+        &__license-name {
+          @include titleH3();
+          padding-bottom: 3px;
         }
 
         &__last-update {
@@ -80,7 +78,9 @@
         }
 
         &__text {
-          color: red;
+          display: flex;
+          align-items: center;
+          gap: .5rem;
           @include p2();
         }
       }
@@ -108,18 +108,42 @@
     }
 
     &__column-2 {
-      display: flex;
-      align-items: center !important;
-      gap: 1rem;
-      padding-top: 15px;
-
-      &--span {
+      &--size,
+      &--requests {
         display: flex;
-        align-items: center;
-        white-space: nowrap;
-        padding: 0;
-        margin: 0;
-        padding-top: 10px;
+        flex-direction: row;
+        align-items: center !important;
+        margin-top: 20px;
+
+        &__title {
+          @include titleH5();
+          margin-right: 15px;
+          padding-top: 5px;
+          white-space: nowrap;
+        }
+
+        &__progress {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          width: 100%;
+
+          &--span {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0;
+            margin: 0;
+            padding-top: 5px;
+          }
+        }
+      }
+
+      &--requests {
+        margin-top: 10px;
+
+        &__title {}
       }
     }
 
@@ -133,11 +157,10 @@
         transition: max-height 0.7s ease-in-out;
         overflow: hidden;
 
-        &__content {
+        &__content-1 {
           display: flex;
           justify-content: space-between;
           padding: 13px;
-          padding-bottom: 5px;
 
           @media (max-width: 520px) {
             flex-direction: column;
@@ -156,6 +179,15 @@
               @include p3();
               padding: 10px 0;
             }
+          }
+        }
+
+        &__content-2 {
+          padding: 13px;
+          padding-top: 0;
+
+          p {
+            @include p();
           }
         }
 
