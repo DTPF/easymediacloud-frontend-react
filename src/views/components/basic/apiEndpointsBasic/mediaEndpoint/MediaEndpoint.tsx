@@ -1,30 +1,31 @@
 import { Collapse } from 'antd'
-import { basePath } from 'api/utils/config'
 import './mediaEndpoint.scss'
 import { Highlight, themes } from "prism-react-renderer"
 import Spin from 'views/components/UI/spin/Spin'
 import { useTranslation } from 'react-i18next'
 import { useDauth } from 'dauth-context-react'
 
-type Props = {
+type MediaEndpointProps = {
   title: string
-  endpoint: string
+  endpoint: React.ReactNode
   method: string
   header: boolean
+  token: string
   instructions: React.ReactNode
   requestCodeBlock: string
   responseCodeBlock: string
+  isOpenCollapse: boolean
 }
 
-function MediaEndpoint({ title, endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Props) {
-  const { isAuthenticated, isLoading } = useDauth()
+function MediaEndpoint({ title, endpoint, method, header, token, instructions, requestCodeBlock, responseCodeBlock, isOpenCollapse }: MediaEndpointProps) {
+  const { isLoading } = useDauth()
   return (
     isLoading ? <Spin /> : (
       <Collapse
         collapsible="header"
-        defaultActiveKey={[isAuthenticated ? '0' : '1']}
+        defaultActiveKey={[isOpenCollapse ? '1' : '0']}
         bordered={false}
-        className='example-endpoint'
+        className={`example-endpoint ${method.toLowerCase()}`}
         items={[
           {
             key: '1',
@@ -34,6 +35,7 @@ function MediaEndpoint({ title, endpoint, method, header, instructions, requestC
                 endpoint={endpoint}
                 method={method}
                 header={header}
+                token={token}
                 instructions={instructions}
                 requestCodeBlock={requestCodeBlock}
                 responseCodeBlock={responseCodeBlock}
@@ -49,39 +51,55 @@ function MediaEndpoint({ title, endpoint, method, header, instructions, requestC
 
 export default MediaEndpoint
 
-function MediaEndpointCollapse({ endpoint, method, header, instructions, requestCodeBlock, responseCodeBlock }: Omit<Props, 'title'>) {
+type MediaEndpointCollapseProps = {
+  endpoint: React.ReactNode
+  method: string
+  header: boolean
+  token: string
+  instructions: React.ReactNode
+  requestCodeBlock: string
+  responseCodeBlock: string
+}
+
+function MediaEndpointCollapse({ endpoint, method, header, token, instructions, requestCodeBlock, responseCodeBlock }: MediaEndpointCollapseProps) {
   const { t } = useTranslation()
   return (
     <article className='example-endpoint__media'>
       <div className='example-endpoint__media--description'>
         <div className='example-endpoint__media--description__info'>
-          <p>
-            <span>Endpoint:</span> {basePath}{endpoint}
+          <p className='example-endpoint__media--description__info--endpoint'>
+            <span className='title'>Endpoint:</span> <span className='endpoint'>{endpoint}</span>
           </p>
-          <p>
-            <span>Method:</span> {method}
+          <p className='example-endpoint__media--description__info--method'>
+            <span className='title'>Method:</span> {method}
           </p>
           {header === true && (
-            <p>
-              <span>Header:</span> Authorization {'{'}<span className='token'>token</span>{'}'}
+            <p className='example-endpoint__media--description__info--header'>
+              <span className='title'>Header:</span> Authorization {'{'}<span className='token'>{token}</span>{'}'}
             </p>
           )}
         </div>
         {instructions && (
-          <>
-            <div className='example-endpoint__media--description__title'>{t('media-endpoint_instructions-label')}:</div>
+          <div className='example-endpoint__media--description__instructions'>
+            <div className='example-endpoint__media--description__instructions__title'>
+              {t('media-endpoint_instructions-label')}:
+            </div>
             {instructions}
-          </>
+          </div>
         )
         }
       </div>
       <div className='example-endpoint__media--example'>
         <div className='example-endpoint__media--example__request'>
-          <div className='example-endpoint__media--example__request--title'>Petición con Javascript:</div>
+          <div className='example-endpoint__media--example__request--title'>
+            {t('media-endpoint_requests-title')}:
+          </div>
           <pre className='example-endpoint__media--example__request--pre'>
             <RequestCodeBlock requestCodeBlock={requestCodeBlock} />
           </pre>
-          <div className='example-endpoint__media--example__request--title'>Respuesta:</div>
+          <div className='example-endpoint__media--example__request--title'>
+            {t('media-endpoint_response-title')}:
+          </div>
           <pre className='example-endpoint__media--example__request--pre'>
             <ResponseCodeBlock responseCodeBlock={responseCodeBlock} />
           </pre>

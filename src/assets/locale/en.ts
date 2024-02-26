@@ -6,7 +6,16 @@ const englishTranslation = {
    'profile-icon_send-email-verification': 'Send email verification',
    // Post Media Endpoint
    'post-media-endpoint_description-1': 'To nest within folders, we include the folder names in the URL separated by hyphens',
+   'post-media-endpoint_description-1-nested': 'nested',
+   'post-media-endpoint_description-2': 'The key of the file is',
+   'post-media-endpoint_codeblock-archive': 'file',
+   'post-media-endpoint_codeblock-folders': 'user-images',
+   'post-media-endpoint_codeblock-created-success': 'File/s created successfully',
    'media-endpoint_instructions-label': 'Instructions',
+   'media-endpoint_requests-title': 'Request',
+   'media-endpoint_response-title': 'Response',
+   'post-media-endpoint_codeblock-deleted-success': 'File deleted successfully',
+   'post-media-endpoint_codeblock-get-license-token-success': 'Token obtained successfully',
    // Licenses
    'licenses_empty-msg': 'No licenses available',
    'licenses_tooltip_license-not-active': 'License is not active',

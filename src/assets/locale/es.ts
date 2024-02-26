@@ -6,7 +6,16 @@ const spanishTranslation = {
   'profile-icon_send-email-verification': 'Enviar email de verificación',
   // Post Media Endpoint
   'post-media-endpoint_description-1': 'Para organizar archivos en carpetas, incluimos en la URL los nombres de las carpetas separados por guiones',
+  'post-media-endpoint_description-1-nested': 'anidado',
+  'post-media-endpoint_description-2': 'La clave del archivo es',
+  'post-media-endpoint_codeblock-archive': 'archivo',
+  'post-media-endpoint_codeblock-folders': 'imagenes-usuarios',
+  'post-media-endpoint_codeblock-created-success': 'Archivo/s creado correctamente',
   'media-endpoint_instructions-label': 'Instrucciones',
+  'media-endpoint_requests-title': 'Petición',
+  'media-endpoint_response-title': 'Respuesta',
+  'post-media-endpoint_codeblock-deleted-success': 'Archivo eliminado correctamente',
+  'post-media-endpoint_codeblock-get-license-token-success': 'Token obtenido correctamente',
   // Licenses
   'licenses_empty-msg': 'No hay licencias',
   'licenses_tooltip_license-not-active': 'La licencia no está activa',

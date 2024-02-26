@@ -5,6 +5,18 @@
   margin-bottom: 20px;
   background-color: $bg-medium-light;
 
+  &.get {
+    background-color: rgba(40, 146, 40, 0.13);
+  }
+
+  &.post {
+    background-color: rgba(40, 70, 146, 0.13);
+  }
+
+  &.delete {
+    background-color: rgba(146, 40, 40, 0.13);
+  }
+
   &--title {
     @include titleH2();
     font-weight: 600;
@@ -24,71 +36,74 @@
       padding-left: 20px;
       padding-bottom: 20px;
 
-      &__title {
-        @include titleH3();
-        border-radius: 10px;
-        padding: 5px;
-        margin-bottom: 5px;
-      }
-
-      &__item {
-        @include p2();
-        display: flex;
-        align-items: center;
-        padding: 3px !important;
-        padding-left: 10px !important;
-        text-wrap: balance;
-        white-space: nowrap;
-        overflow: hidden;
-        overflow-x: auto;
-
-        &--sub-item {
-          padding: 0 !important;
-          padding-left: 20px !important;
-
-          &__folder {
-            @include p2();
-            color: $color-medium;
-            padding: 0 2px;
-            font-weight: 600 !important;
-          }
-        }
-
-        &--media {
-          @include p2();
-          color: $color-medium;
-          margin-left: 4px;
-          font-weight: 600;
-        }
-      }
-
       &__info {
         padding: 5px;
-        padding-bottom: 10px;
+        padding-bottom: 0px;
         font-size: 1rem;
 
-        p {
-          @include p2();
+        &--endpoint,
+        &--method,
+        &--header {
+          @include p();
           white-space: nowrap;
           overflow: hidden;
           overflow-x: auto;
           padding-top: 7px;
-        }
 
-        span {
-          @include p3();
-          font-size: 1.1rem;
+          .title {
+            @include titleH4();
+            margin-right: 5px;
+          }
 
-          &.token {
+          .token {
             @include p2();
             color: $color-medium;
             font-weight: 600;
           }
+        }
+      }
 
-          &.folder {
+      &__instructions {
+        margin-top: 10px;
+
+        &__title {
+          @include titleH3();
+          border-radius: 10px;
+          padding: 5px;
+          margin-bottom: 5px;
+        }
+
+        &__item {
+          @include p2();
+          display: flex;
+          align-items: center;
+          padding: 3px !important;
+          padding-left: 10px !important;
+          text-wrap: balance;
+          overflow: hidden;
+          overflow-x: auto;
+
+          &--sub-item {
+            padding: 0;
+            padding: 2px 6px;
+            border-radius: 5px;
+            white-space: nowrap;
+            background-color: rgba(176, 176, 176, 0.139);
+            box-shadow: 0 0 5px rgba(176, 176, 176, 0.439);
+            margin: 5px 0;
+
+            &__folder {
+              @include p2();
+              color: $color-medium;
+              padding: 0px 2px;
+              font-weight: 600 !important;
+            }
+          }
+
+          &--media {
             @include p2();
             color: $color-medium;
-            padding: 0 2px;
+            margin-left: 4px;
             font-weight: 600;
           }
         }
