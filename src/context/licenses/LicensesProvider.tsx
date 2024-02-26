@@ -17,9 +17,10 @@ function LicensesProvider(props: ChildrenProps) {
 		action.getLicensesAction(dispatch, token)
 	}, [getAccessToken])
 
-	const postLicense = useCallback(async () => {
-		action.postLicenseAction(dispatch)
-	}, [])
+	const postLicense = useCallback(async ({ projectName }: { projectName: string }) => {
+		const token = getAccessToken()
+		action.postLicenseAction(dispatch, projectName, token)
+	}, [getAccessToken])
 
 	const setLicenseOnline = useCallback(async ({ licenseId, online }: { licenseId: string, online: boolean }) => {
 		const token = getAccessToken()

@@ -2,6 +2,9 @@
 @import '../../../../scss/mixins';
 
 .tooltip-antd {
+  display: flex;
+  align-items: center;
+
   &__title {
     @include p2();
   }

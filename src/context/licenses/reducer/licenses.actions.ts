@@ -1,6 +1,6 @@
 import { messageError, messageSuccess } from 'views/components/UI/messages'
 import * as LicenseTypes from './licenses.types'
-import { getMyLicensesAPI, setLicenseOnlineAPI } from "api/licenses.api"
+import { createLicenseAPI, getMyLicensesAPI, setLicenseOnlineAPI } from "api/licenses.api"
 import { ILicense } from 'interfaces/license.interface'
 
 export async function getLicensesAction(dispatch: any, token: string) {
@@ -14,21 +14,29 @@ export async function getLicensesAction(dispatch: any, token: string) {
         payload: sortLicenses
       })
     }
-    if (response.status === 404 || response.status === 401) {
-      return dispatch({
-        type: LicenseTypes.GET_LICENSES,
-        payload: []
-      })
-    }
     return messageError(data.message)
   } catch (err: any) {
-    messageError({ msg: err.message })
+    messageError({ msg: err.message ?? 'Error al obtener las licencias'})
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false })
   }
 }
 
-export async function postLicenseAction(dispatch: any) { }
+export async function postLicenseAction(dispatch: any, projectName: string, token: string) {
+  try {
+    const { response, data } = await createLicenseAPI({ projectName, token })
+    if (response.status === 200) {
+      dispatch({
+        type: LicenseTypes.POST_LICENSE,
+        payload: { license: data.license }
+      })
+      return messageSuccess({ msg: data.message })
+    }
+    return messageError({ msg: data.message })
+  } catch (err: any) {
+    messageError({ msg: err.message ?? 'Error al crear la licencia' })
+  }
+}
 
 export async function setLicenseOnlineAction(dispatch: any, licenseId: string, online: boolean, token: string) {
   try {
@@ -42,7 +50,7 @@ export async function setLicenseOnlineAction(dispatch: any, licenseId: string, o
     }
     return messageError(setLicenseOnline.data.message)
   } catch (err: any) {
-    messageError({ msg: err.message })
+    messageError({ msg: err.message ?? 'Error al cambiar el estado de la licencia' })
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false })
   }

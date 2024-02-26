@@ -13,6 +13,20 @@ export const getMyLicensesAPI = async (token: string): Promise<any> => {
   return { response, data }
 }
 
+export const createLicenseAPI = async ({ projectName, token }: { projectName: string, token: string }): Promise<any> => {
+  const params = {
+    method: "POST",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ project: projectName })
+  }
+  const response = await fetch(`${basePath}/create-license`, params)
+  const data = await response.json()
+  return { response, data }
+}
+
 export const setLicenseOnlineAPI = async (licenseId: string, online: boolean, token: string): Promise<any> => {
   const params = {
     method: "PATCH",

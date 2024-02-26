@@ -41,6 +41,12 @@ const spanishTranslation = {
   'licenses_license': 'licencia',
   'licenses_refresh-token': 'Refrescar token',
   'licenses_see-token': 'Ver token',
+  'licenses_title': 'Mis Licencias',
+  'licenses_create-license_project-name_error': 'El nombre del proyecto solo puede contener letras, números, guiones y guiones bajos',
+  'licenses_create-license_input-placeholder': 'Introduce el nombre de la licencia',
+  'licenses_create-license_btn': 'Crear Licencia',
+  'licenses_create-license_close-input': 'Cerrar',
+  'licenses_create-license_create-license-btn': 'Crear Licencia',
 }
 
 export default spanishTranslation;

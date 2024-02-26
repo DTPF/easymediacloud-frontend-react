@@ -15,7 +15,6 @@ function Tooltip({ title, children }: Props) {
         title={<div className='tooltip-antd__title'>{title}</div>}
         color={bgLight}
         key={title}
-        className='tooltip-antd__tooltip'
       >
         {children}
       </TooltipAntd>
