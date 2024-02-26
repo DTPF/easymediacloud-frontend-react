@@ -6,6 +6,7 @@ export interface ILicenseState {
   isLoading: boolean,
   getLicenses: () => void,
   postLicense: ({ projectName }: { projectName: string }) => void,
+  setLicenseOnline: ({ licenseId, online }: { licenseId: string, online: boolean }) => void,
 }
 
 export interface ILicense {

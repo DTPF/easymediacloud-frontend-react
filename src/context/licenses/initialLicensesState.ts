@@ -40,6 +40,7 @@ const initialLicensesState: ILicenseState = {
 	isLoading: false,
 	getLicenses: () => { },
 	postLicense: ({ projectName }: { projectName: string }) => { },
+	setLicenseOnline: ({ licenseId, online }: { licenseId: string, online: boolean }) => { }
 }
 
 export default initialLicensesState

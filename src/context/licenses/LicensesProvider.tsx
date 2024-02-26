@@ -21,15 +21,22 @@ function LicensesProvider(props: ChildrenProps) {
 		action.postLicenseAction(dispatch)
 	}, [])
 
+	const setLicenseOnline = useCallback(async ({ licenseId, online }: { licenseId: string, online: boolean }) => {
+		const token = getAccessToken()
+		action.setLicenseOnlineAction(dispatch, licenseId, online, token)
+	}, [getAccessToken])
+
 	const memoProvider = useMemo(
 		() => ({
 			...licensesState,
 			getLicenses,
 			postLicense,
+			setLicenseOnline
 		}), [
 		licensesState,
 		getLicenses,
 		postLicense,
+		setLicenseOnline
 	])
 
 	return (

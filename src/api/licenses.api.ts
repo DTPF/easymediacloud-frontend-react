@@ -12,3 +12,17 @@ export const getMyLicensesAPI = async (token: string): Promise<any> => {
   const data = await response.json()
   return { response, data }
 }
+
+export const setLicenseOnlineAPI = async (licenseId: string, online: boolean, token: string): Promise<any> => {
+  const params = {
+    method: "PATCH",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ online })
+  }
+  const response = await fetch(`${basePath}/set-license-online/${licenseId}`, params)
+  const data = await response.json()
+  return { response, data }
+}

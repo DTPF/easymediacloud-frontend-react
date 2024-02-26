@@ -1,3 +1,4 @@
+import { ILicense } from 'interfaces/license.interface';
 import * as LicensesTypes from './licenses.types'
 
 export default function licensesReducer(state: any, action: any) {
@@ -20,6 +21,17 @@ export default function licensesReducer(state: any, action: any) {
 			return {
 				...state,
 				isLoading: payload,
+			}
+
+		case LicensesTypes.SET_LICENSE_ONLINE:
+			return {
+				...state,
+				licenses: state.licenses.map((license: ILicense) => {
+					if (license._id === payload.licenseId) {
+						license.online = payload.online
+					}
+					return license
+				}),
 			}
 
 		default:

@@ -43,6 +43,8 @@ export default MemoizedLicenses
 function License({ license }: { license: ILicense }) {
   const { t } = useTranslation()
   const [isMobile, innerWidth] = useWindowSizeReport()
+  const { setLicenseOnline } = useContext(LicensesContext)
+  const [isOpenCollapse, setIsOpenCollapse] = useState(isMobile ? false : true);
   const sizePercentage = useMemo(
     () => Math.round(license.size * 100 / license.subscription.maxSize)
     , [license.size, license.subscription.maxSize]
@@ -51,17 +53,16 @@ function License({ license }: { license: ILicense }) {
     () => Math.round(license.requestsInDataRange as number * 100 / license.subscription.maxRequests),
     [license.requestsInDataRange, license.subscription.maxRequests]
   )
-  const [isOpen, setIsOpen] = useState(isMobile ? false : true);
 
   useEffect(() => {
     let isMounted = true
-    isMounted && setIsOpen(isMobile ? false : true)
+    isMounted && setIsOpenCollapse(isMobile ? false : true)
     return () => { isMounted = false }
   }, [isMobile])
 
   const toggleCollapsible = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen])
+    setIsOpenCollapse(!isOpenCollapse);
+  }, [isOpenCollapse])
 
   const getLicenseStatus = useMemo(() => {
     if (license.enabled === false) {
@@ -152,12 +153,16 @@ function License({ license }: { license: ILicense }) {
                 checkedChildren="Online"
                 unCheckedChildren="Offline"
                 defaultChecked={license.online}
+                onChange={(checked) => setLicenseOnline({
+                  licenseId: license._id as string,
+                  online: checked
+                })}
               />
             </Tooltip>
             {/* Toggle collapse */}
             <span onClick={toggleCollapsible}>
               <DownCircleOutlined
-                className={`my-licenses__container--license__column-1--sub-2__rotate-icon${isOpen ? '--open' : ''}`}
+                className={`my-licenses__container--license__column-1--sub-2__rotate-icon${isOpenCollapse ? '--open' : ''}`}
               />
             </span>
           </div>
@@ -206,7 +211,7 @@ function License({ license }: { license: ILicense }) {
             </div>
           </div>
         </div>
-        <div className={`my-licenses__container--license__collapsible${isOpen ? '--open' : ''}`}>
+        <div className={`my-licenses__container--license__collapsible${isOpenCollapse ? '--open' : ''}`}>
           <div className={`my-licenses__container--license__collapsible--open__content-1`}>
             {/* Collapse */}
             <div>
