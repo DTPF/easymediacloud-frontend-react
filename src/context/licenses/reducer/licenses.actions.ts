@@ -1,6 +1,6 @@
 import { messageError, messageSuccess } from 'views/components/UI/messages'
 import * as LicenseTypes from './licenses.types'
-import { createLicenseAPI, getMyLicensesAPI, setLicenseOnlineAPI } from "api/licenses.api"
+import { createLicenseAPI, deleteLicenseAPI, getMyLicensesAPI, setLicenseOnlineAPI } from "api/licenses.api"
 import { ILicense } from 'interfaces/license.interface'
 
 export async function getLicensesAction(dispatch: any, token: string) {
@@ -16,7 +16,7 @@ export async function getLicensesAction(dispatch: any, token: string) {
     }
     return messageError(data.message)
   } catch (err: any) {
-    messageError({ msg: err.message ?? 'Error al obtener las licencias'})
+    messageError({ msg: err.message ?? 'Error al obtener las licencias' })
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false })
   }
@@ -53,5 +53,21 @@ export async function setLicenseOnlineAction(dispatch: any, licenseId: string, o
     messageError({ msg: err.message ?? 'Error al cambiar el estado de la licencia' })
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false })
+  }
+}
+
+export async function deleteLicenseAction(dispatch: any, licenseId: string, token: string) {
+  try {
+    const { response, data } = await deleteLicenseAPI({ licenseId, token })
+    if (response.status === 200) {
+      dispatch({
+        type: LicenseTypes.DELETE_LICENSE,
+        payload: { licenseId }
+      })
+      return messageSuccess({ msg: data.message })
+    }
+    return messageError({ msg: data.message })
+  } catch (err: any) {
+    messageError({ msg: err.message ?? 'Error al eliminar la licencia' })
   }
 }

@@ -47,6 +47,11 @@ const spanishTranslation = {
   'licenses_create-license_btn': 'Crear Licencia',
   'licenses_create-license_close-input': 'Cerrar',
   'licenses_create-license_create-license-btn': 'Crear Licencia',
+  'licenses_delete-license-popover_title': 'Eliminar licencia',
+  'licenses_delete-license-popover_description-1': '¿Estás seguro de que quieres eliminar la licencia',
+  'licenses_delete-license-popover_description-2': 'y todos los archivos?',
+  'licenses_delete-license-popover_cancel': 'Cancelar',
+  'licenses_delete-license-popover_delete': 'Eliminar',
 }
 
 export default spanishTranslation;

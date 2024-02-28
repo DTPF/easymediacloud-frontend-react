@@ -40,3 +40,15 @@ export const setLicenseOnlineAPI = async (licenseId: string, online: boolean, to
   const data = await response.json()
   return { response, data }
 }
+
+export const deleteLicenseAPI = async ({ licenseId, token }: { licenseId: string, token: string }): Promise<any> => {
+  const params = {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    }
+  }
+  const response = await fetch(`${basePath}/delete-license/${licenseId}`, params)
+  const data = await response.json()
+  return { response, data }
+}

@@ -1,6 +1,6 @@
 import './licenses.scss'
 import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { Dropdown, MenuProps, Progress, Switch } from 'antd'
+import { Dropdown, MenuProps, Popconfirm, Progress, Switch } from 'antd'
 import LicensesContext from 'context/licenses/LicensesContext'
 import { ILicense } from 'interfaces/license.interface'
 import { FaDotCircle } from 'react-icons/fa'
@@ -43,8 +43,8 @@ export default MemoizedLicenses
 function License({ license }: { license: ILicense }) {
   const { t } = useTranslation()
   const [isMobile, innerWidth] = useWindowSizeReport()
-  const { setLicenseOnline } = useContext(LicensesContext)
-  const [isOpenCollapse, setIsOpenCollapse] = useState(isMobile ? false : true);
+  const { setLicenseOnline, deleteLicense } = useContext(LicensesContext)
+  const [isOpenCollapse, setIsOpenCollapse] = useState(false);
   const sizePercentage = useMemo(
     () => Math.round(license.size * 100 / license.subscription.maxSize)
     , [license.size, license.subscription.maxSize]
@@ -242,14 +242,24 @@ function License({ license }: { license: ILicense }) {
           </div>
           {/* Buttons */}
           <div className={`my-licenses__container--license__collapsible--open__buttons`}>
-            <BtnLink
-              size='small'
-              shape='round'
-              color={colorRed}
-              onClick={() => { }}
+            {/* Delete license */}
+            <Popconfirm
+              placement="bottomLeft"
+              title={t('licenses_delete-license-popover_title')}
+              description={<div>{t('licenses_delete-license-popover_description-1')}<br /> {t('licenses_delete-license-popover_description-2')}</div>}
+              okText={t('licenses_delete-license-popover_delete')}
+              cancelText={t('licenses_delete-license-popover_cancel')}
+              onConfirm={() => deleteLicense({ licenseId: license._id as string })}
+              style={{ width: 200 }}
             >
-              {t('licenses_remove')} {innerWidth as number >= 420 ? t('licenses_license') : ''}
-            </BtnLink>
+              <BtnLink
+                size='small'
+                shape='round'
+                color={colorRed}
+              >
+                {t('licenses_remove')} {innerWidth as number >= 420 ? t('licenses_license') : ''}
+              </BtnLink>
+            </Popconfirm>
             <div className={`my-licenses__container--license__collapsible--open__buttons--sub`}>
               <BtnDefault
                 size='small'

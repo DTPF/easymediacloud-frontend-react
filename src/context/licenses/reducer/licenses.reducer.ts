@@ -34,6 +34,12 @@ export default function licensesReducer(state: any, action: any) {
 				}),
 			}
 
+		case LicensesTypes.DELETE_LICENSE:
+			return {
+				...state,
+				licenses: state.licenses.filter((license: ILicense) => license._id !== payload.licenseId),
+			}
+
 		default:
 			return state
 	}

@@ -67,6 +67,11 @@ function MyLicenses() {
                 placeholder={t('licenses_create-license_input-placeholder')}
                 value={licenseName}
                 onChange={(e) => setLicenseName(e.target.value.trim())}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter') {
+                    handleShowCreateLicenseInput()
+                  }
+                }}
                 allowClear
               />
             </>

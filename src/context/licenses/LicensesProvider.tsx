@@ -27,17 +27,24 @@ function LicensesProvider(props: ChildrenProps) {
 		action.setLicenseOnlineAction(dispatch, licenseId, online, token)
 	}, [getAccessToken])
 
+	const deleteLicense = useCallback(async ({ licenseId }: { licenseId: string }) => {
+		const token = getAccessToken()
+		action.deleteLicenseAction(dispatch, licenseId, token)
+	}, [getAccessToken])
+
 	const memoProvider = useMemo(
 		() => ({
 			...licensesState,
 			getLicenses,
 			postLicense,
-			setLicenseOnline
+			setLicenseOnline,
+			deleteLicense
 		}), [
 		licensesState,
 		getLicenses,
 		postLicense,
-		setLicenseOnline
+		setLicenseOnline,
+		deleteLicense
 	])
 
 	return (

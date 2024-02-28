@@ -47,6 +47,11 @@ const englishTranslation = {
    'licenses_create-license_btn': 'Create License',
    'licenses_create-license_close-input': 'Close',
    'licenses_create-license_create-license-btn': 'Create License',
+   'licenses_delete-license-popover_title': 'Delete license',
+   'licenses_delete-license-popover_description-1': 'Are you sure you want to delete the license',
+   'licenses_delete-license-popover_description-2': 'and all files?',
+   'licenses_delete-license-popover_cancel': 'Cancel',
+   'licenses_delete-license-popover_delete': 'Delete',
 }
 
 export default englishTranslation;
