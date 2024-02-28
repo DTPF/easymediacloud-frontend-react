@@ -12,23 +12,23 @@ function LicensesProvider(props: ChildrenProps) {
 	const licensesState: ILicenseState = lState
 	const { getAccessToken } = useDauth()
 
-	const getLicenses = useCallback(() => {
-		const token = getAccessToken()
+	const getLicenses = useCallback(async () => {
+		const token = await getAccessToken()
 		action.getLicensesAction(dispatch, token)
 	}, [getAccessToken])
 
 	const postLicense = useCallback(async ({ projectName }: { projectName: string }) => {
-		const token = getAccessToken()
+		const token = await getAccessToken()
 		action.postLicenseAction(dispatch, projectName, token)
 	}, [getAccessToken])
 
 	const setLicenseOnline = useCallback(async ({ licenseId, online }: { licenseId: string, online: boolean }) => {
-		const token = getAccessToken()
+		const token = await getAccessToken()
 		action.setLicenseOnlineAction(dispatch, licenseId, online, token)
 	}, [getAccessToken])
 
 	const deleteLicense = useCallback(async ({ licenseId }: { licenseId: string }) => {
-		const token = getAccessToken()
+		const token = await getAccessToken()
 		action.deleteLicenseAction(dispatch, licenseId, token)
 	}, [getAccessToken])
 

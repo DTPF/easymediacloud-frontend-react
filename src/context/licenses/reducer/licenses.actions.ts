@@ -14,7 +14,7 @@ export async function getLicensesAction(dispatch: any, token: string) {
         payload: sortLicenses
       })
     }
-    return messageError(data.message)
+    return messageError({ msg: data.message })
   } catch (err: any) {
     messageError({ msg: err.message ?? 'Error al obtener las licencias' })
   } finally {
@@ -40,15 +40,15 @@ export async function postLicenseAction(dispatch: any, projectName: string, toke
 
 export async function setLicenseOnlineAction(dispatch: any, licenseId: string, online: boolean, token: string) {
   try {
-    const setLicenseOnline = await setLicenseOnlineAPI(licenseId, online, token)
-    if (setLicenseOnline.response.status === 200) {
+    const { response, data } = await setLicenseOnlineAPI(licenseId, online, token)
+    if (response.status === 200) {
       dispatch({
         type: LicenseTypes.SET_LICENSE_ONLINE,
         payload: { licenseId, online }
       })
-      return messageSuccess({ msg: setLicenseOnline.data.message as string })
+      return messageSuccess({ msg: data.message as string })
     }
-    return messageError(setLicenseOnline.data.message)
+    return messageError({ msg: data.message })
   } catch (err: any) {
     messageError({ msg: err.message ?? 'Error al cambiar el estado de la licencia' })
   } finally {
