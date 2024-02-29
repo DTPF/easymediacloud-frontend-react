@@ -43,7 +43,7 @@ export default MemoizedLicenses
 function License({ license }: { license: ILicense }) {
   const { t } = useTranslation()
   const [isMobile, innerWidth] = useWindowSizeReport()
-  const { setLicenseOnline, deleteLicense } = useContext(LicensesContext)
+  const { setLicenseOnline, deleteLicense, getLicenseToken, refreshLicenseToken } = useContext(LicensesContext)
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
   const sizePercentage = useMemo(
     () => Math.round(license.size * 100 / license.subscription.maxSize)
@@ -264,16 +264,16 @@ function License({ license }: { license: ILicense }) {
               <BtnDefault
                 size='small'
                 shape='round'
-                onClick={() => { }}
+                onClick={() => refreshLicenseToken({ licenseId: license._id as string })}
               >
                 {t('licenses_refresh-token')}
               </BtnDefault>
               <BtnPrimary
                 size='small'
                 shape='round'
-                onClick={() => { }}
+                onClick={() => getLicenseToken({ licenseId: license._id as string })}
               >
-                {t('licenses_see-token')}
+                {t('licenses_get-media-token')}
               </BtnPrimary>
             </div>
           </div>

@@ -8,6 +8,8 @@ export interface ILicenseState {
   postLicense: ({ projectName }: { projectName: string }) => void,
   setLicenseOnline: ({ licenseId, online }: { licenseId: string, online: boolean }) => void,
   deleteLicense: ({ licenseId }: { licenseId: string }) => void,
+  getLicenseToken: ({ licenseId }: { licenseId: string }) => void,
+  refreshLicenseToken: ({ licenseId }: { licenseId: string }) => void
 }
 
 export interface ILicense {

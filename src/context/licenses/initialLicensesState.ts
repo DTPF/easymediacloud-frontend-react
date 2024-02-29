@@ -7,6 +7,8 @@ const initialLicensesState: ILicenseState = {
 	postLicense: ({ projectName }: { projectName: string }) => { },
 	setLicenseOnline: ({ licenseId, online }: { licenseId: string, online: boolean }) => { },
 	deleteLicense: ({ licenseId }: { licenseId: string }) => { },
+	getLicenseToken: ({ licenseId }: { licenseId: string }) => { },
+	refreshLicenseToken: ({ licenseId }: { licenseId: string }) => { }
 }
 
 export default initialLicensesState

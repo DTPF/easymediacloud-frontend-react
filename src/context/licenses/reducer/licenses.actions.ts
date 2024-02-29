@@ -1,12 +1,13 @@
 import { messageError, messageSuccess } from 'views/components/UI/messages'
 import * as LicenseTypes from './licenses.types'
-import { createLicenseAPI, deleteLicenseAPI, getMyLicensesAPI, setLicenseOnlineAPI } from "api/licenses.api"
+import * as api from "api/licenses.api"
 import { ILicense } from 'interfaces/license.interface'
+import { TFunction } from 'i18next'
 
-export async function getLicensesAction(dispatch: any, token: string) {
+export async function getLicensesAction(dispatch: any, token: string, translate: TFunction<"translation", undefined>) {
   dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: true })
   try {
-    const { response, data } = await getMyLicensesAPI(token)
+    const { response, data } = await api.getMyLicensesAPI(token)
     if (response.status === 200) {
       const sortLicenses = data.licenses.sort((a: ILicense, b: ILicense) => a.updatedAt > b.updatedAt ? -1 : 1)
       return dispatch({
@@ -16,15 +17,15 @@ export async function getLicensesAction(dispatch: any, token: string) {
     }
     return messageError({ msg: data.message })
   } catch (err: any) {
-    messageError({ msg: err.message ?? 'Error al obtener las licencias' })
+    messageError({ msg: err.message ?? translate('actions_licenses_get-licenses_error') })
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false })
   }
 }
 
-export async function postLicenseAction(dispatch: any, projectName: string, token: string) {
+export async function postLicenseAction(dispatch: any, projectName: string, token: string, translate: TFunction<"translation", undefined>) {
   try {
-    const { response, data } = await createLicenseAPI({ projectName, token })
+    const { response, data } = await api.createLicenseAPI({ projectName, token })
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.POST_LICENSE,
@@ -34,13 +35,13 @@ export async function postLicenseAction(dispatch: any, projectName: string, toke
     }
     return messageError({ msg: data.message })
   } catch (err: any) {
-    messageError({ msg: err.message ?? 'Error al crear la licencia' })
+    messageError({ msg: err.message ?? translate('actions_licenses_post-license_error') })
   }
 }
 
-export async function setLicenseOnlineAction(dispatch: any, licenseId: string, online: boolean, token: string) {
+export async function setLicenseOnlineAction(dispatch: any, licenseId: string, online: boolean, token: string, translate: TFunction<"translation", undefined>) {
   try {
-    const { response, data } = await setLicenseOnlineAPI(licenseId, online, token)
+    const { response, data } = await api.setLicenseOnlineAPI(licenseId, online, token)
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.SET_LICENSE_ONLINE,
@@ -50,15 +51,15 @@ export async function setLicenseOnlineAction(dispatch: any, licenseId: string, o
     }
     return messageError({ msg: data.message })
   } catch (err: any) {
-    messageError({ msg: err.message ?? 'Error al cambiar el estado de la licencia' })
+    messageError({ msg: err.message ?? translate('actions_licenses_set-license-online_error') })
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false })
   }
 }
 
-export async function deleteLicenseAction(dispatch: any, licenseId: string, token: string) {
+export async function deleteLicenseAction(dispatch: any, licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
   try {
-    const { response, data } = await deleteLicenseAPI({ licenseId, token })
+    const { response, data } = await api.deleteLicenseAPI({ licenseId, token })
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.DELETE_LICENSE,
@@ -68,6 +69,32 @@ export async function deleteLicenseAction(dispatch: any, licenseId: string, toke
     }
     return messageError({ msg: data.message })
   } catch (err: any) {
-    messageError({ msg: err.message ?? 'Error al eliminar la licencia' })
+    messageError({ msg: err.message ?? translate('actions_licenses_delete-license_error') })
+  }
+}
+
+export async function getLicenseTokenAction(licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
+  try {
+    const { response, data } = await api.getLicenseTokenAPI(licenseId, token)
+    if (response.status === 200) {
+      navigator.clipboard.writeText(data.mediaToken);
+      return messageSuccess({ msg: translate('actions_licenses_get-license-token_success') })
+    }
+    return messageError({ msg: data.message })
+  } catch (err: any) {
+    messageError({ msg: err.message ?? translate('actions_licenses_get-license-token_error') })
+  }
+}
+
+export async function refreshLicenseTokenAction(licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
+  try {
+    const { response, data } = await api.refreshLicenseTokenAPI(licenseId, token)
+    if (response.status === 200) {
+      navigator.clipboard.writeText(data.mediaToken);
+      return messageSuccess({ msg: translate('actions_licenses_refresh-license-token_success') })
+    }
+    return messageError({ msg: data.message })
+  } catch (err: any) {
+    messageError({ msg: err.message ?? translate('actions_licenses_get-license-token_error') })
   }
 }

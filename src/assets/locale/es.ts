@@ -40,7 +40,7 @@ const spanishTranslation = {
   'licenses_remove': 'Eliminar',
   'licenses_license': 'licencia',
   'licenses_refresh-token': 'Refrescar token',
-  'licenses_see-token': 'Ver token',
+  'licenses_get-media-token': 'Copiar token',
   'licenses_title': 'Mis Licencias',
   'licenses_create-license_project-name_error': 'El nombre del proyecto solo puede contener letras, números, guiones y guiones bajos',
   'licenses_create-license_input-placeholder': 'Introduce el nombre de la licencia',
@@ -52,6 +52,17 @@ const spanishTranslation = {
   'licenses_delete-license-popover_description-2': 'y todos los archivos?',
   'licenses_delete-license-popover_cancel': 'Cancelar',
   'licenses_delete-license-popover_delete': 'Eliminar',
+
+  // ACTIONS /////////////////////////////////
+  // Licenses
+  'actions_licenses_get-licenses_error': 'Error al obtener las licencias',
+  'actions_licenses_post-license_error': 'Error al crear la licencia',
+  'actions_licenses_set-license-online_error': 'Error al cambiar el estado de la licencia',
+  'actions_licenses_delete-license_error': 'Error al cambiar el estado de la licencia',
+  'actions_licenses_get-license-token_success': 'Token copiado correctamente',
+  'actions_licenses_get-license-token_error': 'Error al obtener el token',
+  'actions_licenses_refresh-license-token_success': 'Token refrescado y copiado correctamente',
+  ////////////////////////////////////////////
 }
 
 export default spanishTranslation;

@@ -52,3 +52,29 @@ export const deleteLicenseAPI = async ({ licenseId, token }: { licenseId: string
   const data = await response.json()
   return { response, data }
 }
+
+export const getLicenseTokenAPI = async (licenseId: string, token: string): Promise<any> => {
+  const params = {
+    method: "GET",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    }
+  }
+  const response = await fetch(`${basePath}/get-license-token/${licenseId}`, params)
+  const data = await response.json()
+  return { response, data }
+}
+
+export const refreshLicenseTokenAPI = async (licenseId: string, token: string): Promise<any> => {
+  const params = {
+    method: "GET",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    }
+  }
+  const response = await fetch(`${basePath}/refresh-license-token/${licenseId}`, params)
+  const data = await response.json()
+  return { response, data }
+}
