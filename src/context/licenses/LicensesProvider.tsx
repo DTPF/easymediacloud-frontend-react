@@ -44,6 +44,11 @@ function LicensesProvider(props: ChildrenProps) {
 		action.refreshLicenseTokenAction(licenseId, token, translate)
 	}, [getAccessToken, translate])
 
+	const getLicenseMedia = useCallback(async ({ licenseId }: { licenseId: string }) => {
+		const token = await getAccessToken()
+		action.getLicenseMediaAction(dispatch, licenseId, token, translate)
+	}, [getAccessToken, translate])
+
 	const memoProvider = useMemo(
 		() => ({
 			...licensesState,
@@ -52,7 +57,8 @@ function LicensesProvider(props: ChildrenProps) {
 			setLicenseOnline,
 			deleteLicense,
 			getLicenseToken,
-			refreshLicenseToken
+			refreshLicenseToken,
+			getLicenseMedia
 		}), [
 		licensesState,
 		getLicenses,
@@ -60,7 +66,8 @@ function LicensesProvider(props: ChildrenProps) {
 		setLicenseOnline,
 		deleteLicense,
 		getLicenseToken,
-		refreshLicenseToken
+		refreshLicenseToken,
+		getLicenseMedia
 	])
 
 	return (

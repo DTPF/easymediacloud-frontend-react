@@ -3,6 +3,7 @@ import * as LicenseTypes from './licenses.types'
 import * as api from "api/licenses.api"
 import { ILicense } from 'interfaces/license.interface'
 import { TFunction } from 'i18next'
+import { getMediaByLicenseAPI } from 'api/media.api'
 
 export async function getLicensesAction(dispatch: any, token: string, translate: TFunction<"translation", undefined>) {
   dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: true })
@@ -96,5 +97,29 @@ export async function refreshLicenseTokenAction(licenseId: string, token: string
     return messageError({ msg: data.message })
   } catch (err: any) {
     messageError({ msg: err.message ?? translate('actions_licenses_get-license-token_error') })
+  }
+}
+
+export async function getLicenseMediaAction(dispatch: any, licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
+  dispatch({ type: LicenseTypes.SET_IS_LOADING_MEDIA, payload: true })
+  const index = 0;
+  const limit = 20;
+  try {
+    const { response, data } = await getMediaByLicenseAPI(licenseId, index, limit, token)
+    if (response.status === 200) {
+      dispatch({
+        type: LicenseTypes.GET_LICENSE_MEDIA,
+        payload: { 
+          licenseId, 
+          media: data.media,
+          index,
+          limit
+         }
+      })
+    }
+  } catch (err: any) {
+    messageError({ msg: err.message ?? translate('actions_licenses_get-license-media_error') })
+  } finally {
+    dispatch({ type: LicenseTypes.SET_IS_LOADING_MEDIA, payload: false })
   }
 }

@@ -7,6 +7,7 @@ export const routes = {
   // Basic
   home: '/',
   myAccount: '/my-account',
+  license: '/license',
   // Admin
   adminHome: `/${aAdmin}/${aHome}`,
   adminContent: `/${aAdmin}/${aContent}`,

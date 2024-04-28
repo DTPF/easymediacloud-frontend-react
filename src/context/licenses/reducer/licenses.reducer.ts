@@ -40,6 +40,28 @@ export default function licensesReducer(state: any, action: any) {
 				licenses: state.licenses.filter((license: ILicense) => license._id !== payload.licenseId),
 			}
 
+		case LicensesTypes.GET_LICENSE_MEDIA:
+			return {
+				...state,
+				licenses: state.licenses.map((license: ILicense) => {
+					if (license._id === payload.licenseId) {
+						license.mediaPagination = {
+							media: payload.media,
+							index: payload.index,
+							limit: payload.limit,
+						}
+					}
+					return license
+				}),
+				licenseSelected: state.licenses.find((license: ILicense) => license._id === payload.licenseId),
+			}
+
+		case LicensesTypes.SET_IS_LOADING_MEDIA:
+			return {
+				...state,
+				isLoadingMedia: payload,
+			}
+
 		default:
 			return state
 	}

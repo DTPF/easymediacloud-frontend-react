@@ -167,31 +167,31 @@
           display: flex;
           justify-content: space-between;
           padding: 13px;
-
+          
           @media (max-width: 520px) {
             flex-direction: column;
           }
-
+          
           &--item {
             display: flex;
             align-items: center;
-
+            
             span {
               @include p2();
               padding-right: 5px;
             }
-
+            
             p {
               @include p3();
               padding: 10px 0;
             }
           }
         }
-
+        
         &__content-2 {
           padding: 13px;
           padding-top: 0;
-
+          
           p {
             @include p();
           }

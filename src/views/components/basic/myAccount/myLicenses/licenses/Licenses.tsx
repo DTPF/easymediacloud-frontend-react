@@ -14,6 +14,7 @@ import Tooltip from 'views/components/UI/tooltip'
 import useWindowSizeReport from 'hooks/useWindowSizeReport'
 import { BtnDefault, BtnLink, BtnPrimary } from 'views/components/UI/buttons'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 function Licenses() {
   const { t } = useTranslation()
@@ -129,9 +130,11 @@ function License({ license }: { license: ILicense }) {
             </i>
             {/* Project name */}
             <Tooltip title={t('licenses_tooltip_project-name')}>
-              <p className='my-licenses__container--license__column-1--sub__license-name'>
-                {license.project}
-              </p>
+              <Link to={`/license/${license._id}`} style={{ textDecoration: 'none' }}>
+                <p className='my-licenses__container--license__column-1--sub__license-name'>
+                  {license.project}
+                </p>
+              </Link>
             </Tooltip>
             {/* Last update */}
             <Tooltip title={t('licenses_tooltip_last-update')}>
@@ -219,10 +222,13 @@ function License({ license }: { license: ILicense }) {
                 <span>{t('licenses_subscription')}:</span>
                 <p>{license.subscription.type.toUpperCase()}</p>
               </div>
-              <div className='my-licenses__container--license__collapsible--open__content-1--item'>
-                <span>{t('licenses_archives')}:</span>
-                <p>{license.totalFiles}</p>
-              </div>
+              {/* Total files */}
+              <Link to={`/license/${license._id}`} style={{ textDecoration: 'none' }}>
+                <div className='my-licenses__container--license__collapsible--open__content-1--item'>
+                  <span style={{ textDecoration: 'underline' }}>{t('licenses_archives')}:</span>
+                  <p>{license.totalFiles}</p>
+                </div>
+              </Link>
             </div>
             <div>
               <div className='my-licenses__container--license__collapsible--open__content-1--item'>

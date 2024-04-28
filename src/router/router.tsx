@@ -7,6 +7,7 @@ const AdminLayout = lazy(() => import('views/layouts/layoutAdmin'));
 // BASIC PAGES
 const HomeBasic = lazy(() => import('views/pages/basic/home'));
 const MyAccountBasic = lazy(() => import('views/pages/basic/myAccount'));
+const LicenseBasic = lazy(() => import('views/pages/basic/license'));
 // ADMIN PAGES
 const HomeAdmin = lazy(() => import('views/pages/admin/home'));
 const ContentAdmin = lazy(() => import('views/pages/admin/content'));
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: routes.home,
-        element: <Suspense fallback={<></>}><HomeBasic /></Suspense>,
+        element: <Suspense fallback={<></>}><HomeBasic /></Suspense>
+      },
+      {
+        path: `${routes.license}/:id`,
+        element: <Suspense fallback={<></>}><LicenseBasic /></Suspense>
       },
       {
         path: routes.myAccount,
@@ -33,7 +38,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: aHome,
-            element: <Suspense fallback={<></>}><HomeAdmin /></Suspense>,
+            element: <Suspense fallback={<></>}><HomeAdmin /></Suspense>
           },
           {
             path: aContent,
@@ -41,7 +46,7 @@ const router = createBrowserRouter([
           },
           {
             path: aUsers,
-            element: <Suspense fallback={<></>}><UsersAdmin /></Suspense>,
+            element: <Suspense fallback={<></>}><UsersAdmin /></Suspense>
           },
           {
             path: "*",
