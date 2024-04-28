@@ -1,5 +1,10 @@
 import { basePath } from "./utils/config";
 
+/**
+ * Retrieves the licenses associated with the authenticated user.
+ * @param token - The authentication token.
+ * @returns A Promise that resolves to an object containing the response and data.
+ */
 export const getMyLicensesAPI = async (token: string): Promise<any> => {
   const params = {
     method: "GET",
@@ -13,6 +18,12 @@ export const getMyLicensesAPI = async (token: string): Promise<any> => {
   return { response, data }
 }
 
+/**
+ * Creates a new license for a project.
+ * @param projectName - The name of the project.
+ * @param token - The authentication token.
+ * @returns A Promise that resolves to an object containing the response and data.
+ */
 export const createLicenseAPI = async ({ projectName, token }: { projectName: string, token: string }): Promise<any> => {
   const params = {
     method: "POST",
@@ -27,6 +38,13 @@ export const createLicenseAPI = async ({ projectName, token }: { projectName: st
   return { response, data }
 }
 
+/**
+ * Sets the online status of a license.
+ * @param licenseId - The ID of the license.
+ * @param online - The online status to set.
+ * @param token - The authentication token.
+ * @returns A Promise that resolves to an object containing the response and data.
+ */
 export const setLicenseOnlineAPI = async (licenseId: string, online: boolean, token: string): Promise<any> => {
   const params = {
     method: "PATCH",
@@ -41,6 +59,12 @@ export const setLicenseOnlineAPI = async (licenseId: string, online: boolean, to
   return { response, data }
 }
 
+/**
+ * Deletes a license.
+ * @param licenseId - The ID of the license to delete.
+ * @param token - The authentication token.
+ * @returns A Promise that resolves to an object containing the response and data.
+ */
 export const deleteLicenseAPI = async ({ licenseId, token }: { licenseId: string, token: string }): Promise<any> => {
   const params = {
     method: "DELETE",
@@ -53,6 +77,12 @@ export const deleteLicenseAPI = async ({ licenseId, token }: { licenseId: string
   return { response, data }
 }
 
+/**
+ * Retrieves the token for a license.
+ * @param licenseId - The ID of the license.
+ * @param token - The authentication token.
+ * @returns A Promise that resolves to an object containing the response and data.
+ */
 export const getLicenseTokenAPI = async (licenseId: string, token: string): Promise<any> => {
   const params = {
     method: "GET",
@@ -66,6 +96,12 @@ export const getLicenseTokenAPI = async (licenseId: string, token: string): Prom
   return { response, data }
 }
 
+/**
+ * Refreshes the token for a license.
+ * @param licenseId - The ID of the license.
+ * @param token - The authentication token.
+ * @returns A Promise that resolves to an object containing the response and data.
+ */
 export const refreshLicenseTokenAPI = async (licenseId: string, token: string): Promise<any> => {
   const params = {
     method: "GET",

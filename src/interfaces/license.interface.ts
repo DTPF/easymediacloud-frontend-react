@@ -1,6 +1,9 @@
 import { ISubscription } from "./subscription.interface"
 import { IDauthUser } from "./user.interface"
 
+/**
+ * Represents the state of the license feature in the application.
+ */
 export interface ILicenseState {
   licenses: ILicense[],
   licenseSelected: ILicense | null,
@@ -15,6 +18,9 @@ export interface ILicenseState {
   getLicenseMedia: ({ licenseId }: { licenseId: string }) => void
 }
 
+/**
+ * Represents a license.
+ */
 export interface ILicense {
   _id?: string
   user?: IDauthUser
@@ -34,13 +40,19 @@ export interface ILicense {
   __v?: any
 }
 
-interface IMediaPagination {
+/**
+ * Represents the pagination information for media items.
+ */
+export interface IMediaPagination {
   media: IMedia[]
   index: number
   limit: number
 }
 
-interface IMedia {
+/**
+ * Represents a media item.
+ */
+export interface IMedia {
   _id: string,
   url: string,
   size: number,
@@ -50,7 +62,11 @@ interface IMedia {
   createdAt: string,
 }
 
+/**
+ * Represents the data range for requests.
+ */
 export interface IRequestsDataRange {
   quantity: number
   cicle: string
 }
+

@@ -1,5 +1,8 @@
 import { ILicense } from "./license.interface"
 
+/**
+ * Represents a media object.
+ */
 export interface IMedia {
   _id: string
   license: ILicense

@@ -5,6 +5,12 @@ import { ILicense } from 'interfaces/license.interface'
 import { TFunction } from 'i18next'
 import { getMediaByLicenseAPI } from 'api/media.api'
 
+/**
+ * Retrieves licenses from the server and dispatches an action to update the state.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function getLicensesAction(dispatch: any, token: string, translate: TFunction<"translation", undefined>) {
   dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: true })
   try {
@@ -24,6 +30,13 @@ export async function getLicensesAction(dispatch: any, token: string, translate:
   }
 }
 
+/**
+ * Creates a new license and dispatches an action to update the state.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param projectName - The name of the project.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function postLicenseAction(dispatch: any, projectName: string, token: string, translate: TFunction<"translation", undefined>) {
   try {
     const { response, data } = await api.createLicenseAPI({ projectName, token })
@@ -40,6 +53,14 @@ export async function postLicenseAction(dispatch: any, projectName: string, toke
   }
 }
 
+/**
+ * Sets the online status of a license and dispatches an action to update the state.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param licenseId - The ID of the license.
+ * @param online - The online status to set.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function setLicenseOnlineAction(dispatch: any, licenseId: string, online: boolean, token: string, translate: TFunction<"translation", undefined>) {
   try {
     const { response, data } = await api.setLicenseOnlineAPI(licenseId, online, token)
@@ -58,6 +79,13 @@ export async function setLicenseOnlineAction(dispatch: any, licenseId: string, o
   }
 }
 
+/**
+ * Deletes a license and dispatches an action to update the state.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param licenseId - The ID of the license to delete.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function deleteLicenseAction(dispatch: any, licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
   try {
     const { response, data } = await api.deleteLicenseAPI({ licenseId, token })
@@ -74,6 +102,12 @@ export async function deleteLicenseAction(dispatch: any, licenseId: string, toke
   }
 }
 
+/**
+ * Retrieves the media token for a license and copies it to the clipboard.
+ * @param licenseId - The ID of the license.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function getLicenseTokenAction(licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
   try {
     const { response, data } = await api.getLicenseTokenAPI(licenseId, token)
@@ -87,6 +121,12 @@ export async function getLicenseTokenAction(licenseId: string, token: string, tr
   }
 }
 
+/**
+ * Refreshes the media token for a license and copies it to the clipboard.
+ * @param licenseId - The ID of the license.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function refreshLicenseTokenAction(licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
   try {
     const { response, data } = await api.refreshLicenseTokenAPI(licenseId, token)
@@ -100,6 +140,13 @@ export async function refreshLicenseTokenAction(licenseId: string, token: string
   }
 }
 
+/**
+ * Retrieves media associated with a license and dispatches an action to update the state.
+ * @param dispatch - The dispatch function from the Redux store.
+ * @param licenseId - The ID of the license.
+ * @param token - The authentication token.
+ * @param translate - The translation function.
+ */
 export async function getLicenseMediaAction(dispatch: any, licenseId: string, token: string, translate: TFunction<"translation", undefined>) {
   dispatch({ type: LicenseTypes.SET_IS_LOADING_MEDIA, payload: true })
   const index = 0;
