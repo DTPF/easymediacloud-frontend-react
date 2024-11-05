@@ -34,7 +34,7 @@ const LanguageSwitch = () => {
             <div key={i} className="language-switcher__section--container">
               <Tooltip title={user.language === 'es' ? label.es : label.en}>
                 <button
-                  onClick={() => updateUser({ language: code })}
+                  onClick={async () => await updateUser({ language: code })}
                   className="language-switcher__section--container__btn"
                 >
                   <img
