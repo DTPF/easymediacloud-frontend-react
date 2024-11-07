@@ -1,5 +1,5 @@
+import config from "config/config";
 import { IDauthUser } from "interfaces/user.interface";
-import { basePath } from "./utils/config";
 
 /**
  * Updates a user's information.
@@ -16,7 +16,7 @@ export const updateUserAPI = async (user: Partial<IDauthUser>, token: string): P
 		},
 		body: JSON.stringify(user),
 	}
-	const response = await fetch(`${basePath}/update-user`, params)
+	const response = await fetch(`${config.app.SERVER_URL}/update-user`, params)
 	const data = await response.json()
 	return { response, data }
 }

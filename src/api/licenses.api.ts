@@ -1,4 +1,4 @@
-import { basePath } from "./utils/config";
+import config from "config/config"
 
 /**
  * Retrieves the licenses associated with the authenticated user.
@@ -13,7 +13,7 @@ export const getMyLicensesAPI = async (token: string): Promise<any> => {
       "Content-Type": "application/json",
     }
   }
-  const response = await fetch(`${basePath}/get-my-licenses`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/get-my-licenses`, params)
   const data = await response.json()
   return { response, data }
 }
@@ -33,7 +33,7 @@ export const createLicenseAPI = async ({ projectName, token }: { projectName: st
     },
     body: JSON.stringify({ project: projectName })
   }
-  const response = await fetch(`${basePath}/create-license`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/create-license`, params)
   const data = await response.json()
   return { response, data }
 }
@@ -54,7 +54,7 @@ export const setLicenseOnlineAPI = async (licenseId: string, online: boolean, to
     },
     body: JSON.stringify({ online })
   }
-  const response = await fetch(`${basePath}/set-license-online/${licenseId}`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/set-license-online/${licenseId}`, params)
   const data = await response.json()
   return { response, data }
 }
@@ -72,7 +72,7 @@ export const deleteLicenseAPI = async ({ licenseId, token }: { licenseId: string
       Authorization: token,
     }
   }
-  const response = await fetch(`${basePath}/delete-license/${licenseId}`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/delete-license/${licenseId}`, params)
   const data = await response.json()
   return { response, data }
 }
@@ -91,7 +91,7 @@ export const getLicenseTokenAPI = async (licenseId: string, token: string): Prom
       "Content-Type": "application/json",
     }
   }
-  const response = await fetch(`${basePath}/get-license-token/${licenseId}`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/get-license-token/${licenseId}`, params)
   const data = await response.json()
   return { response, data }
 }
@@ -110,7 +110,7 @@ export const refreshLicenseTokenAPI = async (licenseId: string, token: string): 
       "Content-Type": "application/json",
     }
   }
-  const response = await fetch(`${basePath}/refresh-license-token/${licenseId}`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/refresh-license-token/${licenseId}`, params)
   const data = await response.json()
   return { response, data }
 }

@@ -1,4 +1,4 @@
-import { basePath } from "./utils/config";
+import config from "config/config"
 
 export const getMediaByLicenseAPI = async (licenseId: string, index: number, limit: number, token: string): Promise<any> => {
   const params = {
@@ -8,7 +8,7 @@ export const getMediaByLicenseAPI = async (licenseId: string, index: number, lim
       "Content-Type": "application/json",
     }
   }
-  const response = await fetch(`${basePath}/get-media-by-license/${licenseId}?index=${index}&limit=${limit}`, params)
+  const response = await fetch(`${config.app.SERVER_URL}/get-media-by-license/${licenseId}?index=${index}&limit=${limit}`, params)
   const data = await response.json()
   return { response, data }
 }

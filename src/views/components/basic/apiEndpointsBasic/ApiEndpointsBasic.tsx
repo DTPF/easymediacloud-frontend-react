@@ -1,9 +1,9 @@
 import { memo } from 'react'
 import './apiEndpointsBasic.scss'
 import MediaEndpoint from './mediaEndpoint'
-import { basePath } from 'api/utils/config'
 import { useTranslation } from 'react-i18next'
 import { useDauth } from 'dauth-context-react'
+import config from 'config/config'
 
 function ApiBasic() {
   return (
@@ -29,7 +29,7 @@ function GetLicenseTokenEndpoint() {
       token={"Dauth Token"}
       isOpenCollapse={false}
       instructions={null}
-      requestCodeBlock={`const response = await fetch(${isAuthenticated ? basePath : 'https://server-url'}/get-license-token/:licenseId, {
+      requestCodeBlock={`const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/get-license-token/:licenseId, {
   method: "GET",
   headers: { Authorization: 'Dauth Token' }
 });
@@ -62,7 +62,7 @@ function PostMediaEndpoint() {
         </p>
         <p className='example-endpoint__media--description__instructions__item'>
           <span className='example-endpoint__media--description__instructions__item--sub-item'>
-            {basePath}/post-media/
+            {config.app.SERVER_URL}/post-media/
             <span className='example-endpoint__media--description__instructions__item--sub-item__folder'>
               {t('post-media-endpoint_description-1-nested')}1
             </span>-
@@ -81,7 +81,7 @@ function PostMediaEndpoint() {
 formData.append("media", ${t('post-media-endpoint_codeblock-archive')});
 formData.append("media", ${t('post-media-endpoint_codeblock-archive')});
 
-const response = await fetch(${isAuthenticated ? basePath : 'https://server-url'}/post-media/${t('post-media-endpoint_codeblock-folders')}, {
+const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/post-media/${t('post-media-endpoint_codeblock-folders')}, {
   method: "POST",
   headers: { Authorization: 'mediaToken' },
   body: formData
@@ -93,13 +93,13 @@ return { response, data };`}
 "media": [
   {
     "id": "65b4f31be430ca97c69e2599",
-    "url": "${isAuthenticated ? basePath : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/gboAAow0KwKPLZL0QrpfU605.png",
+    "url": "${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/gboAAow0KwKPLZL0QrpfU605.png",
     "size": "1.91 MB",
     "createdAt": "2024-01-27T12:12:11.631Z"
   },
   {
     "id": "65b4f31be430ca97c69e259b",
-    "url": "${isAuthenticated ? basePath : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/QxwgmQfr4p1vcgFs3pi44l4s.png",
+    "url": "${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/QxwgmQfr4p1vcgFs3pi44l4s.png",
     "size": "14.82 KB",
     "createdAt": "2024-01-27T12:12:11.633Z"
   }
@@ -120,7 +120,7 @@ function DeleteMediaEndpoint() {
       token={"mediaToken"}
       isOpenCollapse={false}
       instructions={null}
-      requestCodeBlock={`const response = await fetch(${isAuthenticated ? basePath : 'https://server-url'}/delete-media/{mediaId}, {
+      requestCodeBlock={`const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/delete-media/{mediaId}, {
   method: "DELETE",
   headers: { Authorization: 'mediaToken' }
 });
