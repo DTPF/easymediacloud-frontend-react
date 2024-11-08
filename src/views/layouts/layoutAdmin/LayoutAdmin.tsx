@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { Outlet } from "react-router-dom";
+import { memo } from 'react';
+import { Outlet } from 'react-router-dom';
 
 function LayoutAdmin() {
   return (

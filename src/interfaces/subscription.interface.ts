@@ -5,72 +5,72 @@ export interface ISubscription {
   /**
    * The unique identifier of the subscription.
    */
-  _id?: string
+  _id?: string;
 
   /**
    * The user associated with the subscription.
    */
-  user?: string
+  user?: string;
 
   /**
    * The license of the subscription.
    */
-  license?: string
+  license?: string;
 
   /**
    * The type of the subscription.
    */
-  type: string
+  type: string;
 
   /**
    * The price of the subscription.
    */
-  price: number
+  price: number;
 
   /**
    * The currency of the subscription.
    */
-  currency: string
+  currency: string;
 
   /**
    * The maximum size of the subscription.
    */
-  maxSize: number
+  maxSize: number;
 
   /**
    * The maximum size type of the subscription.
    */
-  maxSizeT?: string
+  maxSizeT?: string;
 
   /**
    * The expiration date of the subscription.
    */
-  expire?: Date
+  expire?: Date;
 
   /**
    * Indicates whether the subscription is enabled or not.
    */
-  enabled: boolean
+  enabled: boolean;
 
   /**
    * The range of requests data for the subscription.
    */
-  requestsDataRange: TRequestsDataRange
+  requestsDataRange: TRequestsDataRange;
 
   /**
    * The maximum number of requests for the subscription.
    */
-  maxRequests: number
+  maxRequests: number;
 
   /**
    * The creation date of the subscription.
    */
-  createdAt: Date
+  createdAt: Date;
 
   /**
    * The last update date of the subscription.
    */
-  updatedAt: Date
+  updatedAt: Date;
 }
 
 /**
@@ -80,15 +80,15 @@ export type TRequestsDataRange = {
   /**
    * The quantity of requests data.
    */
-  quantity: number
+  quantity: number;
 
   /**
    * The cycle of requests data.
    */
-  cicle: string
-}
+  cicle: string;
+};
 
 /**
  * Represents the type of a subscription.
  */
-export type SubscriptionType = 'free' | 'basic' | 'premium'
+export type SubscriptionType = 'free' | 'basic' | 'premium';

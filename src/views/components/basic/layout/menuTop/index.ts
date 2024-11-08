@@ -1,1 +1,1 @@
-export { default } from './MenuTopMain'
+export { default } from './MenuTopMain';

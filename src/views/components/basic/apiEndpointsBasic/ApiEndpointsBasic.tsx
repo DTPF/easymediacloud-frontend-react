@@ -1,32 +1,36 @@
-import { memo } from 'react'
-import './apiEndpointsBasic.scss'
-import MediaEndpoint from './mediaEndpoint'
-import { useTranslation } from 'react-i18next'
-import { useDauth } from 'dauth-context-react'
-import config from 'config/config'
+import { memo } from 'react';
+import './apiEndpointsBasic.scss';
+import MediaEndpoint from './mediaEndpoint';
+import { useTranslation } from 'react-i18next';
+import { useDauth } from 'dauth-context-react';
+import config from 'config/config';
 
 function ApiBasic() {
   return (
-    <section className='api-doc-basic'>
+    <section className="api-doc-basic">
       <GetLicenseTokenEndpoint />
       <PostMediaEndpoint />
       <DeleteMediaEndpoint />
     </section>
-  )
+  );
 }
 
-export default memo(ApiBasic)
+export default memo(ApiBasic);
 
 function GetLicenseTokenEndpoint() {
-  const { t } = useTranslation()
-  const { isAuthenticated } = useDauth()
+  const { t } = useTranslation();
+  const { isAuthenticated } = useDauth();
   return (
     <MediaEndpoint
       title={'Get License Token'}
-      endpoint={<span>get-license-token/<i>:licenseId</i></span>}
+      endpoint={
+        <span>
+          get-license-token/<i>:licenseId</i>
+        </span>
+      }
       method={'GET'}
       header={true}
-      token={"Dauth Token"}
+      token={'Dauth Token'}
       isOpenCollapse={false}
       instructions={null}
       requestCodeBlock={`const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/get-license-token/:licenseId, {
@@ -42,41 +46,43 @@ return { response, data };`}
   "mediaToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDlmOWU1MGM5MjIzOGV..."
 }`}
     />
-  )
+  );
 }
 
 function PostMediaEndpoint() {
-  const { t } = useTranslation()
-  const { isAuthenticated } = useDauth()
+  const { t } = useTranslation();
+  const { isAuthenticated } = useDauth();
   return (
     <MediaEndpoint
       title={'Post Media'}
       endpoint={'post-media'}
       method={'POST'}
       header={true}
-      token={"mediaToken"}
+      token={'mediaToken'}
       isOpenCollapse={false}
-      instructions={<>
-        <p className='example-endpoint__media--description__instructions__item'>
-          • {t('post-media-endpoint_description-1')} "-":
-        </p>
-        <p className='example-endpoint__media--description__instructions__item'>
-          <span className='example-endpoint__media--description__instructions__item--sub-item'>
-            {config.app.SERVER_URL}/post-media/
-            <span className='example-endpoint__media--description__instructions__item--sub-item__folder'>
-              {t('post-media-endpoint_description-1-nested')}1
-            </span>-
-            <span className='example-endpoint__media--description__instructions__item--sub-item__folder'>
-              {t('post-media-endpoint_description-1-nested')}2
+      instructions={
+        <>
+          <p className="example-endpoint__media--description__instructions__item">
+            • {t('post-media-endpoint_description-1')} "-":
+          </p>
+          <p className="example-endpoint__media--description__instructions__item">
+            <span className="example-endpoint__media--description__instructions__item--sub-item">
+              {config.app.SERVER_URL}/post-media/
+              <span className="example-endpoint__media--description__instructions__item--sub-item__folder">
+                {t('post-media-endpoint_description-1-nested')}1
+              </span>
+              -
+              <span className="example-endpoint__media--description__instructions__item--sub-item__folder">
+                {t('post-media-endpoint_description-1-nested')}2
+              </span>
             </span>
-          </span>
-        </p>
-        <p className='example-endpoint__media--description__instructions__item'>
-          • {t('post-media-endpoint_description-2')}
-          <span className='example-endpoint__media--description__instructions__item--media'>
-            media
-          </span>.
-        </p></>}
+          </p>
+          <p className="example-endpoint__media--description__instructions__item">
+            • {t('post-media-endpoint_description-2')}
+            <span className="example-endpoint__media--description__instructions__item--media">media</span>.
+          </p>
+        </>
+      }
       requestCodeBlock={`const formData = new FormData();
 formData.append("media", ${t('post-media-endpoint_codeblock-archive')});
 formData.append("media", ${t('post-media-endpoint_codeblock-archive')});
@@ -105,19 +111,23 @@ return { response, data };`}
   }
 ]`}
     />
-  )
+  );
 }
 
 function DeleteMediaEndpoint() {
-  const { t } = useTranslation()
-  const { isAuthenticated } = useDauth()
+  const { t } = useTranslation();
+  const { isAuthenticated } = useDauth();
   return (
     <MediaEndpoint
       title={'Delete Media'}
-      endpoint={<span>delete-media/<i>:mediaId</i></span>}
+      endpoint={
+        <span>
+          delete-media/<i>:mediaId</i>
+        </span>
+      }
       method={'DELETE'}
       header={true}
-      token={"mediaToken"}
+      token={'mediaToken'}
       isOpenCollapse={false}
       instructions={null}
       requestCodeBlock={`const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/delete-media/{mediaId}, {
@@ -132,5 +142,5 @@ return { response, data };`}
   "message": "${t('post-media-endpoint_codeblock-deleted-success')}"
 }`}
     />
-  )
+  );
 }

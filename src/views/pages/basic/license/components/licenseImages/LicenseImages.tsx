@@ -109,6 +109,5 @@ function LicenseImages() {
   );
 }
 
-
 const MemoizedLicenseImages = memo(LicenseImages);
-export default MemoizedLicenseImages
+export default MemoizedLicenseImages;

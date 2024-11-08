@@ -187,7 +187,7 @@ export async function getLicenseMediaAction(
   const index = 0;
   const limit = 20;
   try {
-    const { response, data } = await getMediaByLicenseAPI({licenseId, index, limit, token});
+    const { response, data } = await getMediaByLicenseAPI({ licenseId, index, limit, token });
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.GET_LICENSE_MEDIA,

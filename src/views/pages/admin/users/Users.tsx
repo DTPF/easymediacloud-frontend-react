@@ -1,11 +1,7 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 function Users() {
-  return (
-    <div>
-      Users Admin
-    </div>
-  );
+  return <div>Users Admin</div>;
 }
 
 export default memo(Users);

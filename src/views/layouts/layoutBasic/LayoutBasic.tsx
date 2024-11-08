@@ -1,4 +1,4 @@
-import './layoutBasic.scss'
+import './layoutBasic.scss';
 import { memo, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import HeaderMain from 'views/components/basic/layout/header';
@@ -12,17 +12,17 @@ import { useDauth } from 'dauth-context-react';
 import moment from 'moment';
 
 function LayoutMain() {
-  const [isMobile] = useWindowSizeReport()
-  const { user } = useDauth()
-  moment.locale(user.language)
+  const [isMobile] = useWindowSizeReport();
+  const { user } = useDauth();
+  moment.locale(user.language);
 
   useEffect(() => {
-    let isMounted = true
-    isMounted && i18n.changeLanguage(user.language)
+    let isMounted = true;
+    isMounted && i18n.changeLanguage(user.language);
     return () => {
-      isMounted = false
-    }
-  }, [user.language])
+      isMounted = false;
+    };
+  }, [user.language]);
 
   return (
     <ConfigProvider
@@ -33,17 +33,17 @@ function LayoutMain() {
         },
       }}
     >
-      <div className='layout-basic'>
+      <div className="layout-basic">
         <HeaderMain />
-        <div className='layout-basic__main'>
-          <div className='layout-basic__main--container'>
+        <div className="layout-basic__main">
+          <div className="layout-basic__main--container">
             <Outlet />
           </div>
         </div>
         {!isMobile ? <FooterBasic /> : <MenuBottom />}
       </div>
     </ConfigProvider>
-  )
+  );
 }
 
-export default memo(LayoutMain)
+export default memo(LayoutMain);

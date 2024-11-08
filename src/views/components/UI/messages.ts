@@ -1,13 +1,13 @@
 import { message } from 'antd';
 
 type MessageSuccessProps = {
-  msg: string,
-  duration?: number
-}
+  msg: string;
+  duration?: number;
+};
 
-const messageTop = 50
-const messageDuration = 3
-const messageMaxCount = 3
+const messageTop = 50;
+const messageDuration = 3;
+const messageMaxCount = 3;
 
 export function messageInfo({ msg, duration = messageDuration }: MessageSuccessProps) {
   message.config({
@@ -15,7 +15,7 @@ export function messageInfo({ msg, duration = messageDuration }: MessageSuccessP
     duration: duration,
     maxCount: messageMaxCount,
   });
-  return message.info(msg)
+  return message.info(msg);
 }
 
 export function messageSuccess({ msg, duration = messageDuration }: MessageSuccessProps) {
@@ -24,7 +24,7 @@ export function messageSuccess({ msg, duration = messageDuration }: MessageSucce
     duration: duration,
     maxCount: messageMaxCount,
   });
-  return message.success(msg)
+  return message.success(msg);
 }
 
 export function messageWarning({ msg, duration = messageDuration }: MessageSuccessProps) {
@@ -33,7 +33,7 @@ export function messageWarning({ msg, duration = messageDuration }: MessageSucce
     duration: duration,
     maxCount: messageMaxCount,
   });
-  return message.warning(msg)
+  return message.warning(msg);
 }
 
 export function messageError({ msg, duration = messageDuration }: MessageSuccessProps) {
@@ -42,5 +42,5 @@ export function messageError({ msg, duration = messageDuration }: MessageSuccess
     duration: duration,
     maxCount: messageMaxCount,
   });
-  return message.error(msg)
+  return message.error(msg);
 }

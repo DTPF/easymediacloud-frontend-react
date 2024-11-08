@@ -1,11 +1,7 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 function Home() {
-  return (
-    <div>
-      Admin Home
-    </div>
-  );
+  return <div>Admin Home</div>;
 }
 
 export default memo(Home);

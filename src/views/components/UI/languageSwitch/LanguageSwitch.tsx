@@ -1,30 +1,30 @@
 import './languageSwitch.scss';
-import English from "assets/img/English.webp";
-import Spanish from "assets/img/Spanish.webp";
-import { useDauth } from "dauth-context-react";
+import English from 'assets/img/English.webp';
+import Spanish from 'assets/img/Spanish.webp';
+import { useDauth } from 'dauth-context-react';
 import Tooltip from '../tooltip/Tooltip';
 
 const languages = [
   {
-    code: "en",
+    code: 'en',
     label: {
-      es: "Inglés",
-      en: "English"
+      es: 'Inglés',
+      en: 'English',
     },
-    img: English
+    img: English,
   },
   {
-    code: "es",
+    code: 'es',
     label: {
-      es: "Español",
-      en: "Spanish"
+      es: 'Español',
+      en: 'Spanish',
     },
-    img: Spanish
+    img: Spanish,
   },
 ];
 
 const LanguageSwitch = () => {
-  const { user, updateUser } = useDauth()
+  const { user, updateUser } = useDauth();
   return (
     <div className="language-switcher">
       <div className="language-switcher__section">
@@ -40,17 +40,20 @@ const LanguageSwitch = () => {
                   <img
                     src={img}
                     alt={code === 'es' ? label.es : label.en}
-                    className={user.language === code ? "language-switcher__section--container__btn--imgActive" : "language-switcher__section--container__btn--img"}
+                    className={
+                      user.language === code
+                        ? 'language-switcher__section--container__btn--imgActive'
+                        : 'language-switcher__section--container__btn--img'
+                    }
                   />
                 </button>
               </Tooltip>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LanguageSwitch;
-

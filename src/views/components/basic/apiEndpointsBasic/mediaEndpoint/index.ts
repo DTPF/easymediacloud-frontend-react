@@ -1,1 +1,1 @@
-export { default } from './MediaEndpoint'
+export { default } from './MediaEndpoint';

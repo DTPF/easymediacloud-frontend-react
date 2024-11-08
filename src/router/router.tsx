@@ -1,6 +1,6 @@
-import { Suspense, lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
-import { aAdmin, aContent, aHome, aUsers, routes } from "./paths";
+import { Suspense, lazy } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import { aAdmin, aContent, aHome, aUsers, routes } from './paths';
 // LAYOUTS
 const BasicLayout = lazy(() => import('views/layouts/layoutBasic'));
 const AdminLayout = lazy(() => import('views/layouts/layoutAdmin'));
@@ -17,47 +17,87 @@ const Error404 = lazy(() => import('views/pages/errors/Error404'));
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Suspense fallback={<></>}><BasicLayout /></Suspense>,
+    path: '/',
+    element: (
+      <Suspense fallback={<></>}>
+        <BasicLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: routes.home,
-        element: <Suspense fallback={<></>}><HomeBasic /></Suspense>
+        element: (
+          <Suspense fallback={<></>}>
+            <HomeBasic />
+          </Suspense>
+        ),
       },
       {
         path: `${routes.license}/:id`,
-        element: <Suspense fallback={<></>}><LicenseBasic /></Suspense>
+        element: (
+          <Suspense fallback={<></>}>
+            <LicenseBasic />
+          </Suspense>
+        ),
       },
       {
         path: routes.myAccount,
-        element: <Suspense fallback={<></>}><MyAccountBasic /></Suspense>
+        element: (
+          <Suspense fallback={<></>}>
+            <MyAccountBasic />
+          </Suspense>
+        ),
       },
       {
         path: aAdmin,
-        element: <Suspense fallback={<></>}><AdminLayout /></Suspense>,
+        element: (
+          <Suspense fallback={<></>}>
+            <AdminLayout />
+          </Suspense>
+        ),
         children: [
           {
             path: aHome,
-            element: <Suspense fallback={<></>}><HomeAdmin /></Suspense>
+            element: (
+              <Suspense fallback={<></>}>
+                <HomeAdmin />
+              </Suspense>
+            ),
           },
           {
             path: aContent,
-            element: <Suspense fallback={<></>}><ContentAdmin /></Suspense>
+            element: (
+              <Suspense fallback={<></>}>
+                <ContentAdmin />
+              </Suspense>
+            ),
           },
           {
             path: aUsers,
-            element: <Suspense fallback={<></>}><UsersAdmin /></Suspense>
+            element: (
+              <Suspense fallback={<></>}>
+                <UsersAdmin />
+              </Suspense>
+            ),
           },
           {
-            path: "*",
-            element: <Suspense fallback={<></>}><Error404 /></Suspense>
-          }
+            path: '*',
+            element: (
+              <Suspense fallback={<></>}>
+                <Error404 />
+              </Suspense>
+            ),
+          },
         ],
       },
       {
-        path: "*",
-        element: <Suspense fallback={<></>}><Error404 /></Suspense>
-      }
+        path: '*',
+        element: (
+          <Suspense fallback={<></>}>
+            <Error404 />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);

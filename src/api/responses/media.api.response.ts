@@ -1,4 +1,4 @@
-import { IMedia } from "interfaces/license.interface";
+import { IMedia } from 'interfaces/license.interface';
 
 // getMediaByLicenseAPI //////////////////
 export interface IgetMediaByLicenseAPIResponse {

@@ -7,7 +7,7 @@
   margin: 0;
   padding: 10px 0;
   font-size: 1.8rem;
-  font-family: "Lato Bold";
+  font-family: 'Lato Bold';
   // @include fadeIn()
 }
 
@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0;
   font-size: 1.5rem;
-  font-family: "Lato Bold";
+  font-family: 'Lato Bold';
 }
 
 @mixin titleH3() {
@@ -24,7 +24,7 @@
   margin: 0;
   padding: 0;
   font-size: 1.3rem;
-  font-family: "Lato Bold";
+  font-family: 'Lato Bold';
 }
 
 @mixin titleH4() {
@@ -32,7 +32,7 @@
   margin: 0;
   padding: 0;
   font-size: 1.1rem;
-  font-family: "Lato Bold";
+  font-family: 'Lato Bold';
 }
 
 @mixin titleH5() {
@@ -40,43 +40,43 @@
   margin: 0;
   padding: 0;
   font-size: 1rem;
-  font-family: "Lato Bold";
+  font-family: 'Lato Bold';
 }
 
 @mixin p($color: $color-primary) {
   color: $color;
   margin: 0;
   padding: 0;
-  font-size: .94rem;
-  @include fadeIn()
+  font-size: 0.94rem;
+  @include fadeIn();
 }
 
 @mixin p0($color: $color-primary) {
-  font-family: "Lato Thin";
+  font-family: 'Lato Thin';
   @include fadeIn();
   @include p($color);
 }
 
 @mixin p1($color: $color-primary) {
-  font-family: "Lato Light";
+  font-family: 'Lato Light';
   @include fadeIn();
   @include p($color);
 }
 
 @mixin p2($color: $color-primary) {
-  font-family: "Lato Regular";
+  font-family: 'Lato Regular';
   @include fadeIn();
   @include p($color);
 }
 
 @mixin p3($color: $color-primary) {
-  font-family: "Lato Bold";
+  font-family: 'Lato Bold';
   @include fadeIn();
   @include p($color);
 }
 
 @mixin p4($color: $color-primary) {
-  font-family: "Lato BLack";
+  font-family: 'Lato BLack';
   @include fadeIn();
   @include p($color);
 }
@@ -86,10 +86,16 @@
   color: #fff;
   border: 1px solid $color-primary;
   border-radius: 10px;
-  box-shadow: inset -1px 3px 8px 5px #00000017, 2px 5px 16px 0px #00000017, 5px 5px 15px 5px #00000017;
+  box-shadow:
+    inset -1px 3px 8px 5px #00000017,
+    2px 5px 16px 0px #00000017,
+    5px 5px 15px 5px #00000017;
   @include fadeIn();
 
   &:hover {
-    box-shadow: inset -1px 3px 8px 5px #00000023, 2px 5px 16px 0px #00000023, 5px 5px 15px 5px #00000023;
+    box-shadow:
+      inset -1px 3px 8px 5px #00000023,
+      2px 5px 16px 0px #00000023,
+      5px 5px 15px 5px #00000023;
   }
 }
