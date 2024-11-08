@@ -1,94 +1,43 @@
 /**
  * Represents a subscription.
+ *
+ * @interface ISubscription
+ * @property {string} _id - The unique identifier for the subscription.
+ * @property {string} user - The user associated with the subscription.
+ * @property {string} license - The license type of the subscription.
+ * @property {string} type - The type of the subscription (e.g., free, basic, premium).
+ * @property {number} price - The price of the subscription.
+ * @property {string} currency - The currency of the subscription price.
+ * @property {number} maxSize - The maximum size allowed for the subscription.
+ * @property {string} maxSizeT - The maximum size in a human-readable format.
+ * @property {Date} expire - The expiration date of the subscription.
+ * @property {boolean} enabled - Indicates whether the subscription is enabled.
+ * @property {TRequestsDataRange} requestsDataRange - The data range for requests.
+ * @property {number} maxRequests - The maximum number of requests allowed.
+ * @property {Date} createdAt - The date and time when the subscription was created.
+ * @property {Date} updatedAt - The date and time when the subscription was last updated.
  */
+
 export interface ISubscription {
-  /**
-   * The unique identifier of the subscription.
-   */
   _id?: string;
-
-  /**
-   * The user associated with the subscription.
-   */
   user?: string;
-
-  /**
-   * The license of the subscription.
-   */
   license?: string;
-
-  /**
-   * The type of the subscription.
-   */
   type: string;
-
-  /**
-   * The price of the subscription.
-   */
   price: number;
-
-  /**
-   * The currency of the subscription.
-   */
   currency: string;
-
-  /**
-   * The maximum size of the subscription.
-   */
   maxSize: number;
-
-  /**
-   * The maximum size type of the subscription.
-   */
   maxSizeT?: string;
-
-  /**
-   * The expiration date of the subscription.
-   */
   expire?: Date;
-
-  /**
-   * Indicates whether the subscription is enabled or not.
-   */
   enabled: boolean;
-
-  /**
-   * The range of requests data for the subscription.
-   */
   requestsDataRange: TRequestsDataRange;
-
-  /**
-   * The maximum number of requests for the subscription.
-   */
   maxRequests: number;
-
-  /**
-   * The creation date of the subscription.
-   */
   createdAt: Date;
-
-  /**
-   * The last update date of the subscription.
-   */
   updatedAt: Date;
 }
 
-/**
- * Represents the range of requests data for a subscription.
- */
 export type TRequestsDataRange = {
-  /**
-   * The quantity of requests data.
-   */
   quantity: number;
-
-  /**
-   * The cycle of requests data.
-   */
   cicle: string;
 };
 
-/**
- * Represents the type of a subscription.
- */
 export type SubscriptionType = 'free' | 'basic' | 'premium';

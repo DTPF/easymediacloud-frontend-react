@@ -1,9 +1,15 @@
 import { messageError, messageSuccess } from 'views/components/UI/messages';
 import * as LicenseTypes from './licenses.types';
 import * as api from 'api/licenses.api';
-import { ILicense } from 'interfaces/license.interface';
 import { TFunction } from 'i18next';
 import { getMediaByLicenseAPI } from 'api/media.api';
+import { ILicense, IMediaPagination } from 'interfaces/license.interface';
+import {
+  TDeleteLicensePayload,
+  TGetLicenseMediaPayload,
+  TPostLicensePayload,
+  TSetLicenseOnlinePayload,
+} from './licenses.reducer';
 
 /**
  * Retrieves licenses from the server and dispatches an action to update the state.
@@ -11,21 +17,26 @@ import { getMediaByLicenseAPI } from 'api/media.api';
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function getLicensesAction(
-  dispatch: React.Dispatch<any>,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function getLicensesAction({
+  dispatch,
+  token,
+  translate,
+}: {
+  dispatch: React.Dispatch<any>;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: true });
   try {
-    const { response, data } = await api.getMyLicensesAPI(token);
+    const { response, data } = await api.getMyLicensesAPI({ token });
     if (response.status === 200) {
-      const sortLicenses = data.licenses.sort((a: ILicense, b: ILicense) =>
-        a.updatedAt > b.updatedAt ? -1 : 1
-      );
+      const sortLicenses = data.licenses.sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
       return dispatch({
         type: LicenseTypes.GET_LICENSES,
-        payload: sortLicenses,
+        payload: sortLicenses.map((license) => ({
+          ...license,
+          mediaPagination: {} as IMediaPagination,
+        })) as ILicense[],
       });
     }
     return messageError({ msg: data.message });
@@ -43,18 +54,23 @@ export async function getLicensesAction(
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function postLicenseAction(
-  dispatch: React.Dispatch<any>,
-  projectName: string,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function postLicenseAction({
+  dispatch,
+  projectName,
+  token,
+  translate,
+}: {
+  dispatch: React.Dispatch<any>;
+  projectName: string;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   try {
     const { response, data } = await api.createLicenseAPI({ projectName, token });
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.POST_LICENSE,
-        payload: { license: data.license },
+        payload: { license: data.license } as TPostLicensePayload,
       });
       return messageSuccess({ msg: data.message });
     }
@@ -72,19 +88,25 @@ export async function postLicenseAction(
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function setLicenseOnlineAction(
-  dispatch: React.Dispatch<any>,
-  licenseId: string,
-  online: boolean,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function setLicenseOnlineAction({
+  dispatch,
+  licenseId,
+  online,
+  token,
+  translate,
+}: {
+  dispatch: React.Dispatch<any>;
+  licenseId: string;
+  online: boolean;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   try {
-    const { response, data } = await api.setLicenseOnlineAPI(licenseId, online, token);
+    const { response, data } = await api.setLicenseOnlineAPI({ licenseId, online, token });
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.SET_LICENSE_ONLINE,
-        payload: { licenseId, online },
+        payload: { licenseId, online } as TSetLicenseOnlinePayload,
       });
       return messageSuccess({ msg: data.message as string });
     }
@@ -103,18 +125,23 @@ export async function setLicenseOnlineAction(
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function deleteLicenseAction(
-  dispatch: React.Dispatch<any>,
-  licenseId: string,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function deleteLicenseAction({
+  dispatch,
+  licenseId,
+  token,
+  translate,
+}: {
+  dispatch: React.Dispatch<any>;
+  licenseId: string;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   try {
     const { response, data } = await api.deleteLicenseAPI({ licenseId, token });
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.DELETE_LICENSE,
-        payload: { licenseId },
+        payload: { licenseId } as TDeleteLicensePayload,
       });
       return messageSuccess({ msg: data.message });
     }
@@ -130,11 +157,15 @@ export async function deleteLicenseAction(
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function getLicenseTokenAction(
-  licenseId: string,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function getLicenseTokenAction({
+  licenseId,
+  token,
+  translate,
+}: {
+  licenseId: string;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   try {
     const { response, data } = await api.getLicenseTokenAPI({ licenseId, token });
     if (response.status === 200) {
@@ -153,13 +184,17 @@ export async function getLicenseTokenAction(
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function refreshLicenseTokenAction(
-  licenseId: string,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function refreshLicenseTokenAction({
+  licenseId,
+  token,
+  translate,
+}: {
+  licenseId: string;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   try {
-    const { response, data } = await api.refreshLicenseTokenAPI(licenseId, token);
+    const { response, data } = await api.refreshLicenseTokenAPI({ licenseId, token });
     if (response.status === 200) {
       navigator.clipboard.writeText(data.mediaToken);
       return messageSuccess({ msg: translate('actions_licenses_refresh-license-token_success') });
@@ -177,12 +212,17 @@ export async function refreshLicenseTokenAction(
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
-export async function getLicenseMediaAction(
-  dispatch: React.Dispatch<any>,
-  licenseId: string,
-  token: string,
-  translate: TFunction<'translation', undefined>
-) {
+export async function getLicenseMediaAction({
+  dispatch,
+  licenseId,
+  token,
+  translate,
+}: {
+  dispatch: React.Dispatch<any>;
+  licenseId: string;
+  token: string;
+  translate: TFunction<'translation', undefined>;
+}) {
   dispatch({ type: LicenseTypes.SET_IS_LOADING_MEDIA, payload: true });
   const index = 0;
   const limit = 20;
@@ -196,7 +236,7 @@ export async function getLicenseMediaAction(
           media: data.media,
           index,
           limit,
-        },
+        } as TGetLicenseMediaPayload,
       });
     }
   } catch (err: any) {

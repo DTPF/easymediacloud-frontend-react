@@ -1,12 +1,16 @@
 import config from 'config/config';
-import { IgetLicenseTokenAPIResponse } from './responses/licenses.api.response';
+import * as apiResponse from 'interfaces/license.interface';
 
 /**
  * Retrieves the licenses associated with the authenticated user.
  * @param token - The authentication token.
  * @returns A Promise that resolves to an object containing the response and data.
  */
-export const getMyLicensesAPI = async (token: string): Promise<any> => {
+export const getMyLicensesAPI = async ({
+  token,
+}: {
+  token: string;
+}): Promise<apiResponse.IgetMyLicensesAPIResponse> => {
   const params = {
     method: 'GET',
     headers: {
@@ -31,7 +35,7 @@ export const createLicenseAPI = async ({
 }: {
   projectName: string;
   token: string;
-}): Promise<any> => {
+}): Promise<apiResponse.IcreateLicenseAPIResponse> => {
   const params = {
     method: 'POST',
     headers: {
@@ -52,11 +56,15 @@ export const createLicenseAPI = async ({
  * @param token - The authentication token.
  * @returns A Promise that resolves to an object containing the response and data.
  */
-export const setLicenseOnlineAPI = async (
-  licenseId: string,
-  online: boolean,
-  token: string
-): Promise<any> => {
+export const setLicenseOnlineAPI = async ({
+  licenseId,
+  online,
+  token,
+}: {
+  licenseId: string;
+  online: boolean;
+  token: string;
+}): Promise<apiResponse.IsetLicenseOnlineAPIResponse> => {
   const params = {
     method: 'PATCH',
     headers: {
@@ -82,7 +90,7 @@ export const deleteLicenseAPI = async ({
 }: {
   licenseId: string;
   token: string;
-}): Promise<any> => {
+}): Promise<apiResponse.IdeleteLicenseAPIResponse> => {
   const params = {
     method: 'DELETE',
     headers: {
@@ -106,7 +114,7 @@ export const getLicenseTokenAPI = async ({
 }: {
   licenseId: string;
   token: string;
-}): Promise<IgetLicenseTokenAPIResponse> => {
+}): Promise<apiResponse.IgetLicenseTokenAPIResponse> => {
   const params = {
     method: 'GET',
     headers: {
@@ -125,7 +133,13 @@ export const getLicenseTokenAPI = async ({
  * @param token - The authentication token.
  * @returns A Promise that resolves to an object containing the response and data.
  */
-export const refreshLicenseTokenAPI = async (licenseId: string, token: string): Promise<any> => {
+export const refreshLicenseTokenAPI = async ({
+  licenseId,
+  token,
+}: {
+  licenseId: string;
+  token: string;
+}): Promise<apiResponse.IrefreshLicenseTokenAPIResponse> => {
   const params = {
     method: 'GET',
     headers: {

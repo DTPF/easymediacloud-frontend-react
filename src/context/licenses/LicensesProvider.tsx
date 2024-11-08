@@ -22,7 +22,7 @@ function LicensesProvider(props: ChildrenProps) {
    */
   const getLicenses = useCallback(async () => {
     const token = await getAccessToken();
-    action.getLicensesAction(dispatch, token, translate);
+    action.getLicensesAction({ dispatch, token, translate });
   }, [getAccessToken, translate]);
 
   /**
@@ -32,7 +32,7 @@ function LicensesProvider(props: ChildrenProps) {
   const postLicense = useCallback(
     async ({ projectName }: { projectName: string }) => {
       const token = await getAccessToken();
-      action.postLicenseAction(dispatch, projectName, token, translate);
+      action.postLicenseAction({ dispatch, projectName, token, translate });
     },
     [getAccessToken, translate]
   );
@@ -45,7 +45,7 @@ function LicensesProvider(props: ChildrenProps) {
   const setLicenseOnline = useCallback(
     async ({ licenseId, online }: { licenseId: string; online: boolean }) => {
       const token = await getAccessToken();
-      action.setLicenseOnlineAction(dispatch, licenseId, online, token, translate);
+      action.setLicenseOnlineAction({ dispatch, licenseId, online, token, translate });
     },
     [getAccessToken, translate]
   );
@@ -57,7 +57,7 @@ function LicensesProvider(props: ChildrenProps) {
   const deleteLicense = useCallback(
     async ({ licenseId }: { licenseId: string }) => {
       const token = await getAccessToken();
-      action.deleteLicenseAction(dispatch, licenseId, token, translate);
+      action.deleteLicenseAction({ dispatch, licenseId, token, translate });
     },
     [getAccessToken, translate]
   );
@@ -69,7 +69,7 @@ function LicensesProvider(props: ChildrenProps) {
   const getLicenseToken = useCallback(
     async ({ licenseId }: { licenseId: string }) => {
       const token = await getAccessToken();
-      action.getLicenseTokenAction(licenseId, token, translate);
+      action.getLicenseTokenAction({ licenseId, token, translate });
     },
     [getAccessToken, translate]
   );
@@ -81,7 +81,7 @@ function LicensesProvider(props: ChildrenProps) {
   const refreshLicenseToken = useCallback(
     async ({ licenseId }: { licenseId: string }) => {
       const token = await getAccessToken();
-      action.refreshLicenseTokenAction(licenseId, token, translate);
+      action.refreshLicenseTokenAction({ licenseId, token, translate });
     },
     [getAccessToken, translate]
   );
@@ -93,7 +93,7 @@ function LicensesProvider(props: ChildrenProps) {
   const getLicenseMedia = useCallback(
     async ({ licenseId }: { licenseId: string }) => {
       const token = await getAccessToken();
-      action.getLicenseMediaAction(dispatch, licenseId, token, translate);
+      action.getLicenseMediaAction({ dispatch, licenseId, token, translate });
     },
     [getAccessToken, translate]
   );
