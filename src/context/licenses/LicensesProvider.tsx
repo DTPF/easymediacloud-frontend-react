@@ -4,7 +4,6 @@ import initialLicensesState from './initialLicensesState'
 import licenseReducer from 'context/licenses/reducer/licenses.reducer'
 import * as action from "context/licenses/reducer/licenses.actions"
 import { ChildrenProps } from 'interfaces/global'
-import { ILicenseState } from 'interfaces/license.interface'
 import { useDauth } from 'dauth-context-react'
 import { useTranslation } from 'react-i18next'
 
@@ -14,8 +13,7 @@ import { useTranslation } from 'react-i18next'
  * @returns The LicensesProvider component.
  */
 function LicensesProvider(props: ChildrenProps) {
-	const [lState, dispatch] = useReducer(licenseReducer, initialLicensesState)
-	const licensesState: ILicenseState = lState
+	const [licensesState, dispatch] = useReducer(licenseReducer, initialLicensesState)
 	const { getAccessToken } = useDauth()
 	const { t: translate } = useTranslation()
 

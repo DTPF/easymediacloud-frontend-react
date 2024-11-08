@@ -1,4 +1,4 @@
-@import "scss/mixins";
+@import 'scss/mixins';
 
 .license {
   max-width: $window-max-width;
@@ -13,7 +13,7 @@
     &--header {
       display: flex;
       align-items: center;
-      gap: .6rem;
+      gap: 0.6rem;
 
       &__license-name {
         @include titleH2();
@@ -25,7 +25,7 @@
         align-items: center;
         margin-right: 10px;
         @include p2();
-        font-size: .8rem;
+        font-size: 0.8rem;
         white-space: nowrap;
 
         &--icon {
@@ -33,59 +33,6 @@
           margin-left: 10px;
         }
       }
-
-      &__text {
-        display: flex;
-        align-items: center;
-        gap: .5rem;
-        @include p2();
-      }
-    }
-
-    &__items-container {
-      h3 {
-        @include titleH3();
-        margin: 20px 5px
-      }
-
-      &__items {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-gap: 3rem;
-        width: 100%;
-        padding: 10px;
-
-        @media (max-width: 768px) {
-          grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-          grid-gap: 1rem;
-        }
-
-        &--card {
-          width: 100%;
-
-          &__title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 100;
-            font-size: .8rem;
-
-            p {
-              margin: 0;
-              padding: 0;
-              padding-top: 3px;
-              font-size: .9rem;
-            }
-          }
-
-          .license__section__items-container__items--card__img {
-            width: 100%;
-            aspect-ratio: 16/12;
-            object-fit: cover;
-          }
-        }
-      }
     }
   }
-
 }

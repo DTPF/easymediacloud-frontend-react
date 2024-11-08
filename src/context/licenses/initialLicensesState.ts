@@ -6,12 +6,12 @@ const initialLicensesState: ILicenseState = {
 	isLoading: false,
 	isLoadingMedia: false,
 	getLicenses: () => { },
-	postLicense: ({ projectName }: { projectName: string }) => { },
-	setLicenseOnline: ({ licenseId, online }: { licenseId: string, online: boolean }) => { },
-	deleteLicense: ({ licenseId }: { licenseId: string }) => { },
-	getLicenseToken: ({ licenseId }: { licenseId: string }) => { },
-	refreshLicenseToken: ({ licenseId }: { licenseId: string }) => { },
-	getLicenseMedia: ({ licenseId }: { licenseId: string }) => { },
+	postLicense: () => { },
+	setLicenseOnline: () => { },
+	deleteLicense: () => { },
+	getLicenseToken: () => { },
+	refreshLicenseToken: () => { },
+	getLicenseMedia: () => { },
 }
 
 export default initialLicensesState

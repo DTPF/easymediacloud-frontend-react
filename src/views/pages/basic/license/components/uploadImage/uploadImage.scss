@@ -1,0 +1,15 @@
+@import 'scss/mixins';
+
+.license__section__upload-image {
+  max-width: 400px;
+
+  h3 {
+    @include titleH3();
+    margin: 20px 5px;
+  }
+
+  &__btn {
+    margin-top: 30px;
+    margin-left: 15px;
+  }
+}
