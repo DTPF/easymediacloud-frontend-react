@@ -1,17 +1,17 @@
 {
   "name": "easymediacloud-react",
-  "version": "0.1.0",
-  "private": false,
-  "repository": "git@github.com:DTPF/media-cloud-frontend.git",
   "author": "David T. Pizarro Frick <davidpizarrofrick@gmail.com>",
+  "repository": "git@github.com:DTPF/media-cloud-frontend.git",
+  "version": "0.1.0",
   "license": "MIT",
+  "private": false,
   "scripts": {
     "dev": "export NODE_ENV=development && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docs": "typedoc --out docs --theme default ./src/api/* ./src/interfaces/* ./src/context/licenses/reducer/licenses.actions.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,scss,json,md}\""
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
@@ -49,6 +49,10 @@
     "workbox-strategies": "~7.3.0",
     "workbox-streams": "~7.3.0"
   },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "typedoc": "^0.26.11"
+  },
   "prettier": {
     "printWidth": 110,
     "semi": true,
@@ -73,9 +77,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "prettier": "^3.3.3",
-    "typedoc": "^0.26.11"
   }
 }
