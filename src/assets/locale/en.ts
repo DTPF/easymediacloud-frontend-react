@@ -17,6 +17,7 @@ const englishTranslation = {
   'media-endpoint_response-title': 'Response',
   'post-media-endpoint_codeblock-deleted-success': 'File deleted successfully',
   'post-media-endpoint_codeblock-get-license-token-success': 'Token obtained successfully',
+  // LICENSE /////////////////////////////////
   // Licenses
   'licenses_empty-msg': 'No licenses available',
   'licenses_tooltip_license-not-active': 'License is not active',
@@ -55,6 +56,7 @@ const englishTranslation = {
   'licenses_delete-license-popover_description-2': 'and all files?',
   'licenses_delete-license-popover_cancel': 'Cancel',
   'licenses_delete-license-popover_delete': 'Delete',
+  ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////
   // Licenses

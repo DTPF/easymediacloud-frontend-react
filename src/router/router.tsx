@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { aAdmin, aContent, aHome, aUsers, routes } from './paths';
+import { EnsureAuthenticated } from './middlewares';
 // LAYOUTS
 const BasicLayout = lazy(() => import('views/layouts/layoutBasic'));
 const AdminLayout = lazy(() => import('views/layouts/layoutAdmin'));
@@ -35,9 +36,11 @@ const router = createBrowserRouter([
       {
         path: `${routes.license}/:id`,
         element: (
-          <Suspense fallback={<></>}>
-            <LicenseBasic />
-          </Suspense>
+          <EnsureAuthenticated>
+            <Suspense fallback={<></>}>
+              <LicenseBasic />
+            </Suspense>
+          </EnsureAuthenticated>
         ),
       },
       {

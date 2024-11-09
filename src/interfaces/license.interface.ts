@@ -87,6 +87,7 @@ import { ISubscription } from './subscription.interface';
  *
  * @interface IgetMyLicensesAPIResponseLicense
  * @property {string} _id - Unique identifier of the license.
+ * @property {string} name - Name of the license.
  * @property {string} project - Project associated with the license.
  * @property {boolean} enabled - Indicates if the license is enabled.
  * @property {boolean} online - Indicates if the license is online.
@@ -222,6 +223,7 @@ export interface IRequestsDataRange {
 // getMyLicensesAPI //////////////////
 export interface IgetMyLicensesAPIResponseLicense {
   _id: string;
+  name: string;
   project: string;
   enabled: boolean;
   online: boolean;

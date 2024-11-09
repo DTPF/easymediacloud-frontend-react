@@ -20,4 +20,22 @@
       font-family: 'Lato Bold';
     }
   }
+
+  &__btn-primary,
+  &__btn-default,
+  &__btn-link {
+    &--label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
 }

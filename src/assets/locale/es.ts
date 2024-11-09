@@ -17,6 +17,7 @@ const spanishTranslation = {
   'media-endpoint_response-title': 'Respuesta',
   'post-media-endpoint_codeblock-deleted-success': 'Archivo eliminado correctamente',
   'post-media-endpoint_codeblock-get-license-token-success': 'Token obtenido correctamente',
+  // LICENSE /////////////////////////////////
   // Licenses
   'licenses_empty-msg': 'No hay licencias',
   'licenses_tooltip_license-not-active': 'La licencia no está activa',
@@ -56,6 +57,16 @@ const spanishTranslation = {
   'licenses_delete-license-popover_description-2': 'y todos los archivos?',
   'licenses_delete-license-popover_cancel': 'Cancelar',
   'licenses_delete-license-popover_delete': 'Eliminar',
+  //**************************************************** */
+  //**************************************************** */
+  // License Images
+  'license-images_title': 'Imágenes de la licencia',
+  'license-images_total-visualizations_tooltip': 'Visualizaciones totales',
+  'license-images_copy-id-to-clipboard_tooltip': 'Copiar al portapapeles',
+  'license-images_remove-image_tooltip-label': 'Eliminar imagen',
+  //**************************************************** */
+  //**************************************************** */
+  ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////
   // Licenses
@@ -67,6 +78,21 @@ const spanishTranslation = {
   'actions_licenses_get-license-token_error': 'Error al obtener el token',
   'actions_licenses_refresh-license-token_success': 'Token refrescado y copiado correctamente',
   ////////////////////////////////////////////
+
+  //**************************************************** */
+  //**************************************************** */
+  // UI ////////////////////////////////////////
+  'copy-to-clipboard_copied': 'Copiado al portapapeles',
+  'handle-search_navigator_title': 'Compartir archivo',
+  'handle-search_navigator_text': 'Mira esto',
+  'handle-search_navigator_share_success': 'Compartido con éxito.',
+  'handle-search_navigator_share_info': 'El enlace ha sido copiado al portapapeles. Comparte manualmente.',
+  'handle-search_navigator_share_error': 'Error al compartir: ',
+  'handle-search_navigator_get-image_error': 'Error al obtener la imagen: ',
+  share_label: 'Compartir',
+  //////////////////////////////////////////////
+  //**************************************************** */
+  //**************************************************** */
 };
 
 export default spanishTranslation;

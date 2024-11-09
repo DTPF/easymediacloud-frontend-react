@@ -10,16 +10,18 @@ import { GrUpdate } from 'react-icons/gr';
 import { useTranslation } from 'react-i18next';
 import UploadImage from './components/uploadImage/UploadImage';
 import LicenseImages from './components/licenseImages/LicenseImages';
+import { useDauth } from 'dauth-context-react';
 
 function License() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { licenses, licenseSelected, getLicenses, getLicenseMedia, isLoadingMedia } =
     useContext(LicensesContext);
+  const { isAuthenticated } = useDauth();
 
   useEffect(() => {
     let isMounted = true;
-    if (licenses.length === 0) {
+    if (isAuthenticated && licenses.length === 0) {
       isMounted && getLicenses();
     }
     return () => {
@@ -31,6 +33,7 @@ function License() {
   useEffect(() => {
     if (!id) return;
     let isMounted = true;
+    if (!isAuthenticated) return;
     if (
       !licenseSelected?.mediaPagination?.media.length ||
       licenseSelected?.mediaPagination?.media.length === 0
@@ -40,7 +43,7 @@ function License() {
     return () => {
       isMounted = false;
     };
-  }, [getLicenseMedia, id, licenseSelected?.mediaPagination?.media.length]);
+  }, [getLicenseMedia, id, isAuthenticated, licenseSelected?.mediaPagination?.media.length]);
 
   return (
     <div className="license">
