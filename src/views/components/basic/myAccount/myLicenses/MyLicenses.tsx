@@ -1,5 +1,5 @@
 import './myLicenses.scss';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import LicensesContext from 'context/licenses/LicensesContext';
 import Licenses from './licenses';
 import Spin from 'views/components/UI/spin';
@@ -98,4 +98,5 @@ function MyLicenses() {
   );
 }
 
-export default MyLicenses;
+const MemoizedMyLicenses = memo(MyLicenses);
+export default MemoizedMyLicenses;

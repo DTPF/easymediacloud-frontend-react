@@ -40,10 +40,7 @@ function License() {
     return () => {
       isMounted = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, licenseSelected?.mediaPagination?.media.length]);
-
-  if (!licenseSelected) return <Spin />;
+  }, [getLicenseMedia, id, licenseSelected?.mediaPagination?.media.length]);
 
   return (
     <div className="license">

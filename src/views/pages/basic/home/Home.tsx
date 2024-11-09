@@ -18,4 +18,5 @@ function Home() {
   );
 }
 
-export default memo(Home);
+const MemoizedHome = memo(Home);
+export default MemoizedHome;

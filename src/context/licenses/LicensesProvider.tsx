@@ -124,4 +124,5 @@ function LicensesProvider(props: ChildrenProps) {
   return <LicensesContext.Provider value={memoProvider}>{props.children}</LicensesContext.Provider>;
 }
 
-export default memo(LicensesProvider);
+const MemoizedLicensesProvider = memo(LicensesProvider);
+export default MemoizedLicensesProvider;
