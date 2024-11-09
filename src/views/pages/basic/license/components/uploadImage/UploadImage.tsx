@@ -7,11 +7,13 @@ import { Button, message, Upload } from 'antd';
 import config from 'config/config';
 import { getLicenseTokenAPI } from 'api/licenses.api';
 import { useDauth } from 'dauth-context-react';
+import { useTranslation } from 'react-i18next';
 
 function UploadImage() {
   const { licenseSelected, getLicenseMedia } = useContext(LicensesContext);
   const { getAccessToken } = useDauth();
   const [token, setToken] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     let isMounted = true;
@@ -33,7 +35,7 @@ function UploadImage() {
     if (!token) return {};
     return {
       name: 'media',
-      action: config.app.SERVER_URL + '/post-media/platform',
+      action: config.app.SERVER_URL + '/post-media/man_upload',
       multiple: true,
       headers: {
         authorization: token,
@@ -44,20 +46,20 @@ function UploadImage() {
         }
         if (info.file.status === 'done') {
           getLicenseMedia({ licenseId: licenseSelected?._id as string });
-          message.success(`${info.file.name} Archivo subido correctamente.`);
+          message.success(`${t('license-upload-images_handle-success')}`);
         } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} Error al subir el archivo.`);
+          message.error(`${t('license-upload-images_handle-error')}`);
         }
       },
     };
-  }, [getLicenseMedia, licenseSelected?._id, token]);
+  }, [getLicenseMedia, licenseSelected?._id, t, token]);
 
   return (
     <div className="license__section__upload-image">
-      <h3>Subir imágenes</h3>
+      <h3>{t('license-upload-images_title')}</h3>
       <div className="license__section__upload-image__btn">
         <Upload {...props}>
-          <Button icon={<UploadOutlined />}>Click para subir</Button>
+          <Button icon={<UploadOutlined />}>{t('license-upload-images_btn-label')}</Button>
         </Upload>
       </div>
     </div>

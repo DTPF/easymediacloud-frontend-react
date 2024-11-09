@@ -48,6 +48,7 @@ const spanishTranslation = {
   licenses_title: 'Mis Licencias',
   'licenses_create-license_project-name_error':
     'El nombre del proyecto solo puede contener letras, números, guiones y guiones bajos',
+
   //**************************************************** */
   //**************************************************** */
   'licenses_create-license_empty-inputs': 'Por favor, rellena todos los campos',
@@ -57,6 +58,7 @@ const spanishTranslation = {
   'licenses_create-license_name-input-placeholder': 'Nombre comercial del proyecto',
   //**************************************************** */
   //**************************************************** */
+
   'licenses_create-license_btn': 'Crear Licencia',
   'licenses_create-license_close-input': 'Cerrar',
   'licenses_create-license_create-license-btn': 'Crear Licencia',
@@ -73,9 +75,13 @@ const spanishTranslation = {
   'license-images_total-visualizations_tooltip': 'Visualizaciones totales',
   'license-images_copy-id-to-clipboard_tooltip': 'Copiar al portapapeles',
   'license-images_remove-image_tooltip-label': 'Eliminar imagen',
+  // License Upload Images
+  'license-upload-images_title': 'Subir imágenes',
+  'license-upload-images_btn-label': 'Click para subir',
+  'license-upload-images_handle-success': 'Archivo subido correctamente.',
+  'license-upload-images_handle-error': 'Error al subir el archivo.',
   //**************************************************** */
   //**************************************************** */
-
   ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////
