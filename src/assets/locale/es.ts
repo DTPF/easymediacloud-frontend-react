@@ -48,7 +48,15 @@ const spanishTranslation = {
   licenses_title: 'Mis Licencias',
   'licenses_create-license_project-name_error':
     'El nombre del proyecto solo puede contener letras, números, guiones y guiones bajos',
-  'licenses_create-license_input-placeholder': 'Introduce el nombre de la licencia',
+  //**************************************************** */
+  //**************************************************** */
+  'licenses_create-license_empty-inputs': 'Por favor, rellena todos los campos',
+  'licenses_item_license-id': 'ID de la licencia:',
+  'licenses_item_license-project-name': 'Nombre del proyecto:',
+  'licenses_create-license_project-input-placeholder': 'Nombre del proyecto',
+  'licenses_create-license_name-input-placeholder': 'Nombre comercial del proyecto',
+  //**************************************************** */
+  //**************************************************** */
   'licenses_create-license_btn': 'Crear Licencia',
   'licenses_create-license_close-input': 'Cerrar',
   'licenses_create-license_create-license-btn': 'Crear Licencia',
@@ -57,6 +65,7 @@ const spanishTranslation = {
   'licenses_delete-license-popover_description-2': 'y todos los archivos?',
   'licenses_delete-license-popover_cancel': 'Cancelar',
   'licenses_delete-license-popover_delete': 'Eliminar',
+
   //**************************************************** */
   //**************************************************** */
   // License Images
@@ -66,6 +75,7 @@ const spanishTranslation = {
   'license-images_remove-image_tooltip-label': 'Eliminar imagen',
   //**************************************************** */
   //**************************************************** */
+
   ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////

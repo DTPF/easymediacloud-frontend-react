@@ -28,11 +28,12 @@ function LicensesProvider(props: ChildrenProps) {
   /**
    * Creates a new license.
    * @param projectName - The name of the project.
+   * @param name - The name of the license.
    */
   const postLicense = useCallback(
-    async ({ projectName }: { projectName: string }) => {
+    async ({ projectName, name }: { projectName: string; name: string }) => {
       const token = await getAccessToken();
-      action.postLicenseAction({ dispatch, projectName, token, translate });
+      action.postLicenseAction({ dispatch, projectName, name, token, translate });
     },
     [getAccessToken, translate]
   );

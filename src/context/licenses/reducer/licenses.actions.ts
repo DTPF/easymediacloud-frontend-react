@@ -51,22 +51,25 @@ export async function getLicensesAction({
  * Creates a new license and dispatches an action to update the state.
  * @param dispatch - The dispatch function from the Redux store.
  * @param projectName - The name of the project.
+ * @param name - The name of the license.
  * @param token - The authentication token.
  * @param translate - The translation function.
  */
 export async function postLicenseAction({
   dispatch,
   projectName,
+  name,
   token,
   translate,
 }: {
   dispatch: React.Dispatch<any>;
   projectName: string;
+  name: string;
   token: string;
   translate: TFunction<'translation', undefined>;
 }) {
   try {
-    const { response, data } = await api.createLicenseAPI({ projectName, token });
+    const { response, data } = await api.createLicenseAPI({ projectName, name, token });
     if (response.status === 200) {
       dispatch({
         type: LicenseTypes.POST_LICENSE,

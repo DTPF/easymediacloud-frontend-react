@@ -31,9 +31,11 @@ export const getMyLicensesAPI = async ({
  */
 export const createLicenseAPI = async ({
   projectName,
+  name,
   token,
 }: {
   projectName: string;
+  name: string;
   token: string;
 }): Promise<apiResponse.IcreateLicenseAPIResponse> => {
   const params = {
@@ -42,7 +44,7 @@ export const createLicenseAPI = async ({
       Authorization: token,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ project: projectName }),
+    body: JSON.stringify({ project: projectName, name }),
   };
   const response = await fetch(`${config.app.SERVER_URL}/create-license`, params);
   const data = await response.json();

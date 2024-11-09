@@ -47,7 +47,6 @@ const englishTranslation = {
   licenses_title: 'My Licenses',
   'licenses_create-license_project-name_error':
     'The project name can only contain letters, numbers, hyphens, and underscores',
-  'licenses_create-license_input-placeholder': 'Enter the license name',
   'licenses_create-license_btn': 'Create License',
   'licenses_create-license_close-input': 'Close',
   'licenses_create-license_create-license-btn': 'Create License',

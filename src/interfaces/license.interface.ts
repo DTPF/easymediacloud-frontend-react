@@ -185,7 +185,7 @@ export interface ILicenseState {
   isLoading: boolean;
   isLoadingMedia: boolean;
   getLicenses: () => void;
-  postLicense: ({ projectName }: { projectName: string }) => void;
+  postLicense: ({ projectName, name }: { projectName: string; name: string }) => void;
   setLicenseOnline: ({ licenseId, online }: { licenseId: string; online: boolean }) => void;
   deleteLicense: ({ licenseId }: { licenseId: string }) => void;
   getLicenseToken: ({ licenseId }: { licenseId: string }) => void;

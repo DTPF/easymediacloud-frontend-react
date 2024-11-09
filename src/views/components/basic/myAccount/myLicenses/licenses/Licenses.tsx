@@ -123,9 +123,7 @@ function License({ license }: { license: ILicense }) {
             {/* Project name */}
             <Tooltip title={t('licenses_tooltip_project-name')}>
               <Link to={`/license/${license._id}`} style={{ textDecoration: 'none' }}>
-                <p className="my-licenses__container--license__column-1--sub__license-name">
-                  {license.project}
-                </p>
+                <p className="my-licenses__container--license__column-1--sub__license-name">{license.name}</p>
               </Link>
             </Tooltip>
             {/* Last update */}
@@ -238,7 +236,10 @@ function License({ license }: { license: ILicense }) {
           </div>
           <div className={`my-licenses__container--license__collapsible--open__content-2`}>
             <p>
-              License Id: <b>{license._id}</b>
+              {t('licenses_item_license-project-name')} <b>{license.project}</b>
+            </p>
+            <p style={{ marginTop: 17 }}>
+              {t('licenses_item_license-id')} <b>{license._id}</b>
             </p>
           </div>
           {/* Buttons */}
