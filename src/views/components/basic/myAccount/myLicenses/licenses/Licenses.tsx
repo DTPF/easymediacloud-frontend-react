@@ -15,6 +15,7 @@ import useWindowSizeReport from 'hooks/useWindowSizeReport';
 import { BtnDefault, BtnLink, BtnPrimary } from 'views/components/UI/buttons';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { FaRegTrashCan } from 'react-icons/fa6';
 
 function Licenses() {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ export default MemoizedLicenses;
 
 function License({ license }: { license: ILicense }) {
   const { t } = useTranslation();
-  const [isMobile, innerWidth] = useWindowSizeReport();
+  const [isMobile] = useWindowSizeReport();
   const { setLicenseOnline, deleteLicense, getLicenseToken, refreshLicenseToken } =
     useContext(LicensesContext);
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
@@ -238,7 +239,7 @@ function License({ license }: { license: ILicense }) {
             <p>
               {t('licenses_item_license-project-name')} <b>{license.project}</b>
             </p>
-            <p style={{ marginTop: 17 }}>
+            <p style={{ marginTop: 20 }}>
               {t('licenses_item_license-id')} <b>{license._id}</b>
             </p>
           </div>
@@ -259,11 +260,17 @@ function License({ license }: { license: ILicense }) {
               onConfirm={() => deleteLicense({ licenseId: license._id as string })}
               style={{ width: 200 }}
             >
-              <BtnLink size="small" shape="round" color={colorRed}>
-                {t('licenses_remove')} {(innerWidth as number) >= 420 ? t('licenses_license') : ''}
+              <BtnLink
+                size="small"
+                shape="round"
+                color={colorRed}
+                tooltip={t('licenses_delete-license-btn-label')}
+              >
+                <FaRegTrashCan style={{ fontSize: '1.1rem', color: 'red' }} />
               </BtnLink>
             </Popconfirm>
             <div className={`my-licenses__container--license__collapsible--open__buttons--sub`}>
+              {/* Refresh token */}
               <BtnDefault
                 size="small"
                 shape="round"
@@ -271,6 +278,7 @@ function License({ license }: { license: ILicense }) {
               >
                 {t('licenses_refresh-token')}
               </BtnDefault>
+              {/* Get token */}
               <BtnPrimary
                 size="small"
                 shape="round"

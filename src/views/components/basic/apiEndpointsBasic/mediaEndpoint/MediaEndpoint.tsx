@@ -1,9 +1,8 @@
 import { Collapse } from 'antd';
 import './mediaEndpoint.scss';
 import { Highlight, themes } from 'prism-react-renderer';
-import Spin from 'views/components/UI/spin/Spin';
 import { useTranslation } from 'react-i18next';
-import { useDauth } from 'dauth-context-react';
+import { memo } from 'react';
 
 type MediaEndpointProps = {
   title: string;
@@ -28,10 +27,7 @@ function MediaEndpoint({
   responseCodeBlock,
   isOpenCollapse,
 }: MediaEndpointProps) {
-  const { isLoading } = useDauth();
-  return isLoading ? (
-    <Spin />
-  ) : (
+  return (
     <Collapse
       collapsible="header"
       defaultActiveKey={[isOpenCollapse ? '1' : '0']}
@@ -58,7 +54,8 @@ function MediaEndpoint({
   );
 }
 
-export default MediaEndpoint;
+const MemoizedMediaEndpoint = memo(MediaEndpoint);
+export default MemoizedMediaEndpoint;
 
 type MediaEndpointCollapseProps = {
   endpoint: React.ReactNode;

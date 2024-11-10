@@ -1,8 +1,8 @@
-import { Divider } from 'antd';
+import { Divider, Skeleton, Spin } from 'antd';
 import LicensesContext from 'context/licenses/LicensesContext';
 import { memo, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Spin from 'views/components/UI/spin/Spin';
+import UISpin from 'views/components/UI/spin/Spin';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
 import './license.scss';
 import moment from 'moment';
@@ -15,60 +15,64 @@ import { useDauth } from 'dauth-context-react';
 function License() {
   const { t } = useTranslation();
   const { id } = useParams();
-  const { licenses, licenseSelected, getLicenses, getLicenseMedia, isLoadingMedia } =
-    useContext(LicensesContext);
-  const { isAuthenticated } = useDauth();
+  const {
+    licenseSelected,
+    getLicenses,
+    getLicenseMedia,
+    isLoading: isLoadingLicenses,
+  } = useContext(LicensesContext);
+  const { isAuthenticated, isLoading } = useDauth();
 
   useEffect(() => {
     let isMounted = true;
-    if (isAuthenticated && licenses.length === 0) {
-      isMounted && getLicenses();
+    async function get() {
+      if (isMounted && isAuthenticated && !isLoading && id) {
+        const success = await getLicenses();
+        if (success) {
+          getLicenseMedia({ licenseId: id });
+        }
+      }
     }
+    get();
     return () => {
       isMounted = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!id) return;
-    let isMounted = true;
-    if (!isAuthenticated) return;
-    if (
-      !licenseSelected?.mediaPagination?.media.length ||
-      licenseSelected?.mediaPagination?.media.length === 0
-    ) {
-      isMounted && getLicenseMedia({ licenseId: id });
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, [getLicenseMedia, id, isAuthenticated, licenseSelected?.mediaPagination?.media.length]);
+  }, [id, isAuthenticated, isLoading]);
 
   return (
     <div className="license">
-      {(isLoadingMedia || !licenseSelected) && <Spin />}
-      <>
+      {isLoadingLicenses ? (
+        <UISpin />
+      ) : (
         <section className="license__section">
           <div className="license__section--header">
             {/* Project name */}
-            <Tooltip title={t('licenses_tooltip_project-name')}>
-              <h2 className="license__section--header__license-name">{licenseSelected?.project}</h2>
-            </Tooltip>
-            {/* Last update */}
-            <Tooltip title={t('licenses_tooltip_last-update')}>
-              <span className="license__section--header__last-update">
-                | <GrUpdate className="license__section--header__last-update--icon" />
-                {moment(licenseSelected?.updatedAt).calendar()}
-              </span>
-            </Tooltip>
+            {licenseSelected?.name && licenseSelected?.updatedAt ? (
+              <>
+                <Tooltip title={t('licenses_tooltip_project-name')}>
+                  <h2 className="license__section--header__license-name">
+                    {licenseSelected?.name ? licenseSelected?.name : <Spin />}
+                  </h2>
+                </Tooltip>
+                {/* Last update */}
+                <Tooltip title={t('licenses_tooltip_last-update')}>
+                  <span className="license__section--header__last-update">
+                    | <GrUpdate className="license__section--header__last-update--icon" />
+                    {moment(licenseSelected?.updatedAt).calendar()}
+                  </span>
+                </Tooltip>
+              </>
+            ) : (
+              <Skeleton.Node active={true} style={{ width: 250, height: 30, marginLeft: 10 }} />
+            )}
           </div>
           <Divider />
           <UploadImage />
           <Divider />
           <LicenseImages />
         </section>
-      </>
+      )}
     </div>
   );
 }

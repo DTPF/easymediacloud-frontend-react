@@ -17,7 +17,7 @@
 
       &__license-name {
         @include titleH2();
-        padding-bottom: 3px;
+        padding-bottom: 3px !important;
       }
 
       &__last-update {

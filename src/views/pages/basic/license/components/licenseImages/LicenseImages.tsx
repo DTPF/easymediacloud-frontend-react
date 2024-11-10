@@ -1,31 +1,32 @@
 import './licenseImages.scss';
 import { Badge, Card, Image } from 'antd';
 import LicensesContext from 'context/licenses/LicensesContext';
-import { memo, useContext } from 'react';
-import { BtnPrimary } from 'views/components/UI/buttons';
+import { memo, useCallback, useContext } from 'react';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
 import { FaEye, FaRegTrashCan } from 'react-icons/fa6';
 import { copyToClipboard } from 'utils/copyToClipboard';
-import { FaRegCopy, FaShareAlt } from 'react-icons/fa';
+import { FaDownload, FaShareAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { handleShare } from 'utils/handleShare';
-import Spin from 'views/components/UI/spin/Spin';
-import { bgMedium } from 'scss/_variables';
+import SpinUI from 'views/components/UI/spin/Spin';
+import { bgMedium, colorPrimary } from 'scss/_variables';
 import { IMedia } from 'interfaces/media.interface';
+import { ILicense } from 'interfaces/license.interface';
+import moment from 'moment';
+import { saveAs } from 'file-saver';
+import { uploadByEasymediaCloudServerFolderName } from 'config/constants';
 
 function LicenseImages() {
   const { licenseSelected } = useContext(LicensesContext);
   const { t } = useTranslation();
 
-  if (!licenseSelected) return <Spin />;
-
   return (
     <div className="license__images__items-container">
       <h3>{t('license-images_title')}</h3>
       <div className="license__images__items-container__items">
-        {licenseSelected.mediaPagination?.media?.map((media, index) => {
-          return media.url.includes('man_upload') ? (
-            <Badge.Ribbon text="Manual" color={bgMedium} key={index}>
+        {licenseSelected?.mediaPagination?.media?.map((media, index) => {
+          return media.url.includes(uploadByEasymediaCloudServerFolderName) ? (
+            <Badge.Ribbon text="EMC" color={bgMedium} style={{ fontSize: '.7rem' }} key={index}>
               <CardContainer media={media} />
             </Badge.Ribbon>
           ) : (
@@ -41,20 +42,24 @@ const MemoizedLicenseImages = memo(LicenseImages);
 export default MemoizedLicenseImages;
 
 function CardContainer({ media }: { media: IMedia }) {
-  const { licenseSelected } = useContext(LicensesContext);
+  const { licenseSelected, isLoadingMedia } = useContext(LicensesContext);
   const { t } = useTranslation();
   const { Meta } = Card;
 
-  if (!licenseSelected) return <Spin />;
+  const handleDownload = useCallback((url: string, filename: string) => {
+    saveAs(url, filename);
+  }, []);
 
-  return (
+  return isLoadingMedia ? (
+    <SpinUI size="small" />
+  ) : (
     <Card
       hoverable
-      style={{ width: '100%' }}
       className="license__images__items-container__items--card"
+      loading={isLoadingMedia}
       cover={
         <Image
-          alt={`${licenseSelected.project} archive`}
+          alt={`${(licenseSelected as ILicense).project} archive`}
           className="license__images__items-container__items--card__img"
           src={media.url}
         />
@@ -63,63 +68,60 @@ function CardContainer({ media }: { media: IMedia }) {
       <Meta
         title={
           <div className="license__images__items-container__items--card__title">
-            <Tooltip title={t('license-images_total-visualizations_tooltip')}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: 0 }}>
-                <FaEye style={{ fontSize: '1.3rem', paddingTop: 0 }} />
-                <p style={{ margin: 0, padding: 0, fontSize: '1rem' }}>{media.totalRequests}</p>
+            <Tooltip title={t('licenses_tooltip_last-update')}>
+              <span style={{ fontSize: '.7rem', color: colorPrimary }}>
+                {moment(media.createdAt).format('DD/MM/YYYY HH:mm')}
               </span>
             </Tooltip>
-            <Tooltip title={t('share_label')}>
-              <FaShareAlt
-                style={{ fontSize: '1rem' }}
-                onClick={() => {
-                  handleShare({ url: media.url, translate: t, send: 'url' });
-                  copyToClipboard({ text: media.url, translate: t, showMsg: false });
-                }}
-              />
+            <Tooltip title={t('license-images_total-visualizations_tooltip')}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ paddingTop: 2, fontSize: '.7rem', color: colorPrimary }}>
+                  {media.totalRequests}
+                </span>
+                <FaEye style={{ fontSize: '1.1rem', color: bgMedium }} />
+              </span>
             </Tooltip>
           </div>
         }
         description={
-          <div>
+          <>
             <div
               style={{
                 display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '10px',
-                marginTop: 15,
-                whiteSpace: 'nowrap',
+                margin: '15px 0',
                 fontSize: '0.8rem',
               }}
             >
-              <span>{media.type ? media.type : 'no-type'}</span>
-              <p>{media.sizeT}</p>
+              <div onClick={() => copyToClipboard({ text: media._id, translate: t })}>
+                {media.type ? media.type : 'no-type'}
+              </div>
+              <div>{media.sizeT}</div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
-              <span style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
-                <Tooltip title={t('license-images_copy-id-to-clipboard_tooltip')}>
-                  <span
-                    style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#000' }}
-                    onClick={() => copyToClipboard({ text: media._id, translate: t })}
-                  >
-                    Id <FaRegCopy style={{ fontSize: '1rem' }} />
-                  </span>
+              <Tooltip title={t('license-images_remove-image_tooltip-label')}>
+                <FaRegTrashCan style={{ fontSize: '1.1rem', color: 'red' }} />
+              </Tooltip>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <Tooltip title={t('download_label')}>
+                  <FaDownload
+                    style={{ fontSize: '1rem' }}
+                    onClick={() => handleDownload(media.url, `${media._id}.jpg`)}
+                  />
                 </Tooltip>
-              </span>
-              <div>
-                <BtnPrimary
-                  shape="round"
-                  size="small"
-                  onClick={() => console.log('Eliminar archivo')}
-                  tooltip={t('license-images_remove-image_tooltip-label')}
-                  danger
-                  disabled
-                >
-                  <FaRegTrashCan style={{ fontSize: '1rem' }} />
-                </BtnPrimary>
+                <Tooltip title={t('share_label')}>
+                  <FaShareAlt
+                    style={{ fontSize: '1rem' }}
+                    onClick={() => {
+                      handleShare({ url: media.url, translate: t, send: 'url' });
+                      copyToClipboard({ text: media.url, translate: t, showMsg: false });
+                    }}
+                  />
+                </Tooltip>
               </div>
             </div>
-          </div>
+          </>
         }
       />
     </Card>

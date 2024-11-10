@@ -5,7 +5,7 @@ const initialLicensesState: ILicenseState = {
   licenseSelected: {} as ILicense,
   isLoading: false,
   isLoadingMedia: false,
-  getLicenses: () => {},
+  getLicenses: () => Promise.resolve(false),
   postLicense: () => {},
   setLicenseOnline: () => {},
   deleteLicense: () => {},

@@ -40,13 +40,16 @@ const englishTranslation = {
   licenses_archives: 'Archives',
   'licenses_created-at': 'Created at',
   'licenses_valid-until': 'Valid until',
-  licenses_remove: 'Remove',
-  licenses_license: 'License',
   'licenses_refresh-token': 'Refresh token',
   'licenses_get-media-token': 'Copy token',
   licenses_title: 'My Licenses',
   'licenses_create-license_project-name_error':
     'The project name can only contain letters, numbers, hyphens, and underscores',
+  'licenses_create-license_empty-inputs': 'Please fill in all fields',
+  'licenses_item_license-id': 'License ID:',
+  'licenses_item_license-project-name': 'Project name:',
+  'licenses_create-license_project-input-placeholder': 'Project name',
+  'licenses_create-license_name-input-placeholder': 'Commercial project name',
   'licenses_create-license_btn': 'Create License',
   'licenses_create-license_close-input': 'Close',
   'licenses_create-license_create-license-btn': 'Create License',
@@ -55,6 +58,17 @@ const englishTranslation = {
   'licenses_delete-license-popover_description-2': 'and all files?',
   'licenses_delete-license-popover_cancel': 'Cancel',
   'licenses_delete-license-popover_delete': 'Delete',
+  'licenses_delete-license-btn-label': 'Delete license',
+  // License Images
+  'license-images_title': 'License files',
+  'license-images_total-visualizations_tooltip': 'Total views',
+  'license-images_copy-id-to-clipboard_tooltip': 'Copy to clipboard',
+  'license-images_remove-image_tooltip-label': 'Delete image',
+  // License Upload Images
+  'license-upload-images_title': 'Upload files',
+  'license-upload-images_btn-label': 'Click to upload',
+  'license-upload-images_handle-success': 'File uploaded successfully.',
+  'license-upload-images_handle-error': 'Error uploading file.',
   ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////
@@ -67,6 +81,18 @@ const englishTranslation = {
   'actions_licenses_get-license-token_error': 'Error getting token',
   'actions_licenses_refresh-license-token_success': 'Token refreshed and copied successfully',
   ////////////////////////////////////////////
+
+  // UI ////////////////////////////////////////
+  'copy-to-clipboard_copied': 'Copied to clipboard',
+  'handle-search_navigator_title': 'Share file',
+  'handle-search_navigator_text': 'Check this out',
+  'handle-search_navigator_share_success': 'Successfully shared.',
+  'handle-search_navigator_share_info': 'The link has been copied to the clipboard. Share manually.',
+  'handle-search_navigator_share_error': 'Error sharing: ',
+  'handle-search_navigator_get-image_error': 'Error fetching image: ',
+  share_label: 'Share',
+  download_label: 'Download',
+  //////////////////////////////////////////////
 };
 
 export default englishTranslation;

@@ -33,17 +33,16 @@ function GetLicenseTokenEndpoint() {
       token={'Dauth Token'}
       isOpenCollapse={false}
       instructions={null}
-      requestCodeBlock={`const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/get-license-token/:licenseId, {
+      requestCodeBlock={`const response = await fetch("${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/get-license-token/:licenseId", {
   method: "GET",
-  headers: { Authorization: 'Dauth Token' }
+  headers: { Authorization: "Dauth Token" }
 });
 const data = await response.json();
-
 return { response, data };`}
       responseCodeBlock={`{
-  "status": "get-token-success",
-  "message": "${t('post-media-endpoint_codeblock-get-license-token-success')}",
-  "mediaToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDlmOWU1MGM5MjIzOGV..."
+  status: "get-token-success",
+  message: "${t('post-media-endpoint_codeblock-get-license-token-success')}",
+  mediaToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDlmOWU1MGM5MjIzOGV..."
 }`}
     />
   );
@@ -87,27 +86,26 @@ function PostMediaEndpoint() {
 formData.append("media", ${t('post-media-endpoint_codeblock-archive')});
 formData.append("media", ${t('post-media-endpoint_codeblock-archive')});
 
-const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/post-media/${t('post-media-endpoint_codeblock-folders')}, {
+const response = await fetch("${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/post-media/${t('post-media-endpoint_codeblock-folders')}", {
   method: "POST",
-  headers: { Authorization: 'mediaToken' },
+  headers: { Authorization: "mediaToken" },
   body: formData
 });
 const data = await response.json();
-
 return { response, data };`}
-      responseCodeBlock={`"message": "${t('post-media-endpoint_codeblock-created-success')}",
-"media": [
+      responseCodeBlock={`message: "${t('post-media-endpoint_codeblock-created-success')}",
+media: [
   {
-    "id": "65b4f31be430ca97c69e2599",
-    "url": "${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/gboAAow0KwKPLZL0QrpfU605.png",
-    "size": "1.91 MB",
-    "createdAt": "2024-01-27T12:12:11.631Z"
+    id: "65b4f31be430ca97c69e2599",
+    url: "${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/gboAAow0KwKPLZL0QrpfU605.png",
+    size: "1.91 MB",
+    createdAt: "2024-01-27T12:12:11.631Z"
   },
   {
-    "id": "65b4f31be430ca97c69e259b",
-    "url": "${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/QxwgmQfr4p1vcgFs3pi44l4s.png",
-    "size": "14.82 KB",
-    "createdAt": "2024-01-27T12:12:11.633Z"
+    id: "65b4f31be430ca97c69e259b",
+    url: "${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/media/65b4ed217597a1e7d3681ecf/project/${t('post-media-endpoint_codeblock-folders')}/QxwgmQfr4p1vcgFs3pi44l4s.png",
+    size: "14.82 KB",
+    createdAt: "2024-01-27T12:12:11.633Z"
   }
 ]`}
     />
@@ -130,16 +128,15 @@ function DeleteMediaEndpoint() {
       token={'mediaToken'}
       isOpenCollapse={false}
       instructions={null}
-      requestCodeBlock={`const response = await fetch(${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/delete-media/{mediaId}, {
+      requestCodeBlock={`const response = await fetch("${isAuthenticated ? config.app.SERVER_URL : 'https://server-url'}/delete-media/{mediaId}", {
   method: "DELETE",
-  headers: { Authorization: 'mediaToken' }
+  headers: { Authorization: "mediaToken" }
 });
 const data = await response.json();
-
 return { response, data };`}
       responseCodeBlock={`{
-  "status": "media-deleted-success",
-  "message": "${t('post-media-endpoint_codeblock-deleted-success')}"
+  status: "media-deleted-success",
+  message: "${t('post-media-endpoint_codeblock-deleted-success')}"
 }`}
     />
   );

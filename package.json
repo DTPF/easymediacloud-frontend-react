@@ -22,7 +22,8 @@
     "@types/react": "~18.3.12",
     "@types/react-dom": "~18.3.1",
     "antd": "~5.21.6",
-    "dauth-context-react": "^0.2.113",
+    "dauth-context-react": "^0.2.121",
+    "file-saver": "^2.0.5",
     "i18next": "^23.16.5",
     "intersection-observer": "~0.12.2",
     "moment": "~2.30.1",
@@ -50,6 +51,7 @@
     "workbox-streams": "~7.3.0"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "prettier": "^3.3.3",
     "typedoc": "^0.26.11"
   },

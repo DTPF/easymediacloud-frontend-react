@@ -8,6 +8,7 @@ import config from 'config/config';
 import { getLicenseTokenAPI } from 'api/licenses.api';
 import { useDauth } from 'dauth-context-react';
 import { useTranslation } from 'react-i18next';
+import { uploadByEasymediaCloudServerFolderName } from 'config/constants';
 
 function UploadImage() {
   const { licenseSelected, getLicenseMedia } = useContext(LicensesContext);
@@ -35,7 +36,7 @@ function UploadImage() {
     if (!token) return {};
     return {
       name: 'media',
-      action: config.app.SERVER_URL + '/post-media/man_upload',
+      action: config.app.SERVER_URL + `/post-media/${uploadByEasymediaCloudServerFolderName}`,
       multiple: true,
       headers: {
         authorization: token,

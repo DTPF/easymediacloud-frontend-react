@@ -22,7 +22,7 @@ function LicensesProvider(props: ChildrenProps) {
    */
   const getLicenses = useCallback(async () => {
     const token = await getAccessToken();
-    action.getLicensesAction({ dispatch, token, translate });
+    return await action.getLicensesAction({ dispatch, token, translate });
   }, [getAccessToken, translate]);
 
   /**

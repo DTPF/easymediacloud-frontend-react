@@ -10,7 +10,7 @@ import { ISubscription } from './subscription.interface';
  * @property {ILicense | null} licenseSelected - The currently selected license or null if none is selected.
  * @property {boolean} isLoading - Indicates if the licenses are being loaded.
  * @property {boolean} isLoadingMedia - Indicates if the media items are being loaded.
- * @property {() => void} getLicenses - Function to fetch licenses.
+ * @property {() => Promise<boolean>} getLicenses - Function to fetch licenses.
  * @property {({ projectName }: { projectName: string }) => void} postLicense - Function to post a new license.
  * @property {({ licenseId, online }: { licenseId: string; online: boolean }) => void} setLicenseOnline - Function to set a license online or offline.
  * @property {({ licenseId }: { licenseId: string }) => void} deleteLicense - Function to delete a license.
@@ -184,7 +184,7 @@ export interface ILicenseState {
   licenseSelected: ILicense | null;
   isLoading: boolean;
   isLoadingMedia: boolean;
-  getLicenses: () => void;
+  getLicenses: () => Promise<boolean>;
   postLicense: ({ projectName, name }: { projectName: string; name: string }) => void;
   setLicenseOnline: ({ licenseId, online }: { licenseId: string; online: boolean }) => void;
   deleteLicense: ({ licenseId }: { licenseId: string }) => void;

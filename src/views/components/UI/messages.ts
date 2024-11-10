@@ -5,9 +5,9 @@ type MessageSuccessProps = {
   duration?: number;
 };
 
-const messageTop = 50;
-const messageDuration = 3;
-const messageMaxCount = 3;
+export const messageTop = 50;
+export const messageDuration = 3;
+export const messageMaxCount = 3;
 
 export function messageInfo({ msg, duration = messageDuration }: MessageSuccessProps) {
   message.config({

@@ -41,24 +41,16 @@ const spanishTranslation = {
   licenses_archives: 'Archivos',
   'licenses_created-at': 'Fecha de creación',
   'licenses_valid-until': 'Válido hasta',
-  licenses_remove: 'Eliminar',
-  licenses_license: 'licencia',
   'licenses_refresh-token': 'Refrescar token',
   'licenses_get-media-token': 'Copiar token',
   licenses_title: 'Mis Licencias',
   'licenses_create-license_project-name_error':
     'El nombre del proyecto solo puede contener letras, números, guiones y guiones bajos',
-
-  //**************************************************** */
-  //**************************************************** */
   'licenses_create-license_empty-inputs': 'Por favor, rellena todos los campos',
   'licenses_item_license-id': 'ID de la licencia:',
   'licenses_item_license-project-name': 'Nombre del proyecto:',
   'licenses_create-license_project-input-placeholder': 'Nombre del proyecto',
   'licenses_create-license_name-input-placeholder': 'Nombre comercial del proyecto',
-  //**************************************************** */
-  //**************************************************** */
-
   'licenses_create-license_btn': 'Crear Licencia',
   'licenses_create-license_close-input': 'Cerrar',
   'licenses_create-license_create-license-btn': 'Crear Licencia',
@@ -67,21 +59,17 @@ const spanishTranslation = {
   'licenses_delete-license-popover_description-2': 'y todos los archivos?',
   'licenses_delete-license-popover_cancel': 'Cancelar',
   'licenses_delete-license-popover_delete': 'Eliminar',
-
-  //**************************************************** */
-  //**************************************************** */
+  'licenses_delete-license-btn-label': 'Eliminar licencia',
   // License Images
-  'license-images_title': 'Imágenes de la licencia',
+  'license-images_title': 'Archivos de la licencia',
   'license-images_total-visualizations_tooltip': 'Visualizaciones totales',
   'license-images_copy-id-to-clipboard_tooltip': 'Copiar al portapapeles',
   'license-images_remove-image_tooltip-label': 'Eliminar imagen',
   // License Upload Images
-  'license-upload-images_title': 'Subir imágenes',
+  'license-upload-images_title': 'Subir archivos',
   'license-upload-images_btn-label': 'Click para subir',
   'license-upload-images_handle-success': 'Archivo subido correctamente.',
   'license-upload-images_handle-error': 'Error al subir el archivo.',
-  //**************************************************** */
-  //**************************************************** */
   ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////
@@ -95,8 +83,6 @@ const spanishTranslation = {
   'actions_licenses_refresh-license-token_success': 'Token refrescado y copiado correctamente',
   ////////////////////////////////////////////
 
-  //**************************************************** */
-  //**************************************************** */
   // UI ////////////////////////////////////////
   'copy-to-clipboard_copied': 'Copiado al portapapeles',
   'handle-search_navigator_title': 'Compartir archivo',
@@ -106,9 +92,8 @@ const spanishTranslation = {
   'handle-search_navigator_share_error': 'Error al compartir: ',
   'handle-search_navigator_get-image_error': 'Error al obtener la imagen: ',
   share_label: 'Compartir',
+  download_label: 'Descargar',
   //////////////////////////////////////////////
-  //**************************************************** */
-  //**************************************************** */
 };
 
 export default spanishTranslation;

@@ -30,18 +30,20 @@ export async function getLicensesAction({
   try {
     const { response, data } = await api.getMyLicensesAPI({ token });
     if (response.status === 200) {
-      const sortLicenses = data.licenses.sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
-      return dispatch({
+      dispatch({
         type: LicenseTypes.GET_LICENSES,
-        payload: sortLicenses.map((license) => ({
+        payload: data.licenses.map((license) => ({
           ...license,
           mediaPagination: {} as IMediaPagination,
         })) as ILicense[],
       });
+      return true;
     }
-    return messageError({ msg: data.message });
+    messageError({ msg: data.message });
+    return false;
   } catch (err: any) {
     messageError({ msg: err.message ?? translate('actions_licenses_get-licenses_error') });
+    return false;
   } finally {
     dispatch({ type: LicenseTypes.SET_IS_LOADING, payload: false });
   }
