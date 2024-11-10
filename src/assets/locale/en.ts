@@ -65,10 +65,9 @@ const englishTranslation = {
   'license-images_copy-id-to-clipboard_tooltip': 'Copy to clipboard',
   'license-images_remove-image_tooltip-label': 'Delete image',
   // License Upload Images
-  'license-upload-images_title': 'Upload files',
-  'license-upload-images_btn-label': 'Click to upload',
-  'license-upload-images_handle-success': 'File uploaded successfully.',
-  'license-upload-images_handle-error': 'Error uploading file.',
+  'license-upload-files_title': 'Upload files',
+  'license-upload-files_handle-success': 'File uploaded successfully.',
+  'license-upload-files_handle-error': 'Error uploading file.',
   ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////

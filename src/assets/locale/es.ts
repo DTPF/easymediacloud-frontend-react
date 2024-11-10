@@ -66,10 +66,15 @@ const spanishTranslation = {
   'license-images_copy-id-to-clipboard_tooltip': 'Copiar al portapapeles',
   'license-images_remove-image_tooltip-label': 'Eliminar imagen',
   // License Upload Images
-  'license-upload-images_title': 'Subir archivos',
-  'license-upload-images_btn-label': 'Click para subir',
-  'license-upload-images_handle-success': 'Archivo subido correctamente.',
-  'license-upload-images_handle-error': 'Error al subir el archivo.',
+  'license-upload-files_title': 'Subir archivos',
+  'license-upload-files_handle-success': 'Archivo subido correctamente.',
+  'license-upload-files_handle-error': 'Error al subir el archivo.',
+  //******************************************************* */
+  //******************************************************* */
+  'license-upload-files_dragger_title': 'Haga clic o arrastre el archivo a esta área para subirlo',
+  'license-upload-files_dragger_description': 'Sube archivos sin restricciones',
+  //******************************************************* */
+  //******************************************************* */
   ////////////////////////////////////////////
 
   // ACTIONS /////////////////////////////////
