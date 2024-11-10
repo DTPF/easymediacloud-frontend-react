@@ -12,11 +12,12 @@
     &--header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.6rem;
+      padding-top: 2px;
 
       &__license-name {
         @include titleH2();
-        padding-bottom: 3px !important;
       }
 
       &__last-update {
@@ -26,6 +27,7 @@
         @include p2();
         font-size: 0.8rem;
         white-space: nowrap;
+        padding-top: 3px;
       }
     }
   }
