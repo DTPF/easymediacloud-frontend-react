@@ -9,7 +9,7 @@
     min-height: calc(100dvh - 70px);
 
     &--container {
-      padding: 0px;
+      padding: 5px;
       padding-top: 20px;
 
       @media (min-width: $media-breakpoint-up-md) {

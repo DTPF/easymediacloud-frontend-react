@@ -3,9 +3,7 @@ import { Badge, Card, Image } from 'antd';
 import LicensesContext from 'context/licenses/LicensesContext';
 import { memo, useCallback, useContext } from 'react';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
-import { FaEye, FaRegTrashCan } from 'react-icons/fa6';
 import { copyToClipboard } from 'utils/copyToClipboard';
-import { FaDownload, FaShareAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { handleShare } from 'utils/handleShare';
 import SpinUI from 'views/components/UI/spin/Spin';
@@ -15,6 +13,7 @@ import { ILicense } from 'interfaces/license.interface';
 import moment from 'moment';
 import { saveAs } from 'file-saver';
 import { uploadByEasymediaCloudServerFolderName } from 'config/constants';
+import Icon from 'views/components/UI/icon/Icon';
 
 function LicenseImages() {
   const { licenseSelected } = useContext(LicensesContext);
@@ -75,10 +74,10 @@ function CardContainer({ media }: { media: IMedia }) {
             </Tooltip>
             <Tooltip title={t('license-images_total-visualizations_tooltip')}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ paddingTop: 2, fontSize: '.7rem', color: colorPrimary }}>
+                <span style={{ paddingTop: 2, fontSize: '.75rem', color: colorPrimary }}>
                   {media.totalRequests}
                 </span>
-                <FaEye style={{ fontSize: '1.1rem', color: bgMedium }} />
+                <Icon type="eye" iconType="secondary" />
               </span>
             </Tooltip>
           </div>
@@ -101,18 +100,15 @@ function CardContainer({ media }: { media: IMedia }) {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
               <Tooltip title={t('license-images_remove-image_tooltip-label')}>
-                <FaRegTrashCan style={{ fontSize: '1.1rem', color: 'red' }} />
+                <Icon type="trash" iconType="danger" />
               </Tooltip>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <Tooltip title={t('download_label')}>
-                  <FaDownload
-                    style={{ fontSize: '1rem' }}
-                    onClick={() => handleDownload(media.url, `${media._id}.jpg`)}
-                  />
+                  <Icon type="download" onClick={() => handleDownload(media.url, `${media._id}.jpg`)} />
                 </Tooltip>
                 <Tooltip title={t('share_label')}>
-                  <FaShareAlt
-                    style={{ fontSize: '1rem' }}
+                  <Icon
+                    type="share"
                     onClick={() => {
                       handleShare({ url: media.url, translate: t, send: 'url' });
                       copyToClipboard({ text: media.url, translate: t, showMsg: false });

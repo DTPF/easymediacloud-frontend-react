@@ -6,12 +6,11 @@ import Spin from 'views/components/UI/spin';
 import { useDauth } from 'dauth-context-react';
 import { BtnPrimary } from 'views/components/UI/buttons';
 import { Input } from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
 import { bgSecondaryDark } from 'scss/_variables';
-import { FaRegSave } from 'react-icons/fa';
 import { messageError, messageWarning } from 'views/components/UI/messages';
 import { useTranslation } from 'react-i18next';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
+import Icon from 'views/components/UI/icon/Icon';
 
 function MyLicenses() {
   const { t } = useTranslation();
@@ -67,12 +66,27 @@ function MyLicenses() {
           {showCreateLicenseInput && (
             <>
               <Tooltip title={t('licenses_create-license_close-input')}>
-                <CloseOutlined
-                  onClick={() => setShowCreateLicenseInput(false)}
-                  style={{ fontSize: '1.4rem', color: bgSecondaryDark }}
-                />
+                <Icon type="close" onClick={() => setShowCreateLicenseInput(false)} color={bgSecondaryDark} />
               </Tooltip>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <Input
+                  style={{
+                    width: '250px',
+                    borderRadius: '25px',
+                    color: validLicenseName ? 'black' : 'red',
+                  }}
+                  placeholder={t('licenses_create-license_name-input-placeholder')}
+                  value={createLicenseFormValues.name}
+                  onChange={(e) =>
+                    setCreateLicenseFormValues({ ...createLicenseFormValues, name: e.target.value })
+                  }
+                  onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
+                      handleShowCreateLicenseInput();
+                    }
+                  }}
+                  allowClear
+                />
                 <Input
                   style={{
                     width: '250px',
@@ -94,24 +108,6 @@ function MyLicenses() {
                   }}
                   allowClear
                 />
-                <Input
-                  style={{
-                    width: '250px',
-                    borderRadius: '25px',
-                    color: validLicenseName ? 'black' : 'red',
-                  }}
-                  placeholder={t('licenses_create-license_name-input-placeholder')}
-                  value={createLicenseFormValues.name}
-                  onChange={(e) =>
-                    setCreateLicenseFormValues({ ...createLicenseFormValues, name: e.target.value.trim() })
-                  }
-                  onKeyUp={(e) => {
-                    if (e.key === 'Enter') {
-                      handleShowCreateLicenseInput();
-                    }
-                  }}
-                  allowClear
-                />
               </div>
             </>
           )}
@@ -121,11 +117,7 @@ function MyLicenses() {
             className="my-licenses__title-create-license--create__btn-create"
             tooltip={t('licenses_create-license_create-license-btn')}
           >
-            {!showCreateLicenseInput ? (
-              t('licenses_create-license_btn')
-            ) : (
-              <FaRegSave style={{ fontSize: '1.3rem', marginTop: 4 }} />
-            )}
+            {!showCreateLicenseInput ? t('licenses_create-license_btn') : <Icon type="save" light />}
           </BtnPrimary>
         </div>
       </div>

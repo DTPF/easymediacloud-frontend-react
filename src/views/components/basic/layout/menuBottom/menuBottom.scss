@@ -1,4 +1,4 @@
-@import '../../../../../scss/variables';
+@import 'scss/variables';
 
 .menu-bottom-mobile {
   display: flex;
@@ -27,7 +27,7 @@
     user-select: none;
 
     &.active {
-      color: $bg-secondary-dark;
+      color: $bg-secondary;
 
       .menu-bottom-mobile__item--icon {
         background-color: $bg-light;
@@ -37,7 +37,9 @@
     }
 
     &--icon {
-      font-size: 11.8rem;
+      display: grid;
+      place-content: center;
+      font-size: 0.1rem;
       border-radius: 17px;
       padding: 9px;
       width: 50px !important;

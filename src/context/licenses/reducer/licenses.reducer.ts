@@ -70,7 +70,7 @@ export default function licensesReducer(state: ILicenseState, action: LicensesAc
     case LicensesTypes.POST_LICENSE: {
       const postLicense: ILicenseState = {
         ...state,
-        licenses: [...state.licenses, payload.license],
+        licenses: [payload.license, ...state.licenses],
       };
       return postLicense;
     }
@@ -107,7 +107,7 @@ export default function licensesReducer(state: ILicenseState, action: LicensesAc
     case LicensesTypes.GET_LICENSE_MEDIA: {
       const getLicenseMedia: ILicenseState = {
         ...state,
-        licenses: state.licenses.map((license: ILicense) => {
+        licenses: state.licenses.map((license) => {
           if (license._id === payload.licenseId) {
             license.mediaPagination = {
               media: payload.media,

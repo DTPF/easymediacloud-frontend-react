@@ -16,98 +16,58 @@ type BtnProps = {
   disabled?: boolean | undefined;
 };
 
-export function BtnPrimary({
-  children,
-  size = 'middle',
+const RenderButton = ({
+  type,
+  size,
   shape,
-  color,
   onClick,
-  danger = false,
-  styles,
   className,
-  tooltip = '',
-  disabled = false,
-  ...props
-}: BtnProps) {
-  return (
-    <Tooltip title={tooltip}>
-      <Button
-        type="primary"
-        size={size}
-        shape={shape}
-        onClick={onClick}
-        className={`buttons__btn-primary ${className}`}
-        style={{ color: color, ...styles }}
-        danger={danger}
-        disabled={disabled ? true : false}
-        {...props}
-      >
-        <span className="buttons__btn-primary--label">{children}</span>
-      </Button>
+  color,
+  styles,
+  danger,
+  disabled,
+  children,
+}: BtnProps & { type: 'primary' | 'default' | 'link' }) => (
+  <Button
+    type={type}
+    size={size}
+    shape={shape}
+    onClick={onClick}
+    className={className}
+    style={{ color: color, ...styles }}
+    danger={danger}
+    disabled={disabled ? true : false}
+  >
+    <span className={`${className}--label`}>{children}</span>
+  </Button>
+);
+
+export function BtnPrimary(props: BtnProps) {
+  return props.tooltip ? (
+    <Tooltip title={props.tooltip}>
+      <RenderButton type="primary" className="buttons__btn-primary" {...props} />
     </Tooltip>
+  ) : (
+    <RenderButton type="primary" className="buttons__btn-primary" {...props} />
   );
 }
 
-export function BtnDefault({
-  children,
-  size = 'middle',
-  shape,
-  color,
-  onClick,
-  danger = false,
-  styles,
-  className,
-  tooltip = '',
-  disabled = false,
-  ...props
-}: BtnProps) {
-  return (
-    <Tooltip title={tooltip}>
-      <Button
-        type="default"
-        size={size}
-        shape={shape}
-        onClick={onClick}
-        className={`buttons__btn-default ${className}`}
-        style={{ color: color, ...styles }}
-        danger={danger}
-        disabled={disabled ? true : false}
-        {...props}
-      >
-        <span className="buttons__btn-default--label">{children}</span>
-      </Button>
+export function BtnDefault(props: BtnProps) {
+  return props.tooltip ? (
+    <Tooltip title={props.tooltip}>
+      <RenderButton type="default" className="buttons__btn-default" {...props} />
     </Tooltip>
+  ) : (
+    <RenderButton type="default" className="buttons__btn-default" {...props} />
   );
 }
 
-export function BtnLink({
-  children,
-  size = 'middle',
-  shape,
-  color,
-  onClick,
-  danger = false,
-  styles,
-  className,
-  tooltip = '',
-  disabled = false,
-  ...props
-}: BtnProps) {
-  return (
-    <Tooltip title={tooltip}>
-      <Button
-        type="link"
-        size={size}
-        shape={shape}
-        onClick={onClick}
-        className={`buttons__btn-link ${className}`}
-        style={{ color: color, ...styles }}
-        danger={danger}
-        disabled={disabled ? true : false}
-        {...props}
-      >
-        <span className="buttons__btn-link--label">{children}</span>
-      </Button>
+export function BtnLink(props: BtnProps) {
+  return props.tooltip ? (
+    <Tooltip title={props.tooltip}>
+      <RenderButton type="link" className="buttons__btn-link" {...props} />
     </Tooltip>
+  ) : (
+    <RenderButton type="link" className="buttons__btn-link" {...props} />
   );
 }

@@ -3,19 +3,15 @@ import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'rea
 import { Dropdown, MenuProps, Popconfirm, Progress, Switch } from 'antd';
 import LicensesContext from 'context/licenses/LicensesContext';
 import { ILicense } from 'interfaces/license.interface';
-import { FaDotCircle } from 'react-icons/fa';
-import { GrStatusGoodSmall } from 'react-icons/gr';
-import { GrUpdate } from 'react-icons/gr';
 import Spin from 'views/components/UI/spin';
 import moment from 'moment';
-import { DownCircleOutlined } from '@ant-design/icons';
 import { colorGreen, colorOrange, colorRed } from 'scss/_variables';
 import Tooltip from 'views/components/UI/tooltip';
 import useWindowSizeReport from 'hooks/useWindowSizeReport';
 import { BtnDefault, BtnLink, BtnPrimary } from 'views/components/UI/buttons';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { FaRegTrashCan } from 'react-icons/fa6';
+import Icon from 'views/components/UI/icon/Icon';
 
 function Licenses() {
   const { t } = useTranslation();
@@ -102,7 +98,7 @@ function License({ license }: { license: ILicense }) {
         key: '1',
         label: (
           <div className="my-licenses__container--license__column-1--sub__text">
-            <FaDotCircle style={{ color: getLicenseStatus?.color }} />
+            <Icon type="donutCircle" style={{ color: getLicenseStatus?.color }} />
             {getLicenseStatus?.text}
           </div>
         ),
@@ -118,7 +114,9 @@ function License({ license }: { license: ILicense }) {
             <i>
               {/* Status */}
               <Dropdown menu={{ items }} placement="bottomLeft">
-                <GrStatusGoodSmall style={{ color: getLicenseStatus?.color }} />
+                <span>
+                  <Icon type="dot" style={{ color: getLicenseStatus?.color }} />
+                </span>
               </Dropdown>
             </i>
             {/* Project name */}
@@ -128,12 +126,18 @@ function License({ license }: { license: ILicense }) {
               </Link>
             </Tooltip>
             {/* Last update */}
-            <Tooltip title={t('licenses_tooltip_last-update')}>
-              <span className="my-licenses__container--license__column-1--sub__last-update">
-                | <GrUpdate className="my-licenses__container--license__column-1--sub__last-update--icon" />
-                {moment(license.updatedAt).calendar()}
-              </span>
-            </Tooltip>
+            <span className="my-licenses__container--license__column-1--sub__last-update">
+              <Icon
+                type="update"
+                iconType="secondary"
+                fontSize=".85rem"
+                marginLeft={3}
+                marginRight={6}
+                marginTop={1}
+                tooltip={t('licenses_tooltip_last-update')}
+              />
+              {moment(license.updatedAt).calendar()}
+            </span>
           </div>
           <div className="my-licenses__container--license__column-1--sub-2">
             {/* Online */}
@@ -158,7 +162,10 @@ function License({ license }: { license: ILicense }) {
             </Tooltip>
             {/* Toggle collapse */}
             <span onClick={toggleCollapsible}>
-              <DownCircleOutlined
+              <Icon
+                type="downCircle"
+                fontSize="1.6rem"
+                marginTop={3}
                 className={`my-licenses__container--license__column-1--sub-2__rotate-icon${isOpenCollapse ? '--open' : ''}`}
               />
             </span>
@@ -171,11 +178,7 @@ function License({ license }: { license: ILicense }) {
               {t('licenses_used-disk')}
             </h4>
             <div className="my-licenses__container--license__column-2--size__progress">
-              <Progress
-                percent={sizePercentage}
-                showInfo={false}
-                style={{ display: 'flex', alignItems: 'center' }}
-              />
+              <Progress percent={sizePercentage} showInfo={false} />
               <span className="my-licenses__container--license__column-2--size__progress--span">
                 <Tooltip title={`${sizePercentage}% ${t('licenses_tooltip_used-disk')}`}>
                   {`${license.sizeT}/`}
@@ -192,11 +195,7 @@ function License({ license }: { license: ILicense }) {
               {t('licenses_requests')}
             </h4>
             <div className="my-licenses__container--license__column-2--requests__progress">
-              <Progress
-                percent={requestsPercentage}
-                showInfo={false}
-                style={{ display: 'flex', alignItems: 'center' }}
-              />
+              <Progress percent={requestsPercentage} showInfo={false} />
               <span className="my-licenses__container--license__column-2--requests__progress--span">
                 <Tooltip title={`${requestsPercentage}% ${t('licenses_tooltip_used-requests')}`}>
                   {`${license.requestsInDataRange}/`}
@@ -266,7 +265,7 @@ function License({ license }: { license: ILicense }) {
                 color={colorRed}
                 tooltip={t('licenses_delete-license-btn-label')}
               >
-                <FaRegTrashCan style={{ fontSize: '1.1rem', color: 'red' }} />
+                <Icon type="trash" iconType="danger" />
               </BtnLink>
             </Popconfirm>
             <div className={`my-licenses__container--license__collapsible--open__buttons--sub`}>

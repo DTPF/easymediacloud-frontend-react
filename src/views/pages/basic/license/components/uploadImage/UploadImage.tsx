@@ -1,14 +1,15 @@
 import './uploadImage.scss';
 import LicensesContext from 'context/licenses/LicensesContext';
 import { memo, useContext, useEffect, useMemo, useState } from 'react';
-import { UploadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
-import { Button, message, Upload } from 'antd';
 import config from 'config/config';
 import { getLicenseTokenAPI } from 'api/licenses.api';
 import { useDauth } from 'dauth-context-react';
 import { useTranslation } from 'react-i18next';
 import { uploadByEasymediaCloudServerFolderName } from 'config/constants';
+import Dragger from 'antd/es/upload/Dragger';
+import Icon from 'views/components/UI/icon/Icon';
+import { messageError, messageSuccess } from 'views/components/UI/messages';
 
 function UploadImage() {
   const { licenseSelected, getLicenseMedia } = useContext(LicensesContext);
@@ -47,9 +48,9 @@ function UploadImage() {
         }
         if (info.file.status === 'done') {
           getLicenseMedia({ licenseId: licenseSelected?._id as string });
-          message.success(`${t('license-upload-images_handle-success')}`);
+          messageSuccess({ msg: `${t('license-upload-files_handle-success')}` });
         } else if (info.file.status === 'error') {
-          message.error(`${t('license-upload-images_handle-error')}`);
+          messageError({ msg: `${t('license-upload-files_handle-error')}` });
         }
       },
     };
@@ -57,11 +58,15 @@ function UploadImage() {
 
   return (
     <div className="license__section__upload-image">
-      <h3>{t('license-upload-images_title')}</h3>
-      <div className="license__section__upload-image__btn">
-        <Upload {...props}>
-          <Button icon={<UploadOutlined />}>{t('license-upload-images_btn-label')}</Button>
-        </Upload>
+      <h3>{t('license-upload-files_title')}</h3>
+      <div className="license__section__upload-image__inbox">
+        <Dragger {...props}>
+          <p className="ant-upload-drag-icon">
+            <Icon type="inbox" fontSize="3rem" />
+          </p>
+          <p className="ant-upload-text">{t('license-upload-files_dragger_title')}</p>
+          <p className="ant-upload-hint">{t('license-upload-files_dragger_description')}</p>
+        </Dragger>
       </div>
     </div>
   );

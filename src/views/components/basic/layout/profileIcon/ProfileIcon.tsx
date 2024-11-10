@@ -1,4 +1,3 @@
-import { UserOutlined } from '@ant-design/icons';
 import './profileIcon.scss';
 import { memo, useCallback, useMemo } from 'react';
 import { Avatar, Popover } from 'antd';
@@ -7,6 +6,7 @@ import { useDauth } from 'dauth-context-react';
 import { adminRole } from 'context/constants';
 import SendVerifyEmailDauth from 'views/components/UI/sendVerifyEmailDauth';
 import { useTranslation } from 'react-i18next';
+import Icon from 'views/components/UI/icon/Icon';
 
 function ProfileIcon() {
   const { t } = useTranslation();
@@ -49,7 +49,7 @@ function ProfileIcon() {
         {isAuthenticated && user.avatar ? (
           <Avatar size={48} src={<img src={user.avatar.url} alt={user.name} />} />
         ) : (
-          <Avatar size={48} icon={<UserOutlined />} />
+          <Avatar size={48} icon={<Icon type="user" />} />
         )}
       </Popover>
     </div>

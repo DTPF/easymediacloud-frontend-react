@@ -7,7 +7,6 @@
   &__section {
     h2 {
       @include titleH2();
-      margin: 0px 5px;
     }
 
     &--header {
@@ -27,11 +26,6 @@
         @include p2();
         font-size: 0.8rem;
         white-space: nowrap;
-
-        &--icon {
-          margin-right: 5px;
-          margin-left: 10px;
-        }
       }
     }
   }

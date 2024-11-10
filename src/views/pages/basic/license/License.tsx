@@ -6,11 +6,11 @@ import UISpin from 'views/components/UI/spin/Spin';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
 import './license.scss';
 import moment from 'moment';
-import { GrUpdate } from 'react-icons/gr';
 import { useTranslation } from 'react-i18next';
 import UploadImage from './components/uploadImage/UploadImage';
 import LicenseImages from './components/licenseImages/LicenseImages';
 import { useDauth } from 'dauth-context-react';
+import Icon from 'views/components/UI/icon/Icon';
 
 function License() {
   const { t } = useTranslation();
@@ -58,7 +58,12 @@ function License() {
                 {/* Last update */}
                 <Tooltip title={t('licenses_tooltip_last-update')}>
                   <span className="license__section--header__last-update">
-                    | <GrUpdate className="license__section--header__last-update--icon" />
+                    <Icon
+                      type="update"
+                      iconType="secondary"
+                      fontSize="1rem"
+                      style={{ marginRight: 5, marginLeft: 10 }}
+                    />
                     {moment(licenseSelected?.updatedAt).calendar()}
                   </span>
                 </Tooltip>

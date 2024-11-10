@@ -1,5 +1,5 @@
-@import '../../../../../../scss/variables';
-@import '../../../../../../scss/mixins';
+@import 'scss/variables';
+@import 'scss/mixins';
 
 .my-licenses__container {
   padding: 10px;
@@ -59,21 +59,16 @@
 
         &__license-name {
           @include titleH3();
-          padding-bottom: 3px;
+          padding-bottom: 1px;
         }
 
         &__last-update {
           display: flex;
           align-items: center;
-          margin-right: 10px;
           @include p2();
           font-size: 0.8rem;
           white-space: nowrap;
-
-          &--icon {
-            margin-right: 5px;
-            margin-left: 10px;
-          }
+          margin-top: 3px;
 
           @media (max-width: 420px) {
             display: none;
@@ -95,7 +90,7 @@
       &--sub-2 {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 10px;
 
         &__rotate-icon {
           font-size: 1.3rem;
@@ -125,16 +120,21 @@
         &__title {
           @include titleH5();
           margin-right: 15px;
-          padding-top: 5px;
           white-space: nowrap;
+          padding: 0;
+          margin: 0;
         }
 
         &__progress {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 1rem;
+          gap: 10px;
           width: 100%;
+          padding: 0;
+          margin: 0;
+          padding: 4px 10px;
+          margin-top: 4px;
 
           &--span {
             display: flex;
@@ -142,7 +142,7 @@
             white-space: nowrap;
             padding: 0;
             margin: 0;
-            padding-top: 5px;
+            padding-bottom: 2px;
           }
         }
       }
