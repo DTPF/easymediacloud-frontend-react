@@ -3,8 +3,8 @@ import { ILicense, ILicenseState } from 'interfaces/license.interface';
 const initialLicensesState: ILicenseState = {
   licenses: [] as ILicense[],
   licenseSelected: {} as ILicense,
-  isLoading: false,
-  isLoadingMedia: false,
+  isLoading: true,
+  isLoadingMedia: true,
   getLicenses: () => Promise.resolve(false),
   postLicense: () => {},
   setLicenseOnline: () => {},

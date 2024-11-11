@@ -2,7 +2,6 @@ import { Divider, Skeleton, Spin } from 'antd';
 import LicensesContext from 'context/licenses/LicensesContext';
 import { memo, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import UISpin from 'views/components/UI/spin/Spin';
 import Tooltip from 'views/components/UI/tooltip/Tooltip';
 import './license.scss';
 import moment from 'moment';
@@ -15,12 +14,7 @@ import Icon from 'views/components/UI/icon/Icon';
 function License() {
   const { t } = useTranslation();
   const { id } = useParams();
-  const {
-    licenseSelected,
-    getLicenses,
-    getLicenseMedia,
-    isLoading: isLoadingLicenses,
-  } = useContext(LicensesContext);
+  const { licenseSelected, getLicenses, getLicenseMedia } = useContext(LicensesContext);
   const { isAuthenticated, isLoading } = useDauth();
 
   useEffect(() => {
@@ -42,42 +36,38 @@ function License() {
 
   return (
     <div className="license">
-      {isLoadingLicenses ? (
-        <UISpin />
-      ) : (
-        <section className="license__section">
-          <div className="license__section--header">
-            {/* Project name */}
-            {licenseSelected?.name && licenseSelected?.updatedAt ? (
-              <>
-                <Tooltip title={t('licenses_tooltip_project-name')}>
-                  <h2 className="license__section--header__license-name">
-                    {licenseSelected?.name ? licenseSelected?.name : <Spin />}
-                  </h2>
-                </Tooltip>
-                {/* Last update */}
-                <Tooltip title={t('licenses_tooltip_last-update')}>
-                  <span className="license__section--header__last-update">
-                    <Icon
-                      type="update"
-                      iconType="secondary"
-                      fontSize="1rem"
-                      style={{ marginRight: 5, marginLeft: 10 }}
-                    />
-                    {moment(licenseSelected?.updatedAt).calendar()}
-                  </span>
-                </Tooltip>
-              </>
-            ) : (
-              <Skeleton.Node active={true} style={{ width: 250, height: 30, marginLeft: 10 }} />
-            )}
-          </div>
-          <Divider />
-          <UploadImage />
-          <Divider />
-          <LicenseImages />
-        </section>
-      )}
+      <section className="license__section">
+        <div className="license__section--header">
+          {/* Project name */}
+          {licenseSelected?.name && licenseSelected?.updatedAt ? (
+            <>
+              <Tooltip title={t('licenses_tooltip_project-name')}>
+                <h2 className="license__section--header__license-name">
+                  {licenseSelected?.name ? licenseSelected?.name : <Spin />}
+                </h2>
+              </Tooltip>
+              {/* Last update */}
+              <Tooltip title={t('licenses_tooltip_last-update')}>
+                <span className="license__section--header__last-update">
+                  <Icon
+                    type="update"
+                    iconType="secondary"
+                    fontSize="1rem"
+                    style={{ marginRight: 5, marginLeft: 10 }}
+                  />
+                  {moment(licenseSelected?.updatedAt).calendar()}
+                </span>
+              </Tooltip>
+            </>
+          ) : (
+            <Skeleton.Node active={true} style={{ width: 170, height: 30, marginLeft: 10 }} />
+          )}
+        </div>
+        <Divider />
+        <UploadImage />
+        <Divider />
+        <LicenseImages />
+      </section>
     </div>
   );
 }

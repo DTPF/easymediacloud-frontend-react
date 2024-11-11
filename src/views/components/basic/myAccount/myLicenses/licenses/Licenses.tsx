@@ -26,7 +26,7 @@ function Licenses() {
         licenses.map((license, index) => {
           return (
             <div key={index}>
-              <License license={license} />
+              <License license={license} index={index} />
             </div>
           );
         })
@@ -38,7 +38,7 @@ function Licenses() {
 const MemoizedLicenses = memo(Licenses);
 export default MemoizedLicenses;
 
-function License({ license }: { license: ILicense }) {
+function License({ license, index }: { license: ILicense; index: number }) {
   const { t } = useTranslation();
   const [isMobile] = useWindowSizeReport();
   const { setLicenseOnline, deleteLicense, getLicenseToken, refreshLicenseToken } =
@@ -55,11 +55,11 @@ function License({ license }: { license: ILicense }) {
 
   useEffect(() => {
     let isMounted = true;
-    isMounted && setIsOpenCollapse(isMobile ? false : true);
+    isMounted && setIsOpenCollapse(isMobile ? (index === 0 ? true : false) : true);
     return () => {
       isMounted = false;
     };
-  }, [isMobile]);
+  }, [index, isMobile]);
 
   const toggleCollapsible = useCallback(() => {
     setIsOpenCollapse(!isOpenCollapse);

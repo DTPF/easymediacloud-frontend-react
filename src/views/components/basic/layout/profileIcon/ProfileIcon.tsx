@@ -47,7 +47,7 @@ function ProfileIcon() {
         placement="bottomRight"
       >
         {isAuthenticated && user.avatar ? (
-          <Avatar size={48} src={<img src={user.avatar.url} alt={user.name} />} />
+          <Avatar size={48} src={<img src={`${user.avatar.url}?source=emc`} alt={user.name} />} />
         ) : (
           <Avatar size={48} icon={<Icon type="user" />} />
         )}

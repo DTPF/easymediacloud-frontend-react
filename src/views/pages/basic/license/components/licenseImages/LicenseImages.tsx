@@ -6,7 +6,6 @@ import Tooltip from 'views/components/UI/tooltip/Tooltip';
 import { copyToClipboard } from 'utils/copyToClipboard';
 import { useTranslation } from 'react-i18next';
 import { handleShare } from 'utils/handleShare';
-import SpinUI from 'views/components/UI/spin/Spin';
 import { bgMedium, colorPrimary } from 'scss/_variables';
 import { IMedia } from 'interfaces/media.interface';
 import { ILicense } from 'interfaces/license.interface';
@@ -16,22 +15,30 @@ import { uploadByEasymediaCloudServerFolderName } from 'config/constants';
 import Icon from 'views/components/UI/icon/Icon';
 
 function LicenseImages() {
-  const { licenseSelected } = useContext(LicensesContext);
+  const { licenseSelected, isLoading, isLoadingMedia } = useContext(LicensesContext);
   const { t } = useTranslation();
 
   return (
     <div className="license__images__items-container">
       <h3>{t('license-images_title')}</h3>
       <div className="license__images__items-container__items">
-        {licenseSelected?.mediaPagination?.media?.map((media, index) => {
-          return media.url.includes(uploadByEasymediaCloudServerFolderName) ? (
-            <Badge.Ribbon text="EMC" color={bgMedium} style={{ fontSize: '.7rem' }} key={index}>
-              <CardContainer media={media} />
-            </Badge.Ribbon>
-          ) : (
-            <CardContainer media={media} key={index} />
-          );
-        })}
+        {isLoading || isLoadingMedia ? (
+          [1, 2, 3, 4, 5, 6].map((_, index) => <EmptyCard key={index} />)
+        ) : licenseSelected?.mediaPagination?.media?.length === 0 ? (
+          <div className="license__images__items-container__items--empty-msg">
+            {t('license-images_empty-images-msg')}
+          </div>
+        ) : (
+          licenseSelected?.mediaPagination?.media?.map((media, index) => {
+            return media.url.includes(uploadByEasymediaCloudServerFolderName) ? (
+              <Badge.Ribbon text="EMC" color={bgMedium} style={{ fontSize: '.7rem' }} key={index}>
+                <CardContainer media={media} />
+              </Badge.Ribbon>
+            ) : (
+              <CardContainer media={media} key={index} />
+            );
+          })
+        )}
       </div>
     </div>
   );
@@ -49,9 +56,7 @@ function CardContainer({ media }: { media: IMedia }) {
     saveAs(url, filename);
   }, []);
 
-  return isLoadingMedia ? (
-    <SpinUI size="small" />
-  ) : (
+  return (
     <Card
       hoverable
       className="license__images__items-container__items--card"
@@ -60,7 +65,7 @@ function CardContainer({ media }: { media: IMedia }) {
         <Image
           alt={`${(licenseSelected as ILicense).project} archive`}
           className="license__images__items-container__items--card__img"
-          src={media.url}
+          src={`${media.url}?source=emc`}
         />
       }
     >
@@ -121,5 +126,16 @@ function CardContainer({ media }: { media: IMedia }) {
         }
       />
     </Card>
+  );
+}
+
+function EmptyCard() {
+  return (
+    <Card
+      hoverable
+      className="license__images__items-container__items--card"
+      loading={true}
+      cover={<div style={{ backgroundColor: '#e9e9e9', aspectRatio: '16/9', objectFit: 'cover' }}></div>}
+    />
   );
 }
